@@ -1,0 +1,89 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+         @keyframes checked {
+           0% {
+             tranform: scale(1);
+           }
+           50% {
+             transform: scale(1.05);
+           }
+           100% {
+             transform: scale(1);
+           }
+         }
+
+         * {
+           box-sizing: border-box;
+         }
+
+
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+div {
+  margin-bottom: 18px;
+}
+
+input[type="radio"]
+{
+  display: none;
+}
+
+input[type="radio"]+label {
+  appearance: none;
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 34px;
+  position: relative;
+  vertical-align: middle;
+}
+
+input[type="radio"]:checked+label {
+  backface-visibility: hidden;
+  animation: checked 200ms ease 1;
+}
+
+input[type="radio"]+label:before {
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0);
+  border-radius: 100% 100% 100% 100%;
+  content: " ";
+  height: 7px;
+  left: 12px;
+  position: absolute;
+  top: 6px;
+  width: 7px;
+}
+
+input[type="radio"]+label:hover:before {
+  background: none repeat scroll 0 0 #000;
+}
+
+input[type="radio"]:checked+label:before {
+  background: none repeat scroll 0 0 #000;
+}
+
+
+
+input[type="radio"]+label:after {
+  border: 3px solid #000;
+  border-radius: 100% 100% 100% 100%;
+  content: " ";
+  height: 20px;
+  left: 5px;
+  position: absolute;
+  top: -1px;
+  width: 20px;
+}
+
+input[type="radio"]:checked+label:after {
+  border-color: #000;
+}
+
+.centered{
+
+   position: absolute;
+   top:30%;
+   left: 40%;
+   }
