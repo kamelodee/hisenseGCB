@@ -30,7 +30,7 @@ class Customer{
     static public function branch($name)
     {
         
-        $ids = Config::clienttest()->search('res.branch', [['name', 'like', '%'.$name.'%']], 0, 1);
+        $ids = Config::clienttest()->search('res.branch', [['name', '=', $name]], 0, 1);
 
         $fields = ['name', 'id','bank_journal_id'];
         $att = Config::clienttest()->read('res.branch', $ids, $fields);

@@ -13,7 +13,7 @@ class WhiteListIpAddressessMiddleware
     
     public function handle(Request $request, Closure $next)
     {
-        // dd($request->getClientIp());
+        // return $request->getClientIp();
         $ips  =IpAddress::whereIn('ip_address',[$request->getClientIp()])->get();
         if (count($ips)< 1) {
             return response()->json([

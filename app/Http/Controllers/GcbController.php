@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
+use Exception;
 use App\Models\User;
 use App\Services\Odoo;
 
@@ -26,6 +27,7 @@ class GcbController extends Controller
 
     public function login(Request $request)
     {
+    //    return $request->all();
        info($request->all());
         $validator = Validator::make($request->all(), [
 
@@ -64,8 +66,8 @@ class GcbController extends Controller
     public function deposit(Request $request)
     {
     //   return  $request->all();
+      try{
         $validator = Validator::make($request->all(), [
-
             'showroom' => 'required',
             'customer_id' => 'required',
             'customer_name' => 'required',
@@ -76,35 +78,45 @@ class GcbController extends Controller
             'account_number' => 'required',
         ]);
 
+
+        
         if ($validator->fails()) {
             return response()->json([
                 'statusCode' => 401,
                 'error' => $validator->messages()
             ], 401);
         }
-        try {
-            // return $request->all();
-                $branch = Customer::branch($request->showroom);
-                // return $branch[0]['bank_journal_id'];
-            $branch = Customer::branch($request->showroom);
-                // return $branch[0]['bank_journal_id'];
-                if ($branch[0]['id'] > 0) {
-                    $customer = Customer::getCustomer($request->customer_id);
-                     if($customer[0]['id']>0){
-                    $data = [
-                        'partner_id' => $customer[0]['id'],
-                        'state' => 'draft',
-                        'branch_id' => $branch[0]['id'],
-                        'date' => $request->date,
-                        'payment_type' => 'inbound',
-                        'payment_method_id' => 1,
-                        'company_id' => 2,
-                        'amount' => $request->amount,
-                        'journal_id' => $branch[0]['bank_journal_id'][0],
-                        'ref' => $request->ref,
 
-                    ];
-                    $deposit = Customer::deposit($data);
+
+        try {
+            if(Auth::user()->showroom == $request->showroom){
+            $branch = Customer::branch(Auth::user()->showroom);
+                if (count($branch) > 0 ) {
+                   $customer = Customer::getCustomer($request->customer_id);
+                     if(count($customer)>0){
+                        if($branch[0]['bank_journal_id']>0){
+                            $data = [
+                                'partner_id' => $customer[0]['id'],
+                                'state' => 'draft',
+                                'branch_id' => $branch[0]['id'],
+                                'date' => $request->date,
+                                'payment_type' => 'inbound',
+                                'payment_method_id' => 1,
+                                'company_id' => 2,
+                                'amount' => $request->amount,
+                                'journal_id' => $branch[0]['bank_journal_id'][0],
+                                'ref' => $request->ref,
+        
+                            ];
+                            $deposit = Customer::deposit($data);
+                           }else{
+                            return response()->json([
+                                'message' => "Someting went wrong",
+                                'statusCode' => 500,
+            
+                            ], 500);
+                           }
+                  
                 if($deposit){
                     Auth::user()->tokens->each(function($token, $key) {
                         $token->delete();
@@ -141,7 +153,7 @@ class GcbController extends Controller
 
                     ];
 
-                    $deposit = Customer::deposit($data);
+                    $deposit = Customer::deposit($datac);
                 if($deposit){
                     Auth::user()->tokens->each(function($token, $key) {
                         $token->delete();
@@ -153,9 +165,21 @@ class GcbController extends Controller
                     ], 200);
                 }
                 }
+                }else{
+                    return response()->json([
+                        'message' => "Invalid showroom",
+                        'statusCode' => 401,
+    
+                    ], 401);  
                 }
                 
-            
+            }else{
+                return response()->json([
+                    'message' => "Invalid showroom",
+                    'statusCode' => 401,
+
+                ], 401);   
+            } 
         } catch (ResponseException $e) {
             report($e);
          info($e);
@@ -165,5 +189,17 @@ class GcbController extends Controller
 
             ], 500);
         }
+      }catch(Exception $error){
+        report($error);
+        info($error);
+        return response()->json([
+            'message' => 'something went wrong',
+            'statusCode' => 500,
+
+        ], 500);
+      }
+       
+
+       
     }
 }
