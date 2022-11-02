@@ -15,6 +15,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Validation\Rules;
 use Exception;
 use App\Models\User;
+use App\Models\Transaction;
 use App\Services\Odoo;
 
 use App\Services\Odoo\Customer;
@@ -89,9 +90,29 @@ class GcbController extends Controller
 
 
         try {
-            if(Auth::user()->showroom == $request->showroom){
+            // return [$request->showroom,Auth::user()->showroom];
+            if(Auth::user()->showroom === $request->showroom){
+               
             $branch = Customer::branch(Auth::user()->showroom);
                 if (count($branch) > 0 ) {
+                    $transaction =   Transaction::create([
+                        'customer_name' => $request->customer_id,
+                        'showroom' => Auth::user()->showroom,
+                        'order_code' => 'gcb',
+                        'payment_token' => sha1(md5(time())),
+                        'payment_code' =>sha1(md5(time())),
+                        'shortpay_code' => sha1(md5(time())),
+                        'transaction_id' => sha1(md5(time())),
+                        'transaction_type' => $request->transaction_type,
+                        'ref' => '',
+                        'phone' => $request->customer_id,
+                        'amount' => $request->amount,
+                        'account_number' => $request->phone,
+                        'status' => 'PAID',
+                        'bank' => 'GCB',
+                        'description' => $request->ref,
+                        'date' => $request->date,
+                    ]);
                    $customer = Customer::getCustomer($request->customer_id);
                      if(count($customer)>0){
                         if($branch[0]['bank_journal_id']>0){
@@ -110,6 +131,7 @@ class GcbController extends Controller
                             ];
                             $deposit = Customer::deposit($data);
                            }else{
+                            info($branch[0]);
                             return response()->json([
                                 'message' => "Someting went wrong",
                                 'statusCode' => 500,
@@ -166,8 +188,10 @@ class GcbController extends Controller
                 }
                 }
                 }else{
+                    info($branch);
+                    // return $branch;
                     return response()->json([
-                        'message' => "Invalid showroom",
+                        'message' => "No showroom",
                         'statusCode' => 401,
     
                     ], 401);  

@@ -6,7 +6,8 @@ use DB;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
+use DataTables;
+use Illuminate\Support\Facades\Auth;
 class RoleController extends Controller
 {
     /**
@@ -16,10 +17,10 @@ class RoleController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:Show Roles|Create Role|Edit Role|Delete Role', ['only' => ['index','store']]);
+         $this->middleware('permission:Create Role', ['only' => ['create','store']]);
+         $this->middleware('permission:Edit Role', ['only' => ['edit','update']]);
+         $this->middleware('permission:Delete Role', ['only' => ['destroy']]);
     }
 
     /**
@@ -33,6 +34,38 @@ class RoleController extends Controller
 
         return view('roles.index', compact('data'));
     }
+
+    public function list(Request $request)
+    {
+        if ($request->ajax()) {
+            $users = Role::orderBy('id', 'desc')->get();
+            return DataTables::of($users)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                   
+                        $actionBtn = ' <a onclick="RoleEdit('."'$row->id'".')"  href="javascript:void()" class="btn btn-primary btn-sm text-white">
+                        Edit
+                    </a>
+                   
+                   ';
+                        return $actionBtn;
+                    
+                   
+                })
+                ->addColumn('name', function($row){
+                    $actionBtn = ' <a href="#" class="text-primary">'.$row->name.'</a>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('created_at', function($row){
+                    $created_at = $row->created_at->format('Y.m.d H:i:s');
+                    return $created_at;
+                })
+                ->rawColumns(['action','name'])
+                ->make(true);
+        }
+    } 
 
     /**
      * Show the form for creating a new resource.
@@ -54,6 +87,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request()->all());
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',

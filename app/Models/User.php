@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 // use Laravel\Passport\HasApiTokens;
+
 use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'phone',
         'email',
         'status',
+        'showroom',
         'branch_id',
         'password',
     ];

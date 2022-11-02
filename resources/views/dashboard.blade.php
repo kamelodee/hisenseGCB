@@ -1,121 +1,188 @@
-@extends('layouts.layout')
+@extends('layouts.layout1')
 @section('content')
 
-
- <!-- Three charts -->
-                <!-- ============================================================== -->
-                <div class="row justify-content-center">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">Total Contacts</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-                                <li class="ms-auto"><span class="counter text-success">{{count($contacts)}}</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">Total SMS</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash2">
-                                        <canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;">
-                                        </canvas>
-                                    </div>
-                                </li>
-                                <li class="ms-auto"><span class="counter text-purple">{{count($smss)}}</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="white-box analytics-info">
-                            <h3 class="box-title">Total Groups</h3>
-                            <ul class="list-inline two-part d-flex align-items-center mb-0">
-                                <li>
-                                    <div id="sparklinedash3"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
-                                </li>
-                                <li class="ms-auto"><span class="counter text-info">{{count($groups)}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+  <!-- Content
+  ============================================= -->
+  <div id="content" class="py-4">
+    <div class="container">
+      <div class="row"> 
+        <!-- Left Panel
+        ============================================= -->
+        <aside class="col-lg-3 col-md-3 col-sm-12"> 
+       
+          <!-- Available Balance
+          =============================== -->
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
+            <h3 class="text-5 text-primary fw-400">GHC2956.00</h3>
+            <p class="mb-2 text-muted opacity-8">Total Transactions</p>
+            <hr class="mx-n3">
+          
+          </div>
+          <!-- Available Balance End --> 
+          
+         
+          
+        </aside>
+        <!-- Left Panel End -->
+        
+        <!-- Middle Panel
+        ============================================= -->
+        <div class="col-lg-9 col-md-9 col-sm-12"> 
+          
+          <!-- Profile Completeness
+          =============================== -->
+          <div class="bg-white shadow-sm rounded p-4 mb-4">
+            
+            <div class="row gy-4 profile-completeness">
+              <div class="col-sm-6 col-md-3">
+                <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <p class="mb-2 text-muted opacity-8">Daily Transactions</p>
+                 
+                
                 </div>
-               
-                <!-- RECENT SALES -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12">
-                        <div class="white-box">
-                            <div class="d-md-flex mb-3">
-                                <h5 class="box-title mb-0">SMS Deliveries</h5>
-                                <div class="col-md-8 col-sm-8 col-xs-10 ms-auto">
-                                    <form action="">
-                                   <div class="d-flex">
-                                    <select class="form-select shadow-none  border-top m-1" name="status">
-                                        <option>Status</option>
-                                        <option value="PENDING">PENDING</option>
-                                        <option value="DELIVERED">DELIVERED</option>
-                                        
-                                    </select>
-                                    <input class="form-control m-1 datepicker" type="text" name="start" data-date-format="yyyy-mm-dd" placeholder="Start Date">
-                                    <input class="form-control m-1 datepicker" type="text" name="end" data-date-format="yyyy-mm-dd" placeholder="End Date">
-                                    <input class="form-control m-1" type="text" name="textform" placeholder="Search">
-                                    <button type="submit" class="btn btn-info text-white ">Search</button>
-                                   
-                                    
-                                   </div>
-                                </form>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table no-wrap">
-                                    <thead>
-
-                                        <tr>
-                                            <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Sender ID</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Phone</th>
-                                            <th class="border-top-0">Message</th>
-                                            <th class="border-top-0">status</th>
-                                            <th class="border-top-0">DataTime</th>
-                                           
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($sms as $sm )
-                                        <tr>
-                                            <td>{{$sm->id}}</td>
-                                            <td class="txt-oflo">{{$sm->sender}}</td>
-                                            <td class="txt-oflo">{{$sm->contact_name}}</td>
-                                            <td>{{$sm->contact_phone}}</td>
-                                            <td class="txt-oflo">{{$sm->message}}</td>
-                                            <td><span class="text-success">{{$sm->status}}</span></td>
-                                            <td><span class="text-success">{{$sm->created_at}}</span></td>
-                                            
-                                        </tr>
-                                        @endforeach
-                                       
-                                        
-                                       
-                                    </tbody>
-                                </table>
-                                <div class="container" >
-                                    {{ $sms->links() }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <p class="mb-2 text-muted opacity-8">Weekly Transactions</p>
                 
                 
-                @endsection
-
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <p class="mb-2 text-muted opacity-8">Monthly Transactions</p>
+                  
+                
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <p class="mb-2 text-muted opacity-8">Yearly Transactions</p>
+                 
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Profile Completeness End --> 
+          
+          <!-- Recent Activity
+          =============================== -->
+          <div class="bg-white shadow-sm rounded py-4 mb-4">
+            <h3 class="text-5 fw-400 d-flex align-items-center px-4 mb-1">Recent Transactions</h3>
+            
+            
+            
+            <!-- Transaction List-->
+           <div class="bg-white shadow-sm rounded p-4 mb-4">
+           
+           
+            <div class="table-responsive mt-2">
+                 
+              <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
+                  <thead class="table-dark_">
+                      <tr>
+                          <th class="border-top-0 text-white_">#</th>
+                          <th class="border-top-0 text-white_">Date</th>
+                          <th class="border-top-0 text-white_">Transaction ID</th>
+                          <th class="border-top-0 text-white_">Transaction Type</th>
+                          <th class="border-top-0 text-white_">Amount</th>
+                          <th class="border-top-0 text-white_">Ref</th>
+                          <th class="border-top-0 text-white_">Showroom</th>
+                          <th class="border-top-0 text-white_">Ceated At</th>
+                         
+                         
+                         
+                      </tr>
+                  </thead>
+          
+                  <tbody>
+                     
+                  </tbody>
+              </table>
+          
+          </div>
+           
+          </div>
+            <!-- Transaction List End --> 
+            
+            
+              
+          </div>
+          <!-- Recent Activity End --> 
+        </div>
+        <!-- Middle Panel End --> 
+      </div>
+    </div>
+  </div>
+  <!-- Content end --> 
+  @include('partials._fullModal')
+  @endsection
+  
+  
+  @section('script')
+  <script type="text/javascript">
+  
+  $(function() {
+     
+      var table = $('.dataTable2').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('transactions.ubalist') }}",
+          columns: [
+              {
+                  data: 'id',
+                  name: 'id',
+                  searchable: true
+              },
+              {
+                  data: 'transaction_id',
+                  name: 'transaction_id'
+              },
+              {
+                  data: 'transaction_type',
+                  name: 'transaction_type',
+                  searchable: true
+              },
+              {
+                  data: 'amount',
+                  name: 'amount',
+                  searchable: true
+              },
+              {
+                  data: 'ref',
+                  name: 'ref',
+                  searchable: true
+              },
+              {
+                  data: 'showroom',
+                  name: 'showroom',
+                  searchable: true
+              },
+            
+              {
+                  data: 'created_at',
+                  name: 'created_at',
+                  searchable: true
+              },
+              
+  
+              
+          ],
+          "order": [
+              [0, 1, 2, 3, 'desc']
+          ]
+      });
+  
+  });
+  </script>
+  @endsection

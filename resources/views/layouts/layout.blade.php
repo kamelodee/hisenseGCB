@@ -55,13 +55,13 @@
                         <!-- Logo icon -->
                         <b class="logo-icon text-dark">
                             <!-- Dark Logo icon -->
-                           HisenseGH
+                           Hisense
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text text-dark">
                             <!-- dark Logo text -->
-                            SMS
+                            Payment
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -100,7 +100,7 @@
                         <li>
                             <a class="profile-pic" href="#">
                                 <img src="{{asset("assets/plugins/images/users/varun.jpg")}}" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">{{ Auth::user()->name }}</span></a>
+                                    class="img-circle"><span class="text-white font-medium">{{ Auth::user()->showroom }}</span></a>
                         </li>
                         <li>
                            <span class="text-white pr-3">
@@ -144,46 +144,29 @@
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('contacts') }}"
+                    
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('payment')}}"
                                 aria-expanded="false">
-                                <i class="fa fa-user fa-3x" aria-hidden="true"></i>
-                                <span class="hide-menu">Contacts</span>
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">Payment</span>
                             </a>
                         </li>
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('sms') }}"
-                                aria-expanded="false">
-                                <i class="fa fa-message fa-3x" aria-hidden="true"></i>
-                                <span class="hide-menu">SMS</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('groups') }}"
-                                aria-expanded="false">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <span class="hide-menu">Groups</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('senderids') }}"
-                                aria-expanded="false">
-                                <i class="fa fa-building" aria-hidden="true"></i>
+                        <li class="sidebar-item">
+                            <span class="text-white pr-3 sidebar-link waves-effect waves-dark sidebar-link">
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+        
+                                    <a href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                        <i class="fas fa-sign-out-alt"></i>
+                                </a>
                                 
-                                <span class="hide-menu">Sender IDs</span>
-                            </a>
+                                </form>
+                               </span>
                         </li>
-
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('sms.developerApi') }}"
-                                aria-expanded="false">
-                                <i class="fa fa-link" aria-hidden="true"></i>
-                               
-                                <span class="hide-menu">API</span>
-                            </a>
-                        </li>
-                     
-                       
                         
                        
                     </ul>
@@ -219,25 +202,13 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-            <!-- ============================================================== -->
-            <!-- End Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
+          
             <div class="container-fluid">
-                
                 @yield('content')
 
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center"> 2022 © Hisense Sms <a
-                    href="https://hisenseghana.com/">Hisense Ghana</a>
+               <footer class="footer text-center"> 2022 © <a
+                    href="/">Hisense Ghana</a>
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
