@@ -55,6 +55,29 @@ class PaymentController extends Controller
         
        
     }
+    public function processing(Request $request)
+    {
+       $token= request()->paytoken;
+       $data = CalBank::getTransactions($token);
+
+       if (json_decode($data->return)->CODE == 1) {
+        return view('payment/processing'); 
+           return back()->with('error', json_decode($data->return)->MESSAGE);
+       } else {
+           if (json_decode($data->return)->RESULT[0]->FINALSTATUS == 'SUCCESS') {
+               Transaction::where('transaction_id',$token)->first()->update(['status' => json_decode($data->return)->RESULT[0]->FINALSTATUS]);
+             return redirect()->route('transactions')->with('success', 'Payment successfully.');
+            }else if(json_decode($data->return)->RESULT[0]->FINALSTATUS == 'FAILED'){
+                return view('payment/processing'); 
+                Transaction::where('transaction_id',$token)->first()->update(['status' => json_decode($data->return)->RESULT[0]->FINALSTATUS]);
+                return redirect()->route('transactions')->with('error', 'Payment Failed.'); 
+            }else{
+                return view('payment/processing'); 
+            }
+       }
+        return view('payment/processing');
+       
+    }
 
 
     public function calpay(Request $request)
