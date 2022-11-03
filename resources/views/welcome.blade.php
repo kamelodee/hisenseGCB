@@ -47,7 +47,7 @@
             <div class="row g-0 my-auto">
               <div class="col-10 col-lg-9 mx-auto">
                 <h1 class="text-11 text-white mb-4">Welcome back!</h1>
-                <p class="text-4 text-white lh-base mb-5">We are glad to see you again! Instant deposits, withdrawals & payouts trusted by millions worldwide.</p>
+                <p class="text-4 text-white lh-base mb-5">We are glad to see you again!</p>
               </div>
             </div>
           </div>
