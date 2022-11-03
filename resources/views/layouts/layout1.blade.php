@@ -41,7 +41,7 @@
         <div class="header-column justify-content-start"> 
           <!-- Logo
           ============================= -->
-          <div class="logo me-3"><i class="fas fa-th text-3 me-2"></i> <a class="d-flex" href="{{route('dashboard')}}" title="Payyed - HTML Template"><span class="text-success text-3">HisensePay</span></a> </div>
+          <div class="logo me-3"><i class="fas fa-th text-3 me-2"></i> <a class="d-flex" href="{{route('dashboard')}}" title="Payyed - HTML Template"><span class="text-success text-3">Hisense Pay</span></a> </div>
           <!-- Logo end --> 
           <!-- Collapse Button
           ============================== -->
