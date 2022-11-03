@@ -42,14 +42,14 @@ class RoleController extends Controller
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                   
+                    if(Auth::user()->can('Edit Role')){
                         $actionBtn = ' <a onclick="RoleEdit('."'$row->id'".')"  href="javascript:void()" class="btn btn-primary btn-sm text-white">
                         Edit
                     </a>
                    
                    ';
                         return $actionBtn;
-                    
+                    }
                    
                 })
                 ->addColumn('name', function($row){

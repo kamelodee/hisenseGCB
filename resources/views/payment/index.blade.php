@@ -31,8 +31,8 @@
 
 
                     <div class="row">
-                        <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
-                            <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                        <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+                            <div class="bg-white shadow-sm rounded  pt-sm-4 pb-sm-5 px-sm-5 mb-4">
                                 <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">CALBANK</h3>
                                 <hr>
                                 <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
@@ -112,8 +112,8 @@
             <div id="content" class="py-4">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
-                            <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                        <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+                            <div class="bg-white shadow-sm rounded  pt-sm-4 pb-sm-5 px-sm-5 mb-4">
                                 <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">ZENITH BANK </h3>
                                 <hr>
                                 <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
@@ -198,8 +198,8 @@
 
 
                     <div class="row">
-                        <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
-                            <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                        <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+                            <div class="bg-white shadow-sm rounded  pt-sm-4 pb-sm-5 px-sm-5 mb-4">
                                 <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">UBA</h3>
                                 <hr>
                                 <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
@@ -268,8 +268,8 @@
 
 
                     <div class="row">
-                        <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
-                            <div class="bg-white shadow-sm rounded p-3 pt-sm-4 pb-sm-5 px-sm-5 mb-4">
+                        <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+                            <div class="bg-white shadow-sm rounded  pt-sm-4 pb-sm-5 px-sm-5 mb-4">
                                 <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">GCB</h3>
                                 <hr>
                                 <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>

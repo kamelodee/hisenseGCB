@@ -13,9 +13,30 @@
           <!-- Available Balance
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-            <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
-            <h3 class="text-5 text-primary fw-400">GHC2956.00</h3>
-            <p class="mb-2 text-muted opacity-8">Total Transactions</p>
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
+            <p class="mb-2 text-muted opacity-8">CalBank</p>
+            <hr class="mx-n3">
+          
+          </div>
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3 fw-400">GHC {{$uba}}</h3>
+            <p class="mb-2 text-muted opacity-8">UBA</p>
+            <hr class="mx-n3">
+          
+          </div>
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3  fw-400">GHC {{$gcb}}</h3>
+            <p class="mb-2 text-muted opacity-8">GCB</p>
+            <hr class="mx-n3">
+          
+          </div>
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3 fw-400">GHC {{$zenith}}</h3>
+            <p class="mb-2 text-muted opacity-8">ZenithBank</p>
             <hr class="mx-n3">
           
           </div>
@@ -37,8 +58,8 @@
             <div class="row gy-4 profile-completeness">
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3  fw-400">GHC {{$transactions_today}}</h3>
                   <p class="mb-2 text-muted opacity-8">Daily Transactions</p>
                  
                 
@@ -46,8 +67,8 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3  fw-400">GHC {{$transactions_week}}</h3>
                   <p class="mb-2 text-muted opacity-8">Weekly Transactions</p>
                 
                 
@@ -55,8 +76,8 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3  fw-400">GHC {{$transactions_month}}</h3>
                   <p class="mb-2 text-muted opacity-8">Monthly Transactions</p>
                   
                 
@@ -64,8 +85,8 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-                  <div class="text-17 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3 text-primary fw-400">GHC2956.00</h3>
+                  <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                  <h3 class="text-3  fw-400">GHC {{$transactions_year}}</h3>
                   <p class="mb-2 text-muted opacity-8">Yearly Transactions</p>
                  
                 
