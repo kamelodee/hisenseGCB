@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
 <link href="images/favicon.png" rel="icon">
 <title>hi {{Auth::user()->name}}</title>
-<meta name="description" content="This professional design html template is for build a Money Transfer and online payments website.">
+<meta name="description" content="HisenseGh payment gatewy">
 <meta name="author" content="harnishdesign.net">
 
 <!-- Web Fonts
@@ -186,7 +186,7 @@
 
 <script >
   
-  let BASE_URL ='https://api.hisense.com.gh'
+  let BASE_URL ='http://127.0.0.1:8000'
      
      $(document).on('click',`#close` , function(){
         $("#fullModal").modal("hide");
