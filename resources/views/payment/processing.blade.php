@@ -21,6 +21,7 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+   
     setInterval(function () {
         location.reload();
     }, 5000);
