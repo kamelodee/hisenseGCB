@@ -54,7 +54,7 @@
             <div id="header-nav" class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto">
                
-                <li><a href="{{route('payments')}}">Payment/Request</a></li>
+                <li><a href="{{route('payments')}}">Received Payments</a></li>
                 
                 @can('Show Users')
                 <li class="dropdown language"> <a class="dropdown-toggle" href="#">Transactions</a>
