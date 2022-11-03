@@ -61,7 +61,7 @@ class CalBank{
                 "customerEmail": '.json_encode(str_replace(' ', '', $name.$order_code).'@gmail.com').',
                 "payOption": "ALL",
                 "currency": "GHS",
-                "approveurl" : "https://api.hisense.com.gh",
+                "approveurl" : "https://api.hisense.com.gh/payments/processing",
                 "orderCode": '.json_encode($order_code).',
                 "callbackurl": "https://caclbank.net",
                 "fullDiscountAmount": 0
