@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-use App\Models\Admin;
+use App\Models\Activity;
 use App\Models\User;
 use App\Models\Showroom;
 use App\Http\Controllers\Controller;
@@ -26,9 +26,10 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        $activities = Activity::where('model_name','App\Models\User')->latest()->paginate(10);
         $data = User::orderBy('id', 'desc')->get();
         // dd($data);
-        return view('users.index');
+        return view('users.index',compact('activities'));
     }
 
 
@@ -134,6 +135,10 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
+        if($user){
+            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Created",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
+     
+        }
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users')
@@ -189,6 +194,8 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));
+        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Updated",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
+     
         return redirect()->route('users')
             ->with('success', 'User updated successfully.');
     }

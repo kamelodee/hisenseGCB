@@ -91,7 +91,7 @@ Route::prefix('transactions')->group(function () {
           
         });
     });
-   
+
     Route::resource('roles', RoleController::class);
     Route::resource('permissions', PermissionController::class);
 });

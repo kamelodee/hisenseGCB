@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use DB;
 use Hash;
 use App\Models\User;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -62,8 +64,13 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
+        if($user){
+            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Created",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
+     
+        }
         $user->assignRole($request->input('roles'));
-    
+       
+      
         return redirect()->route('users.index')
             ->with('success', 'User created successfully.');
     }
@@ -122,7 +129,8 @@ class UserController extends Controller
     
         $user = User::find($id);
         $user->update($input);
-
+        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Updated",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
+     
         DB::table('model_has_roles')
             ->where('model_id', $id)
             ->delete();

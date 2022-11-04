@@ -1,13 +1,14 @@
 <?php
 namespace App\Services\Banks;
 use Illuminate\Support\Facades\DB;
-
+use App\Services\Helper;
 
 class CalBank{
  
 
-    static public function pay($amount,$phone,$name,$order_code,$customer_city)
+    static public function pay($amount,$phone,$name,$order_code,$customer_city,$id)
     {
+      $mai = Helper::username($id,$name);
         $curl = curl_init();
         
         curl_setopt_array($curl, array(
@@ -58,7 +59,7 @@ class CalBank{
                 "shipping": 0,
                 "customerContact": '.json_encode($phone).',
                 "trasactionCardMode": "PURCHASE",
-                "customerEmail": '.json_encode(str_replace(' ', '', $name.$order_code).'@gmail.com').',
+                "customerEmail": '.json_encode(str_replace(' ', '', $mai).'@gmail.com').',
                 "payOption": "ALL",
                 "currency": "GHS",
                 "approveurl" : "https://api.hisense.com.gh/payments/processing",

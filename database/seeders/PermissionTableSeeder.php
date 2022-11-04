@@ -25,7 +25,7 @@ class PermissionTableSeeder extends Seeder
            'Edit User',
            'Delete User',
 
-           'Show Showroom',
+           'Show Showrooms',
            'Create Showroom',
            'Edit Showroom',
            'Delete Showroom',
@@ -40,6 +40,7 @@ class PermissionTableSeeder extends Seeder
            'Edit Payment',
            'make Payment',
            'Delete Payment',
+           'Access All',
         ];
      
         foreach ($permissions as $permission) {

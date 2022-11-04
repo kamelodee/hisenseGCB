@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Showroom;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
@@ -18,8 +19,8 @@ class ShowroomController extends Controller
     }
     public function index()
     {
-      
-        return view('showrooms/index');
+        $activities = Activity::where('model_name','App\Models\Showroom')->latest()->paginate(10);
+        return view('showrooms/index',compact('activities'));
         //
     }
 
@@ -86,12 +87,15 @@ class ShowroomController extends Controller
             'name' => 'required',
             
         ]);
-        Showroom::updateOrCreate([
+      $showroom=  Showroom::updateOrCreate([
             'name'=>$request->name,
             'street'=>$request->street,
             'city'=>$request->city,
             'phone'=>$request->phone,
         ]);
+        if($showroom){
+            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Showroom created",'model_id'=>$showroom->id,'model_name'=>'App\Models\Showroom']);
+        }
         return back();
         //
     }
@@ -128,7 +132,11 @@ class ShowroomController extends Controller
      */
     public function update(Request $request, Showroom $showroom,$id)
     {
-        $showroom =  Showroom::find($id)->update([
+        $showroom =  Showroom::find($id);
+        if($showroom){
+            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Showroom Updated",'model_id'=>$showroom->id,'model_name'=>'App\Models\Showroom']);
+        }
+        $showroom->update([
             'name'=>$request->name,
         'street'=>$request->street,
         'city'=>$request->city,

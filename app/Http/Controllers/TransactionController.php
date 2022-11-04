@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
@@ -17,28 +18,32 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Transaction::where('status', 'SUCCESS')->where('bank','CALBANK')->sum('amount');
-        return view('transactions/index', compact('total'));
+        return view('transactions/index', compact('total','activities'));
         //
     }
     public function gcb()
     {
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Transaction::where('bank','GCB')->sum('amount');
-        return view('transactions/gcb',compact('total'));
+        return view('transactions/gcb',compact('total','activities'));
         //
     }
 
     public function uba()
     {
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Transaction::where('status', 'SUCCESS')->where('bank','UBA')->sum('amount');
-        return view('transactions/uba',compact('total'));
+        return view('transactions/uba',compact('total','activities'));
         //
     }
     public function zenith()
     {
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Transaction::where('status', 'SUCCESS')->where('bank','ZENITH')->sum('amount');
-        return view('transactions/zenith',compact('total'));
+        return view('transactions/zenith',compact('total','activities'));
         //
     }
 

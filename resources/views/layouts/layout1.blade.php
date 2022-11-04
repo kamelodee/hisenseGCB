@@ -35,6 +35,7 @@
 <div id="main-wrapper"> 
   <!-- Header
   ============================================= -->
+<div class="text-center">  <a href="#"><i class="fas fa-building mx-1"></i> {{Auth::user()->showroom}}</a></div>
   <header id="header">
     <div class="container">
       <div class="header-row">
@@ -54,9 +55,12 @@
             <div id="header-nav" class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto">
                
-                <li><a href="{{route('payments')}}">Received Payments</a></li>
+                <li>
+                  <a href="{{route('payments')}}">Received Payments</a>
+                  
+                </li>
                 
-                @can('Show Users')
+                @can('Show Transactions')
                 <li class="dropdown language"> <a class="dropdown-toggle" href="#">Transactions</a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li>
@@ -67,7 +71,7 @@
                   </ul>
                 </li>
                 @endcan
-              
+                
               
                
                 
@@ -82,19 +86,19 @@
           ============================== -->
           <nav class="login-signup navbar navbar-expand">
             <ul class="navbar-nav">
-              @can('Show Users')
+              @can('Access All')
               <li class="dropdown language"> <a class="dropdown-toggle" href="#"><i class="fas text-3 fa-user-cog me-2"></i>Settings</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{{route('users')}}">Users</a></li>
                   <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
-                  @can('Show Showroom')
+                
                   <li><a class="dropdown-item" href="{{route('showrooms')}}">Showrooms</a></li>
-                 @endcan
+              
                 </ul>
               </li>
               @endcan
              
-              <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->showroom}}</span></a>
+              <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->name}}</span></a>
                 <ul class="dropdown-menu">
                   <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
                   <li class="dropdown-divider mx-n3"></li>
@@ -129,8 +133,11 @@
   </header>
   <!-- Header End -->
   
-
+<div>
+  
   @yield('content')
+</div>
+
 
   <!-- Footer
   ============================================= -->
@@ -186,7 +193,7 @@
 
 <script >
   
-  let BASE_URL ='https://api.hisense.com.gh'
+  let BASE_URL ='http://127.0.0.1:8000'
      
      $(document).on('click',`#close` , function(){
         $("#fullModal").modal("hide");

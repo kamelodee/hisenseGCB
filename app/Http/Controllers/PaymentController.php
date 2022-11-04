@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\Showroom;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +14,8 @@ use App\Services\Banks\CalBank;
 use App\Services\Banks\Uba;
 use App\Services\Banks\Gcb;
 use App\Services\Banks\Zenith;
+use App\Services\Helper;
+
 
 class PaymentController extends Controller
 {
@@ -23,7 +26,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payment/index');
+        $showrooms = Showroom::all();
+        return view('payment/index',compact('showrooms'));
     }
 
     public function transaction()
@@ -80,8 +84,11 @@ class PaymentController extends Controller
     }
 
 
+    // calpay function
     public function calpay(Request $request)
     {
+        $roles = Auth::user()->getRoleNames();
+        
         $validator = Validator::make($request->all(), [
 
             'name' => 'required',
@@ -90,17 +97,17 @@ class PaymentController extends Controller
 
 
         ]);
+        $trans = Transaction::latest()->first();
+        $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
 
-        $showroom = Showroom::where('name', Auth::user()->showroom)->first();
-
-        $data = CalBank::pay($request->amount, $request->phone, $request->name, $request->order_code, $showroom->city ? $showroom->city : "");
-
+        $data = CalBank::pay($request->amount, $request->phone, $request->name, $request->order_code, $showroom->city ? $showroom->city : "", $trans->id);
+        $transid= Helper::username($trans->id,$trans->customer_name);
         if (json_decode($data->return)->CODE == 1) {
             return back()->with('error', json_decode($data->return)->MESSAGE);
         } else {
             $transaction =   Transaction::create([
                 'customer_name' => $request->name,
-                'showroom' => Auth::user()->showroom,
+                'showroom' => $showroom->name,
                 'order_code' => json_decode($data->return)->RESULT[0]->ORDERCODE,
                 'payment_token' => json_decode($data->return)->RESULT[0]->PAYMENTTOKEN,
                 'payment_code' => json_decode($data->return)->RESULT[0]->PAYMENTCODE,
@@ -110,6 +117,7 @@ class PaymentController extends Controller
                 'ref' => json_decode($data->return)->RESULT[0]->DESCRIPTION,
                 'phone' => $request->phone,
                 'amount' => $request->amount,
+                'sales_reference_id' => $transid,
                 'account_number' => $request->phone,
                 'status' => 'PENDING',
                 'bank' => 'CALBANK',
@@ -117,6 +125,7 @@ class PaymentController extends Controller
                 'date' => date('Y.m.d H:i:s'),
             ]);
             if ($transaction) {
+                Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Transaction created",'model_id'=>$transaction->id,'model_name'=>'App\Models\Transaction']);
                 return redirect(json_decode($data->return)->RESULT[0]->APIPAYREDIRECTURL);
             }
         }
