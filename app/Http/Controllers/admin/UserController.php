@@ -18,10 +18,7 @@ class UserController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:Show Users|Create Role|Edit Role|Delete Role', ['only' => ['index','store']]);
-         $this->middleware('permission:Create User', ['only' => ['create','store']]);
-         $this->middleware('permission:Edit User', ['only' => ['edit','update']]);
-         $this->middleware('permission:Delete User', ['only' => ['destroy']]);
+        
     }
 
     public function index(Request $request)
