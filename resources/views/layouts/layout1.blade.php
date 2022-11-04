@@ -86,7 +86,7 @@
           ============================== -->
           <nav class="login-signup navbar navbar-expand">
             <ul class="navbar-nav">
-              {{-- @can('Access All') --}}
+              @can('Access All')
               <li class="dropdown language"> <a class="dropdown-toggle" href="#"><i class="fas text-3 fa-user-cog me-2"></i>Settings</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{{route('users')}}">Users</a></li>
@@ -96,7 +96,7 @@
               
                 </ul>
               </li>
-              {{-- @endcan --}}
+              @endcan
              
               <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->name}}</span></a>
                 <ul class="dropdown-menu">
