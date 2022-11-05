@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => 'HisensePay',
     'manifest' => [
         'name' => env('APP_NAME', 'Hisense Pay'),
         'short_name' => 'HiPAY',
-        'start_url' => '/',
+        'start_url' => 'https://api.hisense.com.gh',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',
         'display' => 'standalone',
@@ -59,18 +59,18 @@ return [
         ],
         'shortcuts' => [
             [
-                'name' => 'Shortcut Link 1',
+                'name' => 'https://api.hisense.com.gh',
                 'description' => 'Shortcut Link 1 Description',
-                'url' => '/shortcutlink1',
+                'url' => 'https://api.hisense.com.gh',
                 'icons' => [
                     "src" => "/images/icons/icon-72x72.png",
                     "purpose" => "any"
                 ]
             ],
             [
-                'name' => 'Shortcut Link 2',
+                'name' => 'https://api.hisense.com.gh',
                 'description' => 'Shortcut Link 2 Description',
-                'url' => '/shortcutlink2'
+                'url' => 'https://api.hisense.com.gh'
             ]
         ],
         'custom' => []
