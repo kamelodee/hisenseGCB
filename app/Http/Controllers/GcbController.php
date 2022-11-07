@@ -231,6 +231,7 @@ class GcbController extends Controller
     public function ecobankdeposit(Request $request)
     {
     //   return  $request->all();
+    // GPZEN2022110712244
       try{
         $validator = Validator::make($request->all(), [
             'showroom' => 'required',
@@ -404,5 +405,10 @@ class GcbController extends Controller
        
 
        
+    }
+
+
+    public function apidoc(){
+        return view('api');
     }
 }

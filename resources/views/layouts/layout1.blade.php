@@ -95,6 +95,7 @@
                   <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
                 
                   <li><a class="dropdown-item" href="{{route('showrooms')}}">Showrooms</a></li>
+                  <li><a class="dropdown-item" href="{{route('api')}}">API docs</a></li>
               
                 </ul>
               </li>
@@ -168,6 +169,7 @@
             <ul class="nav justify-content-center">
               <li class="nav-item"> <a class="nav-link active" href="#">Security</a></li>
               <li class="nav-item"> <a class="nav-link" href="#">Terms</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('api')}}">API Docs</a></li>
               <li class="nav-item"> <a class="nav-link" href="#">Privacy</a></li>
             </ul>
           </div>

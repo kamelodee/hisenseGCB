@@ -46,9 +46,12 @@
             </div>
             <div class="row g-0 my-auto">
               <div class="col-10 col-lg-9 mx-auto">
-                <h1 class="text-11 text-white mb-4">Welcome back!</h1>
-                <p class="text-4 text-white lh-base mb-5">We are glad to see you again!</p>
-                <a class="btn btn-primary" href="{{route('api')}}">API Docs</a>
+                <h1 class="text-11 text-white mb-4">Hisense Pay API</h1>
+                <h3 class="text-5 text-white mb-4">Introduction</h3>
+                <hr>
+                <p class="text-4 text-white lh-base mb-5">This Hisense API is a simplified set of rules that enables communication between the ERP of the Company and an assigned third party service provider, exposing data and functionality across secure network infrastructure, in a consistent format. Developed based on REST, the API is delivered a predefined URL and accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs.
+
+                    This API has two endpoints, namely the Showroom Login endpoint and the Showroom Payments endpoint.</p>
               </div>
             </div>
           </div>
@@ -62,34 +65,10 @@
         <div class="container my-4">
           <div class="row g-0">
             <div class="col-11 col-lg-9 col-xl-8 mx-auto">
-              <h3 class="fw-400 mb-4">Log In</h3>
-			  @if ($errors->any())
-			  @foreach ($errors->all() as $error)
-				  <div class="text-danger">{{$error}}</div>
-			  @endforeach
-		  @endif
-              <form id="loginForm" method="POST" action="{{ route('login') }}">
-				@csrf
-                <div class="mb-3">
-                  <label for="emailAddress" class="form-label">Email Address</label>
-                  <input type="email" name="email" class="form-control" id="emailAddress" required="" placeholder="Enter Your Email">
-                </div>
-                <div class="mb-3">
-                  <label for="loginPassword" class="form-label">Password</label>
-                  <input type="password" name="password" class="form-control" id="loginPassword" required="" placeholder="Enter Password">
-                </div>
-                <div class="row mb-3">
-                  <div class="col-sm">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" id="remember-me" name="remember" type="checkbox">
-                      <label class="form-check-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div>
-                  <div class="col-sm text-end"><a class="btn-link" href="#">Forgot Password ?</a></div>
-                </div>
-                <div class="d-grid mb-3"><button class="btn btn-primary" type="submit">Login</button></div>
-              </form>
-              <p class="text-3 text-center text-muted">Don't have an account? <a class="btn-link" href="#">Sign Up</a></p>
+              <h3 class="fw-400 mb-4">Postman Docs</h3>
+			 
+              <a class="btn btn-primary" href="https://documenter.getpostman.com/view/8299726/2s83zpJgC6#intro">Open postman docs</a>
+           
             </div>
           </div>
         </div>
@@ -103,6 +82,9 @@
 ============================================= --> 
 <a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
 
+ 
+</div>
+<!-- Styles Switcher End --> 
 
 <!-- Script --> 
 <script src="{{asset("assets1/vendor/jquery/jquery.min.js")}}"></script> 

@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ShowroomController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\GcbController;
 
 
 Route::get('/', function () {
@@ -21,6 +22,7 @@ Route::get('/transaction', [PaymentController::class, 'transaction'])->name('tra
 Route::get('/admin', [UserController::class, 'loginForm'])->name('admin.loginform');
 Route::get('/unauthorise', [UserController::class, 'unauthorise'])->name('unauthorise');
 Route::post('/admin/login', [UserController::class, 'login'])->name('admin.login');
+Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
 
 
 Route::group(['middleware' => ['auth']], function () {
