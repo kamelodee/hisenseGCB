@@ -2,7 +2,7 @@
 @section('content')
     <!-- Secondary menu
           ============================================= -->
-    <div class="bg-primary">
+    <div class="bg-primary sticky-top">
         <div class="container d-flex justify-content-center">
             <ul class="nav nav-pills alternate nav-lg border-bottom-0 nav nav-pills nav-lg" id="pillsmyTab" role="tablist">
                 <li class="nav-item"> <a class="nav-link active" id="calbanks" href="#calbank" role="tab"
