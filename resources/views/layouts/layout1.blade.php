@@ -42,8 +42,7 @@
         <div class="header-column justify-content-start"> 
           <!-- Logo
           ============================= -->
-          <div class="logo me-3"><i class="fas fa-th text-3 me-2"></i> <a class="d-flex" href="{{route('dashboard')}}" title="Payyed - HTML Template"><span class="text-success text-3">Hisense Pay</span></a> </div>
-          <!-- Logo end --> 
+           <!-- Logo end --> 
           <!-- Collapse Button
           ============================== -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"> <span></span> <span></span> <span></span> </button>
@@ -54,7 +53,10 @@
           <nav class="primary-menu navbar navbar-expand-lg">
             <div id="header-nav" class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto">
-               
+               <li>
+                
+                 <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class="text-success text-3">Hisense Pay</span></a> 
+               </li>
                 <li>
                   <a href="{{route('payments')}}">Received Payments</a>
                   
@@ -74,7 +76,7 @@
                 
               
                
-                
+              
                 
               </ul>
             </div>
@@ -97,8 +99,9 @@
                 </ul>
               </li>
               @endcan
-             
               <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->name}}</span></a>
+                
+                
                 <ul class="dropdown-menu">
                   <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
                   <li class="dropdown-divider mx-n3"></li>
