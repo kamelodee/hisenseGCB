@@ -35,7 +35,7 @@
 <div id="main-wrapper"> 
   <!-- Header
   ============================================= -->
-<div class="text-center">  <a href="#"><i class="fas fa-building mx-1"></i> {{Auth::user()->showroom}}</a></div>
+<div class="text-center sticky-top" >  <a href="#" class="text-dark text-3 "><i class="fas fa-building mx-1"></i> {{Auth::user()->showroom}}</a></div>
   <header id="header">
     <div class="container">
       <div class="header-row">
