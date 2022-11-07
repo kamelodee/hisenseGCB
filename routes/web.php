@@ -16,7 +16,7 @@ use App\Http\Controllers\GcbController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
 
 Route::get('/transaction', [PaymentController::class, 'transaction'])->name('transaction');
 Route::get('/admin', [UserController::class, 'loginForm'])->name('admin.loginform');
@@ -26,6 +26,7 @@ Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
 
 
 Route::group(['middleware' => ['auth']], function () {
+Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::prefix('showrooms')->group(function () {
     Route::get('/', [ShowroomController::class, 'index'])->name('showrooms');
     Route::get('/gettable', [ShowroomController::class, 'gettable'])->name('showrooms.gettable');
