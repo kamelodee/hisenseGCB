@@ -170,7 +170,7 @@
       var table = $('.dataTable2').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('transactions.ubalist') }}",
+          ajax: "{{ route('weekly') }}",
           columns: [
               {
                   data: 'id',
