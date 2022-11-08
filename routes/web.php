@@ -11,6 +11,7 @@ use App\Http\Controllers\ShowroomController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GcbController;
+use App\Http\Controllers\CalbankController;
 
 
 Route::get('/', function () {
@@ -56,7 +57,7 @@ Route::prefix('transactions')->group(function () {
     Route::get('/', [TransactionController::class, 'index'])->name('transactions');
     Route::get('/load', [TransactionController::class, 'load'])->name('transactions.load');
     Route::get('/gettable', [TransactionController::class, 'gettable'])->name('transactions.gettable');
-    Route::get('/calbank', [TransactionController::class, 'index'])->name('transactions.calbank');
+   
     Route::get('/gcb', [TransactionController::class, 'gcb'])->name('transactions.gcb');
     Route::get('/uba', [TransactionController::class, 'uba'])->name('transactions.uba');
     Route::get('/zenith', [TransactionController::class, 'zenith'])->name('transactions.zenith');
@@ -69,6 +70,21 @@ Route::prefix('transactions')->group(function () {
     Route::get('/details/{id}', [TransactionController::class, 'show'])->name('transactions.details');
     Route::post('/edit/{id}', [TransactionController::class, 'edit'])->name('transactions.edit');
     Route::post('/remove/{id}', [TransactionController::class, 'remove'])->name('transactions.remove');
+
+  
+        Route::get('/calbank', [TransactionController::class, 'index'])->name('transactions.calbank');
+        Route::get('/daily', [CalbankController::class, 'indexdaily'])->name('indexdaily');
+        Route::get('/weekly', [CalbankController::class, 'indexweekly'])->name('indexweekly');
+        Route::get('/monthly', [CalbankController::class, 'indexmonthly'])->name('indexmonthly');
+        Route::get('/yearly', [CalbankController::class, 'indexyearly'])->name('indexyearly');
+       
+       
+        Route::get('/dailylist', [CalbankController::class, 'daily'])->name('daily');
+        Route::get('/weeklylist', [CalbankController::class, 'weekly'])->name('weekly');
+        Route::get('/monthlylist', [CalbankController::class, 'monthly'])->name('monthly');
+        Route::get('/yearlylist', [CalbankController::class, 'yearly'])->name('yearly');
+
+ 
 });
 
 

@@ -13,30 +13,38 @@
           <!-- Available Balance
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.calbank')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
             <p class="mb-2 text-muted opacity-8">CalBank</p>
+          </a>
             <hr class="mx-n3">
           
           </div>
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.uba')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$uba}}</h3>
             <p class="mb-2 text-muted opacity-8">UBA</p>
+            </a>
             <hr class="mx-n3">
           
           </div>
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.gcb')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3  fw-400">GHC {{$gcb}}</h3>
             <p class="mb-2 text-muted opacity-8">GCB</p>
+            </a>
             <hr class="mx-n3">
           
           </div>
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.zenith')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$zenith}}</h3>
             <p class="mb-2 text-muted opacity-8">ZenithBank</p>
+            </a>
             <hr class="mx-n3">
           
           </div>
@@ -58,37 +66,41 @@
             <div class="row gy-4 profile-completeness">
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <a href="{{route('indexdaily')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_today}}</h3>
                   <p class="mb-2 text-muted opacity-8">Daily Transactions</p>
                  
-                
+                </a>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <a href="{{route('indexweekly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_week}}</h3>
                   <p class="mb-2 text-muted opacity-8">Weekly Transactions</p>
                 
-                
+                  </a>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <a href="{{route('indexmonthly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_month}}</h3>
                   <p class="mb-2 text-muted opacity-8">Monthly Transactions</p>
                   
-                
+                  </a>
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                  <a href="{{route('indexyearly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_year}}</h3>
                   <p class="mb-2 text-muted opacity-8">Yearly Transactions</p>
-                 
+                  </a>
                 
                 </div>
               </div>
