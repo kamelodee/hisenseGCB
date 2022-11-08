@@ -21,12 +21,12 @@ class Helper
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
            $cha =substr(str_shuffle($characters), 5, 10);
            $na = $name.$cha;
-           $cha =substr(str_shuffle(strtoupper(str_replace(' ', '', $na))), 5, 7);
-          $ref = sprintf('%s%s%s',$id,$cha,now()->format('His'));
+           $cha =substr(str_shuffle(strtoupper(str_replace(' ', '', $na))), 5, 5);
+          $ref = sprintf('%s%s','SO'.$id,now()->format('His'));
           return $ref;
         }else{
-            $cha =substr(str_shuffle(strtoupper(str_replace(' ', '', $name))), 5, 7);
-            $ref = sprintf('%s%s%s',$id,$cha,now()->format('His') ); 
+            $cha =substr(str_shuffle(strtoupper(str_replace(' ', '', $name))), 5, 5);
+            $ref = sprintf('%s%s','SO'.$id,now()->format('His') ); 
             return $ref;  
         }
         
