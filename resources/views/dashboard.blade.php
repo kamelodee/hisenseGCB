@@ -131,7 +131,7 @@
                           <th class="border-top-0 text-white_">Amount</th>
                           <th class="border-top-0 text-white_">Ref</th>
                           <th class="border-top-0 text-white_">Showroom</th>
-                          <th class="border-top-0 text-white_">Ceated At</th>
+                         
                          
                          
                          
@@ -178,6 +178,10 @@
                   searchable: true
               },
               {
+                  data: 'date',
+                  name: 'date'
+              },
+              {
                   data: 'transaction_id',
                   name: 'transaction_id'
               },
@@ -202,11 +206,7 @@
                   searchable: true
               },
             
-              {
-                  data: 'created_at',
-                  name: 'created_at',
-                  searchable: true
-              },
+             
               
   
               
