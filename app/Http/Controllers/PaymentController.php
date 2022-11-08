@@ -61,8 +61,8 @@ class PaymentController extends Controller
     }
     public function processing(Request $request)
     {
-       return $token= request()->paytoken;
-       $data = CalBank::getTransactions($token);
+        $token= request()->paytoken;
+     return  $data = CalBank::getTransactions($token);
 
        if (json_decode($data->return)->CODE == 1) {
         
