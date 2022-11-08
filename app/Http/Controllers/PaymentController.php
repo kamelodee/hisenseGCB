@@ -69,8 +69,15 @@ class PaymentController extends Controller
            return back()->with('error', json_decode($data->return)->MESSAGE);
        } else {
            if (json_decode($data->return)->RESULT[0]->FINALSTATUS == 'SUCCESS') {
-               Transaction::where('transaction_id',$token)->first()->update(['status' => json_decode($data->return)->RESULT[0]->FINALSTATUS]);
-             return redirect()->route('transactions')->with('success', 'Payment successfully.');
+             $transaction =  Transaction::where('transaction_id',$token)->first();
+             if($transaction){
+                $transaction ->update(['status' => json_decode($data->return)->RESULT[0]->FINALSTATUS]);
+                return redirect()->route('transactions')->with('success', 'Payment successfully.');
+            }else{
+                return redirect()->route('transactions')->with('error', 'Payment Failed.'); 
+            }
+            
+            
             }else if(json_decode($data->return)->RESULT[0]->FINALSTATUS == 'FAILED'){
                 
                 Transaction::where('transaction_id',$token)->first()->update(['status' => json_decode($data->return)->RESULT[0]->FINALSTATUS]);
