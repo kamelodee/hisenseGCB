@@ -72,7 +72,18 @@ class TransactionController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id', 'name'])
+                ->addColumn('status', function ($row) {
+                    if($row->status =='PENDING'){
+                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
+               
+                        ';
+                             return $actionBtn;
+                    }else{
+                        return $row->status;
+                    }
+                   
+                })
+                ->rawColumns(['transaction_id', 'name','status'])
                 ->make(true);
         }
     }
