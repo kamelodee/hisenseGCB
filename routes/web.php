@@ -12,6 +12,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GcbController;
 use App\Http\Controllers\CalbankController;
+use App\Http\Controllers\UBAController;
 
 
 Route::get('/', function () {
@@ -60,6 +61,7 @@ Route::prefix('transactions')->group(function () {
    
     Route::get('/gcb', [TransactionController::class, 'gcb'])->name('transactions.gcb');
     Route::get('/uba', [TransactionController::class, 'uba'])->name('transactions.uba');
+    Route::post('/uba/pay', [UBAController::class, 'pay'])->name('transactions.uba.pay');
     Route::get('/zenith', [TransactionController::class, 'zenith'])->name('transactions.zenith');
     Route::get('/ubalist', [TransactionController::class, 'ubalist'])->name('transactions.ubalist');
     Route::get('/zenithlist', [TransactionController::class, 'zenithlist'])->name('transactions.zenithlist');
