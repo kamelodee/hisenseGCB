@@ -19,22 +19,26 @@
         </div>
     </div>
 
- <div class="col-md-3 col-lg-3 col-xl-3 mx-auto my-3">
-    @foreach ($errors->all() as $error)
-                                    <li class="text-danger">{{ $error }}</li>
-                                @endforeach
-                                @if ($message = Session::get('success'))
-                                    <div class="alert alert-success">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                @endif
-                                @if ($message = Session::get('error'))
-                                    <div class="alert alert-danger">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                @endif
- </div>
-
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+        @foreach ($errors->all() as $error)
+                                        <li class="text-danger">{{ $error }}</li>
+                                    @endforeach
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
+                                    @if ($message = Session::get('error'))
+                                        <div class="alert alert-danger">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
+     </div>
+     </div>
+    
+</div>
 
     <div class="tab-content my-3" id="pillsmyTabContent">
         <div class="tab-pane fade show active" id="calbank" role="tabpanel" aria-labelledby="calbanks">
