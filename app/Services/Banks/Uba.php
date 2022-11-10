@@ -26,7 +26,7 @@ class Uba{
         "firstname":'.$name[0].',
         "lastname":'.$name[1].',
         "phone": '.$phone.',
-        "merchantID" : "NG0700144",
+        "merchantID" : "GH1400134",
         "uniqueID": '.$order_code.',
         "description": " test test description",
         "amount": '.$amount.',
