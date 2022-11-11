@@ -44,33 +44,34 @@ class UBAController extends Controller
         $trans = Transaction::latest()->first();
         $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
 
-      return $data = Uba::pay($request->name,$request->phone,$request->amount,$request->order_code);
+       $data = Uba::pay($request->name,$request->phone,$request->amount,$request->order_code);
         $transid= Helper::username($trans->id,$trans->customer_name);
-        if (json_decode($data)->status == 400) {
-            return back()->with('error', json_decode($data)->message);
+      return json_decode($data);
+        if (json_decode($data)->status != 0) {
+            return back()->with('error', json_decode($data)->response);
         } else {
             $transaction =   Transaction::create([
                 'customer_name' => $request->name,
                 'showroom' => $showroom->name,
-                'order_code' => json_decode($data->return)->RESULT[0]->ORDERCODE,
-                'payment_token' => json_decode($data->return)->RESULT[0]->PAYMENTTOKEN,
-                'payment_code' => json_decode($data->return)->RESULT[0]->PAYMENTCODE,
-                'shortpay_code' => json_decode($data->return)->RESULT[0]->SHORTPAYCODE,
-                'transaction_id' => json_decode($data->return)->RESULT[0]->PAYMENTTOKEN,
-                'transaction_type' => json_decode($data->return)->RESULT[0]->DESCRIPTION,
-                'ref' => json_decode($data->return)->RESULT[0]->DESCRIPTION,
+                'order_code' => json_decode($data)->Response->unique_value,
+                'payment_token' => json_decode($data)->Response->unique_value,
+                'payment_code' => json_decode($data)->Response->approval_code,
+                'shortpay_code' => json_decode($data)->Response->unique_value,
+                'transaction_id' => json_decode($data)->Response->transaction_id,
+                'transaction_type' =>json_decode($data)->Response->description,
+                'ref' => json_decode($data)->Response->reference_no,
                 'phone' => $request->phone,
                 'amount' => $request->amount,
                 'sales_reference_id' => $transid,
                 'account_number' => $request->phone,
                 'status' => 'PENDING',
                 'bank' => 'CALBANK',
-                'description' => json_decode($data->return)->RESULT[0]->DESCRIPTION,
+                'description' => json_decode($data)->Response->description,
                 'date' => date('Y.m.d H:i:s'),
             ]);
             if ($transaction) {
                 Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Transaction created",'model_id'=>$transaction->id,'model_name'=>'App\Models\Transaction']);
-                return redirect(json_decode($data->return)->RESULT[0]->APIPAYREDIRECTURL);
+                return back();
             }
         }
         //
