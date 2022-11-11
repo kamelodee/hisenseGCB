@@ -1,252 +1,217 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords"
-        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
-    <meta name="description"
-        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
-    <meta name="robots" content="noindex,nofollow">
-    <title>{{ config('app.name', 'Hisense SMS') }}</title>
-    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset("assets/plugins/images/favicon.png")}}">
-    <!-- Custom CSS -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="{{asset("assets/plugins/bower_components/chartist/dist/chartist.min.css")}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset("assets/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css")}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Custom CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-    <link href="{{asset("assets/css/style.min.css")}}" rel="stylesheet">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+<link href="{{asset('images/favicon.png')}}" rel="icon">
+<title>{{Auth::user()->showroom}}</title>
+<meta name="description" content="HisenseGh payment gatewy">
+<meta name="author" content="harnishdesign.net">
+
+<!-- Web Fonts
+============================================= -->
+<link rel="stylesheet" href="../../../css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+
+<!-- Stylesheet
+============================================= -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="{{asset("assets1/vendor/bootstrap/css/bootstrap.min.css")}}">
+<link rel="stylesheet" type="text/css" href="{{asset("assets1/vendor/font-awesome/css/all.min.css")}}">
+<link rel="stylesheet" type="text/css" href="{{asset("assets1/css/stylesheet.css")}}">
+<!-- Colors Css -->
+
 </head>
-
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin6">
-                    <!-- ============================================================== -->
-                    <!-- Logo -->
-                    <!-- ============================================================== -->
-                    <a class="navbar-brand" href="#">
-                        <!-- Logo icon -->
-                        <b class="logo-icon text-dark">
-                            <!-- Dark Logo icon -->
-                           Hisense
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text text-dark">
-                            <!-- dark Logo text -->
-                            Payment
-                        </span>
-                    </a>
-                    <!-- ============================================================== -->
-                    <!-- End Logo -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
-                        href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-                   
-                    <!-- ============================================================== -->
-                    <!-- Right side toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav ms-auto d-flex align-items-center">
 
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
-                        <li class=" in">
-                            <form role="search" class="app-search d-none d-md-block me-3">
-                                <input type="text" placeholder="Search..." class="form-control mt-0">
-                                <a href="" class="active">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </form>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                        <li>
-                            <a class="profile-pic" href="#">
-                                <img src="{{asset("assets/plugins/images/users/varun.jpg")}}" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">{{ Auth::user()->showroom }}</span></a>
-                        </li>
-                        <li>
-                           <span class="text-white pr-3">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-    
-                                <a href="route('logout')"
-                                        onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                    <i class="fas fa-sign-out-alt"></i>
-                            </a>
-                            
-                            </form>
-                           </span>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- User profile and search -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <aside class="left-sidebar" data-sidebarbg="skin6">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="sidebar-item p-3">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('dashboard')}}"
-                                aria-expanded="false">
-                                <i class="far fa-clock" aria-hidden="true"></i>
-                                <span class="hide-menu">Dashboard</span>
-                            </a>
-                        </li>
-                    
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{route('payment')}}"
-                                aria-expanded="false">
-                                <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">Payment</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
-                            <span class="text-white pr-3 sidebar-link waves-effect waves-dark sidebar-link">
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-        
-                                    <a href="route('logout')"
-                                            onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                        <i class="fas fa-sign-out-alt"></i>
-                                </a>
-                                
-                                </form>
-                               </span>
-                        </li>
-                        
-                       
-                    </ul>
+<!-- Preloader -->
+<div id="preloader">
+  <div data-loader="dual-ring"></div>
+</div>
+<!-- Preloader End --> 
 
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-            <div class="page-breadcrumb bg-white">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Dashboard</h4>
-                    </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <div class="d-md-flex">
-                            <ol class="breadcrumb ms-auto">
-                                <li><a href="#" class="fw-normal">Dashboard</a></li>
-                            </ol>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+<!-- Document Wrapper   
+============================================= -->
+<div id="main-wrapper"> 
+  <!-- Header
+  ============================================= -->
+<div class="text-center sticky-top" >  <a href="#" class="text-dark text-3 "><i class="fas fa-building mx-1"></i> {{Auth::user()->showroom}}</a></div>
+  <header id="header">
+    <div class="container">
+      <div class="header-row">
+        <div class="header-column justify-content-start"> 
+          <!-- Logo
+          ============================= -->
+           <!-- Logo end --> 
+          <!-- Collapse Button
+          ============================== -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"> <span></span> <span></span> <span></span> </button>
+          <!-- Collapse Button end --> 
           
-            <div class="container-fluid">
-                @yield('content')
-
+          <!-- Primary Navigation
+          ============================== -->
+          <nav class="primary-menu navbar navbar-expand-lg">
+            <div id="header-nav" class="collapse navbar-collapse">
+              <ul class="navbar-nav me-auto">
+               <li>
+                
+                 <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class="text-success text-3">Hisense Pay</span></a> 
+               </li>
+                <li>
+                  <a href="{{route('payments')}}">Received Payments</a>
+                  
+                </li>
+                
+                @can('Show Transactions')
+                <li class="dropdown language"> <a class="dropdown-toggle" href="#">Transactions</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions')}}">CALBANK</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH BANK</a></li>
+                  
+                  </ul>
+                </li>
+                @endcan
+                
+              
+               
+              
+                
+              </ul>
             </div>
-               <footer class="footer text-center"> 2022 © <a
-                    href="/">Hisense Ghana</a>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
+          </nav>
+          <!-- Primary Navigation end --> 
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{asset("assets/plugins/bower_components/jquery/dist/jquery.min.js")}}"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="{{asset("assets/bootstrap/dist/js/bootstrap.bundle.min.js")}}"></script>
-    <script src="{{asset("assets/js/app-style-switcher.js")}}"></script>
-    <script src="{{asset("assets/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js")}}"></script>
-    <!--Wave Effects -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-    <script src="{{asset("assets/js/waves.js")}}"></script>
-    <!--Menu sidebar -->
-    <script src="{{asset("assets/js/sidebarmenu.js")}}"></script>
-    <!--Custom JavaScript -->
-    <script src="{{asset("assets/js/custom.js")}}"></script>
-    <!--This page JavaScript -->
-     {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-    <!--chartis chart-->
-    <script src="{{asset("assets/plugins/bower_components/chartist/dist/chartist.min.js")}}"></script>
-    <script src="{{asset("assets/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js")}}"></script>
-    <script src="{{asset("assets/js/pages/dashboards/dashboard1.js")}}"></script>
-    <script>
-        $('.datepicker').datepicker();
-    </script>
-</body>
+        <div class="header-column justify-content-end"> 
+          <!-- My Profile
+          ============================== -->
+          <nav class="login-signup navbar navbar-expand">
+            <ul class="navbar-nav">
+              @can('Access All')
+              <li class="dropdown language"> <a class="dropdown-toggle" href="#"><i class="fas text-3 fa-user-cog me-2"></i>Settings</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{route('users')}}">Users</a></li>
+                  <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
+                
+                  <li><a class="dropdown-item" href="{{route('showrooms')}}">Showrooms</a></li>
+                  <li><a class="dropdown-item" href="{{route('api')}}">API docs</a></li>
+              
+                </ul>
+              </li>
+              @endcan
+              <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->name}}</span></a>
+                
+                
+                <ul class="dropdown-menu">
+                  <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
+                  <li class="dropdown-divider mx-n3"></li>
+                  <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
 
+                  <li><a class="dropdown-item" href="{{route('transactions')}}"><i class="fas fa-credit-card"></i>Transactions</a></li>
+                    
+                  {{-- <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li> --}}
+                  <li>
+                    <span class="text-white pr-3">
+                     <form method="POST" action="{{ route('logout') }}">
+                         @csrf
+
+                         <a href="route('logout')"
+                                 onclick="event.preventDefault();
+                                             this.closest('form').submit();">
+                             {{ __('Log Out') }}
+                             <i class="fas fa-sign-out-alt"></i>
+                     </a>
+                     
+                     </form>
+                    </span>
+                 </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <!-- My Profile end --> 
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Header End -->
+  
+<div>
+  
+  @yield('content')
+</div>
+
+
+  <!-- Footer
+  ============================================= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg d-lg-flex align-items-center">
+          <ul class="nav justify-content-center justify-content-lg-start text-3">
+            <li class="nav-item"> <a class="nav-link active" href="#">About Us</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">Support</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">Help</a></li>
+           
+          </ul>
+        </div>
+        <div class="col-lg d-lg-flex justify-content-lg-end mt-3 mt-lg-0">
+          
+        </div>
+      </div>
+      <div class="footer-copyright pt-3 pt-lg-2 mt-2">
+        <div class="row">
+          <div class="col-lg">
+            <p class="text-center text-lg-start mb-2 mb-lg-0">Copyright &copy; 2022 <a href="#">HisenseGH</a>. All Rights Reserved.</p>
+          </div>
+          <div class="col-lg d-lg-flex align-items-center justify-content-lg-end">
+            <ul class="nav justify-content-center">
+              <li class="nav-item"> <a class="nav-link active" href="#">Security</a></li>
+              <li class="nav-item"> <a class="nav-link" href="#">Terms</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{{route('api')}}">API Docs</a></li>
+              <li class="nav-item"> <a class="nav-link" href="#">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer end --> 
+  
+</div>
+<!-- Document Wrapper end --> 
+
+<!-- Back to Top
+============================================= --> 
+<a id="back-to-top" data-bs-toggle="tooltip" title="Back to Top" href="javascript:void(0)"><i class="fa fa-chevron-up"></i></a> 
+
+
+<!-- Script --> 
+
+<script src="{{asset("assets1/vendor/jquery/jquery.min.js")}}"></script> 
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="{{asset("assets1/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script> 
+<!-- Style Switcher --> 
+<script src="{{asset("assets1/js/switcher.min.js")}}"></script> 
+<script src="{{asset("assets1/js/theme.js")}}"></script>
+
+<script >
+  
+  let BASE_URL ='https://api.hisense.com.gh'
+     
+     $(document).on('click',`#close` , function(){
+        $("#fullModal").modal("hide");
+      })
+     $(document).on('click',`.close` , function(){
+        $("#fullModal").modal("hide");
+      })
+   
+</script>
+<script src="{{asset("assets1/app/js/showrooms.js")}}"></script>
+<script src="{{asset("assets1/app/js/transactions.js")}}"></script>
+<script src="{{asset("assets1/app/js/user.js")}}"></script>
+<script src="{{asset("assets1/app/js/role.js")}}"></script>
+@yield("script")
+</body>
 </html>
