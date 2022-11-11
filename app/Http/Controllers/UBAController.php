@@ -40,11 +40,11 @@ class UBAController extends Controller
 
 
         ]);
-
+// return $request->all();
         $trans = Transaction::latest()->first();
         $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
 
-       $data = Uba::pay($request->name,$request->phone,$request->amount,$request->order_code);
+      return $data = Uba::pay($request->name,$request->phone,$request->amount,$request->order_code);
         $transid= Helper::username($trans->id,$trans->customer_name);
         if (json_decode($data)->status == 400) {
             return back()->with('error', json_decode($data)->message);

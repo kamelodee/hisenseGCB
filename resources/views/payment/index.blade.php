@@ -151,7 +151,7 @@
 
                                     <div class="mb-3">
                                         <label for="emailID" class="form-label">Phone</label>
-                                        <input type="text" value="" class="form-control"
+                                        <input type="text" name="phone" value="" class="form-control"
                                             data-bv-field="emailid" id="emailID" required=""
                                             placeholder="Enter Phone Number">
                                     </div>
