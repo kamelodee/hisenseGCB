@@ -50,35 +50,36 @@
           <!-- All Transactions
           ============================================= -->
           <div class="bg-white shadow-sm rounded p-4 mb-4">
-           
-           
+
+            <div class="col-2">
+                <a class="btn btn-primary btn-sm" href="{{ route('transactions.load') }}">Refresh</a>
+            </div>
             <div class="table-responsive mt-2">
-                 
-              <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
-                  <thead class="table-dark_">
-                      <tr>
-                          <th class="border-top-0 text-white_">#</th>
-                          <th class="border-top-0 text-white_">Date</th>
-                          <th class="border-top-0 text-white_">Transaction ID</th>
-                          <th class="border-top-0 text-white_">Transaction Type</th>
-                          <th class="border-top-0 text-white_">Amount</th>
-                          <th class="border-top-0 text-white_">Ref</th>
-                          <th class="border-top-0 text-white_">Showroom</th>
-                          <th class="border-top-0 text-white_">Ceated At</th>
-                         
-                         
-                         
-                      </tr>
-                  </thead>
-          
-                  <tbody>
-                     
-                  </tbody>
-              </table>
-          
-          </div>
-           
-          </div>
+
+                <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
+                    <thead class="table-dark_">
+                        <tr>
+                            <th class="border-top-0 text-white_">#</th>
+                            <th class="border-top-0 text-white_">Date</th>
+                            <th class="border-top-0 text-white_">Bank Transaction ID</th>
+                            <th class="border-top-0 text-white_">Sales Reference ID</th>
+                            <th class="border-top-0 text-white_">Amount</th>
+                            <th class="border-top-0 text-white_">Showroom</th>
+                            <th class="border-top-0 text-white_">Staus</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+
           <!-- All Transactions End --> 
         </div>
         <!-- Middle End --> 
@@ -100,49 +101,50 @@ $(function() {
         processing: true,
         serverSide: true,
         ajax: "{{ route('transactions.ubalist') }}",
-        columns: [
-            {
-                data: 'id',
-                name: 'id',
-                searchable: true
-            },
-            {
-                data: 'transaction_id',
-                name: 'transaction_id'
-            },
-            {
-                data: 'transaction_type',
-                name: 'transaction_type',
-                searchable: true
-            },
-            {
-                data: 'amount',
-                name: 'amount',
-                searchable: true
-            },
-            {
-                data: 'ref',
-                name: 'ref',
-                searchable: true
-            },
-            {
-                data: 'showroom',
-                name: 'showroom',
-                searchable: true
-            },
-          
-            {
-                data: 'created_at',
-                name: 'created_at',
-                searchable: true
-            },
-            
+        columns: [{
+                        data: 'id',
+                        name: 'id',
+                        searchable: true
+                    },
+                    {
+                        data: 'date',
+                        name: 'date',
+                        searchable: true
+                    },
+                    {
+                        data: 'transaction_id',
+                        name: 'transaction_id'
+                    },
+                    {
+                        data: 'sales_reference_id',
+                        name: 'sales_reference_id'
+                    },
+                    
+                    {
+                        data: 'amount',
+                        name: 'amount',
+                        searchable: true
+                    },
 
-            
-        ],
-        "order": [
-            [0, 1, 2, 3, 'desc']
-        ]
+                    {
+                        data: 'showroom',
+                        name: 'showroom',
+                        searchable: true
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        searchable: true
+                    },
+
+
+
+
+
+                ],
+                "order": [
+                    [0, 1, 2, 3, 'desc']
+                ]
     });
 
 });
