@@ -205,7 +205,7 @@ class TransactionController extends Controller
                 ->addIndexColumn()
                 ->addColumn('transaction_id', function ($row) {
 
-                    $actionBtn = '<a onclick="ShowroomEdit(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
                         ' . $row->transaction_id . '
                     </a>
                    ';
