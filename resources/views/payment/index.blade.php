@@ -9,12 +9,12 @@
                         data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li>
                 <li class="nav-item"> <a class="nav-link " id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
                         aria-controls="uba" aria-selected="true">UBA</a></li>
-                <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
+                {{-- <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
                         aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
 
 
                 <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
-                        aria-controls="gcb" aria-selected="true">GCB</a></li>
+                        aria-controls="gcb" aria-selected="true">GCB</a></li> --}}
             </ul>
         </div>
     </div>

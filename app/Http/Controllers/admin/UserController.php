@@ -132,6 +132,7 @@ class UserController extends Controller
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
+        $user->assignRole($request->input('roles'));
         if($user){
             Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Created",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
      

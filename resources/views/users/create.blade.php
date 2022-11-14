@@ -19,7 +19,7 @@
     </div>
     <div class="mb-3">
       <label for="inputCountry" class="form-label">Showroom</label>
-                <select class="form-select" id="inputCountry" name="showroom" name="showroom">
+                <select class="form-select" id="inputCountry" name="showroom">
                   <option value="">Select Showroom</option>
                   @foreach ($list as $showroom )
                   <option value="{{$showroom->name}}">{{$showroom->name}}</option>
@@ -27,7 +27,7 @@
                 </select> </div>
     <div class="mb-3">
       <label for="inputCountry" class="form-label">Roles</label>
-                <select class="form-select" id="inputCountry" name="showroom" name="roles" multiple>
+                <select class="form-select" id="inputCountry"  name="roles[]" multiple>
                   <option value="">Select Roles</option>
                   @foreach ($roles as $role )
                   <option value="{{$role}}">{{$role}}</option>
