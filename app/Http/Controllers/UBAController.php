@@ -45,6 +45,7 @@ class UBAController extends Controller
         $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
 
        $data = Uba::pay($request->name,$request->phone,$request->amount,$request->order_code);
+       
         $transid= Helper::username($trans->id,$trans->customer_name);
       return json_decode($data);
         if (json_decode($data)->status != 0) {
