@@ -26,24 +26,48 @@ class TransactionController extends Controller
     }
     public function gcb()
     {
+        if(Auth::user()->can('Access All')){
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Transaction::where('bank','GCB')->sum('amount');
+        $total = Transaction::transations('GCB');
         return view('transactions/gcb',compact('total','activities'));
+    }else{
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+        $total = Transaction::cashiertransation('GCB');
+        return view('transactions/gcb',compact('total','activities'));
+    }
         //
     }
 
     public function uba()
     {
+        if(Auth::user()->can('Access All')){
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Transaction::where('status', 'SUCCESS')->where('bank','UBA')->sum('amount');
+       
+        $total = Transaction::transations('UBA');
         return view('transactions/uba',compact('total','activities'));
+        }else{
+            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+       
+            $total = Transaction::cashiertransation('UBA');
+            return view('transactions/uba',compact('total','activities'));
+        }
         //
     }
     public function zenith()
     {
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Transaction::where('status', 'SUCCESS')->where('bank','ZENITH')->sum('amount');
+     
+        if(Auth::user()->can('Access All')){
+            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+           
+            $total = Transaction::transations('ZENITH');
         return view('transactions/zenith',compact('total','activities'));
+
+        }else{
+            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+           
+            $total = Transaction::transations('ZENITH');
+        return view('transactions/zenith',compact('total','activities'));
+        }
         //
     }
 
@@ -51,7 +75,13 @@ class TransactionController extends Controller
     public function callist(Request $request)
     {
         if ($request->ajax()) {
-            $users = Transaction::where('bank','CALBANK')->get();
+            if(Auth::user()->can('Access All')){
+            $users = Transaction::getTransations('CALBANK');
+          
+            }else{
+                $users = Transaction::getCashiertransations('CALBANK');
+              
+            }
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('transaction_id', function ($row) {
@@ -86,11 +116,20 @@ class TransactionController extends Controller
                 ->rawColumns(['transaction_id', 'name','status'])
                 ->make(true);
         }
+
+        
     }
     public function zenithlist(Request $request)
     {
         if ($request->ajax()) {
-            $users = Transaction::where('bank','ZENITH')->get();
+            if(Auth::user()->can('Access All')){
+                $users = Transaction::getTransations('ZENITH');
+              
+                }else{
+                    $users = Transaction::getCashiertransations('ZENITH');
+                  
+                }
+          
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('transaction_id', function ($row) {
@@ -118,7 +157,14 @@ class TransactionController extends Controller
     public function gcblist(Request $request)
     {
         if ($request->ajax()) {
-            $users = Transaction::where('bank','GCB')->orderBy('id', 'desc')->get();
+            if(Auth::user()->can('Access All')){
+                $users = Transaction::getTransations('GCB');
+              
+                }else{
+                    $users = Transaction::getCashiertransations('GCB');
+                  
+                }
+      
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('transaction_id', function ($row) {
@@ -147,7 +193,14 @@ class TransactionController extends Controller
     public function ubalist(Request $request)
     {
         if ($request->ajax()) {
-            $users = Transaction::where('bank','UBA')->orderBy('id', 'desc')->get();
+            if(Auth::user()->can('Access All')){
+                $users = Transaction::getTransations('UBA');
+              
+                }else{
+                    $users = Transaction::getCashiertransations('UBA');
+                  
+                }
+           
             return DataTables::of($users)
                 ->addIndexColumn()
                 ->addColumn('transaction_id', function ($row) {
