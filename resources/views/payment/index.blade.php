@@ -2,24 +2,24 @@
 @section('content')
     <!-- Secondary menu
                   ============================================= -->
-    <div class="bg-primary sticky-top">
+    {{-- <div class="bg-primary sticky-top">
         <div class="container d-flex justify-content-center">
             <ul class="nav nav-pills alternate nav-lg border-bottom-0 nav nav-pills nav-lg" id="pillsmyTab" role="tablist">
-                <li class="nav-item"> <a class="nav-link active" id="calbanks" href="#calbank" role="tab"
-                        data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li>
-                <li class="nav-item"> <a class="nav-link " id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
-                        aria-controls="uba" aria-selected="true">UBA</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link active" id="calbanks" href="#calbank" role="tab"
+                        data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li> --}}
+                {{-- <li class="nav-item"> <a class="nav-link " id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
+                        aria-controls="uba" aria-selected="true">UBA</a></li> --}}
                 {{-- <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
                         aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
 
 
                 <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
                         aria-controls="gcb" aria-selected="true">GCB</a></li> --}}
-            </ul>
+            {{-- </ul>
         </div>
-    </div>
+    </div> --}} 
 
-<div class="container my-3">
+<div class="container my-1">
     <div class="row">
         <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
         @foreach ($errors->all() as $error)
@@ -41,7 +41,7 @@
 </div>
 
     <div class="tab-content my-3" id="pillsmyTabContent">
-        <div class="tab-pane fade show active" id="calbank" role="tabpanel" aria-labelledby="calbanks">
+        <div class="tab-pane fade " id="calbank" role="tabpanel" aria-labelledby="calbanks">
             <!-- Content
                   ============================================= -->
             <div id="content" class="py-4">
@@ -121,7 +121,7 @@
             </div>
             <!-- Content end -->
         </div>
-        <div class="tab-pane fade" id="uba" role="tabpanel" aria-labelledby="ubas">
+        <div class="tab-pane fade show active" id="uba" role="tabpanel" aria-labelledby="ubas">
             <!-- Content
                   ============================================= -->
             <div id="content" class="py-4">
