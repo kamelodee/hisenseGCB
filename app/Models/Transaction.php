@@ -41,19 +41,19 @@ class Transaction extends Model
     }
     public static function transations($bank)
     {
-        $calbank =self::where('bank',$bank)->where('status', 'SUCCESS')->sum('amount');
+        $calbank =self::where('bank',$bank)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
         return  $calbank;
     }
 
     public static function transationsu($bank)
     {
-        $calbank =self::where('bank',$bank)->where('status', 'SUCCESSFUL')->sum('amount');
+        $calbank =self::where('bank',$bank)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
         return  $calbank;
     }
 
     public static function cashiertransation($bank)
     {
-        $calbank =self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->sum('amount');
+        $calbank =self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
         return  $calbank;
     }
 }
