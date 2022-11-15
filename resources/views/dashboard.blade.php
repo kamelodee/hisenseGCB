@@ -100,7 +100,7 @@
                   <a href="{{route('indexyearly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_year}}</h3>
-                  <p class="mb-2 text-muted opacity-8">This Year's Transactions</p>
+                  <p class="mb-2 text-muted opacity-8">This Year</p>
                   </a>
                 
                 </div>
