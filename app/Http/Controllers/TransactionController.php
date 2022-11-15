@@ -98,6 +98,14 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('sales_reference_id', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    ' . $row->sales_reference_id . '
+                </a>
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('name', function ($row) {
                     $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
                
@@ -119,7 +127,7 @@ class TransactionController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id', 'name','status'])
+                ->rawColumns(['transaction_id','sales_reference_id', 'name','status'])
                 ->make(true);
         }
 
@@ -181,6 +189,14 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('ref', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    ' . $row->ref . '
+                </a>
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('name', function ($row) {
                     $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
                
@@ -191,7 +207,7 @@ class TransactionController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id', 'name'])
+                ->rawColumns(['transaction_id','ref', 'name'])
                 ->make(true);
         }
     }
@@ -217,6 +233,14 @@ class TransactionController extends Controller
                    ';
                     return $actionBtn;
                 })
+                ->addColumn('sales_reference_id', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                        ' . $row->sales_reference_id . '
+                    </a>
+                   ';
+                    return $actionBtn;
+                })
                 ->addColumn('name', function ($row) {
                     $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
                
@@ -227,7 +251,7 @@ class TransactionController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id', 'name'])
+                ->rawColumns(['transaction_id','sales_reference_id', 'name'])
                 ->make(true);
         }
     }

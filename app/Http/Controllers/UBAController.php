@@ -62,6 +62,43 @@ class UBAController extends Controller
              }
          }
     }
+    public function updatetransaction($ref)
+    {
+        // dd($request->Ref);
+       $data = Uba::getTransaction($ref);
+
+     
+       $trans = Transaction::latest()->first();
+       
+       $transid= Helper::username($trans->id,$trans->customer_name);
+    //    return json_decode($data);
+         if (json_decode($data)->Status != 0) {
+             return back()->with('error', json_decode($data)->response);
+         } else {
+             $transaction =   Transaction::update([
+                 'customer_name' => json_decode($data)->Response->unique_value,
+                 'showroom' => Auth::user()->showroom,
+                 'order_code' => json_decode($data)->Response->unique_value,
+                 'payment_token' => json_decode($data)->Response->unique_value,
+                 'payment_code' => json_decode($data)->Response->approval_code,
+                 'shortpay_code' => json_decode($data)->Response->unique_value,
+                 'transaction_id' => json_decode($data)->Response->transaction_id,
+                 'transaction_type' =>json_decode($data)->Response->description,
+                 'ref' => json_decode($data)->Response->reference_no,
+                 'phone' => json_decode($data)->Response->unique_value,
+                 'amount' => json_decode($data)->Response->amount,
+                 'sales_reference_id' => $transid,
+                 'account_number' => json_decode($data)->Response->unique_value,
+                 'status' => json_decode($data)->Response->status,
+                 'bank' => 'UBA',
+                 'description' => json_decode($data)->Response->description,
+                 
+             ]);
+             if ($transaction) {
+                        return redirect()->route('transactions.uba')->with('success', 'Transaction successfully.');;
+             }
+         }
+    }
 
     /**
      * Show the form for creating a new resource.
