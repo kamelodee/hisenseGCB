@@ -18,9 +18,9 @@ use App\Http\Controllers\UBAController;
 Route::get('/', function () {
     $domain = parse_url(request()->root())['host'];
 
-    if($domain =='api.hisense.com.gh'){
-        return route('unauthorise');
-    }
+    // if($domain =='api.hisense.com.gh'){
+    //     return route('unauthorise');
+    // }
     return view('welcome');
 });
 
