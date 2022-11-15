@@ -42,7 +42,7 @@
                 <!-- Middle Panel
             ============================================= -->
                 <div class="col-lg-10 col-md-9 col-sm-12 ">
-                    <h4 class="fw-400 mb-3">Yearly Transactions</h4>
+                    <h4 class="fw-400 mb-3">All payments</h4>
                     @foreach ($errors->all() as $error)
                         <li class="text-danger">{{ $error }}</li>
                     @endforeach

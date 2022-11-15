@@ -58,7 +58,7 @@
                  <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class=" text-3">Hisense Pay</span></a> 
                </li>
                 <li>
-                  <a href="{{route('payments')}}">Take Payments</a>
+                  <a href="{{route('payments')}}">Take Payment</a>
                   
                 </li>
                 @can('Show Transactions')
