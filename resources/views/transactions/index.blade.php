@@ -70,8 +70,9 @@
                                     <tr>
                                         <th class="border-top-0 text-white_">#</th>
                                         <th class="border-top-0 text-white_">Date</th>
-                                        <th class="border-top-0 text-white_">Bank Transaction ID</th>
                                         <th class="border-top-0 text-white_">Sales Reference ID</th>
+                                        <th class="border-top-0 text-white_">Bank Transaction ID</th>
+                                      
                                         <th class="border-top-0 text-white_">Amount</th>
                                         <th class="border-top-0 text-white_">Showroom</th>
                                         <th class="border-top-0 text-white_">Staus</th>
@@ -97,7 +98,12 @@
 
     @include('partials._fullModal')
 @endsection
-
+@section('bank')
+<li>
+  <a class="text-success" href="{{route('transactions')}}">CalBank Transactions</a>
+  
+</li>
+@endsection
 
 @section('script')
     <script type="text/javascript">
@@ -118,13 +124,14 @@
                         searchable: true
                     },
                     {
-                        data: 'transaction_id',
-                        name: 'transaction_id'
-                    },
-                    {
                         data: 'sales_reference_id',
                         name: 'sales_reference_id'
                     },
+                    {
+                        data: 'transaction_id',
+                        name: 'transaction_id'
+                    },
+                  
                     
                     {
                         data: 'amount',

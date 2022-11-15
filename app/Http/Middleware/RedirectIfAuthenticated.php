@@ -23,11 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                $domain = parse_url(request()->root())['host'];
-
-                if($domain =='api.hisense.com.gh'){
-                    return route('unauthorise');
-                }
+                
                 return redirect(RouteServiceProvider::HOME);
             }
         }

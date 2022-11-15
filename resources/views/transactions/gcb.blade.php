@@ -59,10 +59,11 @@
                       <tr>
                           <th class="border-top-0 text-white_">#</th>
                           <th class="border-top-0 text-white_">Date</th>
+                          <th class="border-top-0 text-white_">Sales Reference ID</th>
                           <th class="border-top-0 text-white_">Transaction ID</th>
                           <th class="border-top-0 text-white_">Transaction Type</th>
                           <th class="border-top-0 text-white_">Amount</th>
-                          <th class="border-top-0 text-white_">Ref</th>
+                        
                           <th class="border-top-0 text-white_">Showroom</th>
                           <th class="border-top-0 text-white_">Status</th>
                          
@@ -90,6 +91,12 @@
   
   @include('partials._fullModal')
 @endsection
+@section('bank')
+<li>
+  <a class="text-success" href="{{route('transactions.gcb')}}">GCB Transactions</a>
+  
+</li>
+@endsection
 
 
 @section('script')
@@ -113,6 +120,11 @@ $(function() {
                 searchable: true
             },
             {
+                data: 'ref',
+                name: 'ref',
+                searchable: true
+            },
+            {
                 data: 'transaction_id',
                 name: 'transaction_id'
             },
@@ -126,11 +138,7 @@ $(function() {
                 name: 'amount',
                 searchable: true
             },
-            {
-                data: 'ref',
-                name: 'ref',
-                searchable: true
-            },
+           
             {
                 data: 'showroom',
                 name: 'showroom',

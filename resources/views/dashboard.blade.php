@@ -13,10 +13,19 @@
           <!-- Available Balance
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.gcb')}}">
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3  fw-400">GHC {{$gcb}}</h3>
+            <p class="mb-2 ">GCB Transactions</p>
+            </a>
+            <hr class="mx-n3">
+          
+          </div>
+          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('transactions.calbank')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
-            <p class="mb-2 text-muted opacity-8">CalBank</p>
+            <p class="mb-2 ">CalBank Transactions</p>
           </a>
             <hr class="mx-n3">
           
@@ -25,25 +34,17 @@
             <a href="{{route('transactions.uba')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$uba}}</h3>
-            <p class="mb-2 text-muted opacity-8">UBA</p>
+            <p class="mb-2 ">UBA Transactions</p>
             </a>
             <hr class="mx-n3">
           
           </div>
-          <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-            <a href="{{route('transactions.gcb')}}">
-            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-            <h3 class="text-3  fw-400">GHC {{$gcb}}</h3>
-            <p class="mb-2 text-muted opacity-8">GCB</p>
-            </a>
-            <hr class="mx-n3">
-          
-          </div>
+         
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('transactions.zenith')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3 fw-400">GHC {{$zenith}}</h3>
-            <p class="mb-2 text-muted opacity-8">ZenithBank</p>
+            <p class="mb-2 ">ZenithBank Transactions</p>
             </a>
             <hr class="mx-n3">
           

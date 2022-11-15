@@ -55,19 +55,24 @@
               <ul class="navbar-nav me-auto">
                <li>
                 
-                 <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class="text-success text-3">Hisense Pay</span></a> 
+                 <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class=" text-3">Hisense Pay</span></a> 
                </li>
                 <li>
                   <a href="{{route('payments')}}">Received Payments</a>
                   
                 </li>
-                
                 @can('Show Transactions')
+               
+               
+               
+                
+                
+             
                 <li class="dropdown language"> <a class="dropdown-toggle" href="#">Transactions</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li>
-                    <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA</a></li>
-                    <li><a class="dropdown-item" href="{{route('transactions')}}">CALBANK</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB Transactions</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA Transactions</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions')}}">CLBANK Transactions</a></li>
                     {{-- <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH BANK</a></li> --}}
                   
                   </ul>
@@ -75,7 +80,7 @@
                 @endcan
                 
               
-               
+                @yield('bank')
               
                 
               </ul>
