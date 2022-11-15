@@ -24,10 +24,10 @@ class AdminController extends Controller
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
        
-        $transactions_today = DB::table('transactions')->where('status', 'SUCCESS')->whereDay('date',Carbon::now())->sum('amount');
-        $transactions_week = DB::table('transactions')->where('status', 'SUCCESS')->whereBetween('date', [$nowDate, $nextweekdate])->sum('amount');
-        $transactions_month = DB::table('transactions')->where('status', 'SUCCESS')->whereMonth( 'date', Carbon::now()->month)->sum('amount');
-        $transactions_year = DB::table('transactions')->where('status', 'SUCCESS')->whereYear( 'date', Carbon::now()->year)->sum('amount');
+        $transactions_today = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('date',Carbon::now())->sum('amount');
+        $transactions_week = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('date', [$nowDate, $nextweekdate])->sum('amount');
+        $transactions_month = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'date', Carbon::now()->month)->sum('amount');
+        $transactions_year = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'date', Carbon::now()->year)->sum('amount');
        
         $calbank =Transaction::transations('CALBANK');
         $gcb =Transaction::transations('GCB');
@@ -40,10 +40,10 @@ class AdminController extends Controller
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
        
-        $transactions_today = DB::table('transactions')->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->whereDay('date',Carbon::now())->sum('amount');
-        $transactions_week = DB::table('transactions')->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->whereBetween('date', [$nowDate, $nextweekdate])->sum('amount');
-        $transactions_month = DB::table('transactions')->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->whereMonth( 'date', Carbon::now()->month)->sum('amount');
-        $transactions_year = DB::table('transactions')->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->whereYear( 'date', Carbon::now()->year)->sum('amount');
+        $transactions_today = DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('date',Carbon::now())->sum('amount');
+        $transactions_week = DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('date', [$nowDate, $nextweekdate])->sum('amount');
+        $transactions_month = DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'date', Carbon::now()->month)->sum('amount');
+        $transactions_year = DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'date', Carbon::now()->year)->sum('amount');
        
         $calbank =Transaction::cashiertransation('CALBANK');
         $gcb =Transaction::cashiertransation('GCB');

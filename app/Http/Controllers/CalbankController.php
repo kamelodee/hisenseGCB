@@ -42,7 +42,7 @@ class CalbankController extends Controller
     public function indexyearly()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Transaction::where('status', 'SUCCESS')->sum('amount');
+        $total = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
         return view('transactions/calbank/yearly', compact('total','activities'));
         //
     }
@@ -53,7 +53,7 @@ class CalbankController extends Controller
        
         
         if ($request->ajax()) {
-            $transactions_today = Transaction::where('status', 'SUCCESS')->whereDay('date',Carbon::now())->get();
+            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('date',Carbon::now())->get();
      
             return DataTables::of($transactions_today)
                 ->addIndexColumn()
@@ -98,7 +98,7 @@ class CalbankController extends Controller
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-            $transactions_week = Transaction::where('status', 'SUCCESS')->whereBetween('date', [$nowDate, $nextweekdate])->get();
+            $transactions_week = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('date', [$nowDate, $nextweekdate])->get();
       
             return DataTables::of($transactions_week)
                 ->addIndexColumn()
@@ -141,7 +141,7 @@ class CalbankController extends Controller
     {
      
            if ($request->ajax()) {
-            $transactions_month = Transaction::where('status', 'SUCCESS')->whereMonth('date', Carbon::now()->month)->get();
+            $transactions_month = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth('date', Carbon::now()->month)->get();
     
             return DataTables::of($transactions_month)
                 ->addIndexColumn()
@@ -184,7 +184,7 @@ class CalbankController extends Controller
     public function yearly(Request $request)
     {
         if ($request->ajax()) {
-            $transactions_year = Transaction::where('status', 'SUCCESS')->whereYear( 'date', Carbon::now()->year)->get();
+            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'date', Carbon::now()->year)->get();
       
             return DataTables::of($transactions_year)
                 ->addIndexColumn()
