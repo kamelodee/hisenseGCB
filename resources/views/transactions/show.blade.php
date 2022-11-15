@@ -30,7 +30,7 @@
         </ul>
         <ul class="list-unstyled">
           <li class="fw-500">Sale Reference:</li>
-          <li class="text-muted">{{$transaction->order_code}}</li>
+          <li class="text-muted">{{$transaction->sales_reference_id}}</li>
         </ul>
         <ul class="list-unstyled">
           <li class="fw-500">Transaction ID:</li>
