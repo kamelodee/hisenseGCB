@@ -52,7 +52,7 @@ class TransactionController extends Controller
         if(Auth::user()->can('Access All')){
             $activities =Activity::activities('App\Models\Transaction');
        
-        $total = Transaction::transations('UBA');
+        $total = Transaction::transationsu('UBA');
         return view('transactions/uba',compact('total','activities'));
         }else{
             $activities =Activity::activities('App\Models\Transaction');

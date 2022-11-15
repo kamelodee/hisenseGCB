@@ -45,6 +45,12 @@ class Transaction extends Model
         return  $calbank;
     }
 
+    public static function transationsu($bank)
+    {
+        $calbank =self::where('bank',$bank)->where('status', 'SUCCESSFUL')->sum('amount');
+        return  $calbank;
+    }
+
     public static function cashiertransation($bank)
     {
         $calbank =self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->sum('amount');
