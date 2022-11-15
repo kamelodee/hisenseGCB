@@ -85,12 +85,14 @@ Route::prefix('transactions')->group(function () {
         Route::get('/weekly', [CalbankController::class, 'indexweekly'])->name('indexweekly');
         Route::get('/monthly', [CalbankController::class, 'indexmonthly'])->name('indexmonthly');
         Route::get('/yearly', [CalbankController::class, 'indexyearly'])->name('indexyearly');
+        Route::get('/all', [CalbankController::class, 'all'])->name('transactions.all');
        
        
         Route::get('/dailylist', [CalbankController::class, 'daily'])->name('daily');
         Route::get('/weeklylist', [CalbankController::class, 'weekly'])->name('weekly');
         Route::get('/monthlylist', [CalbankController::class, 'monthly'])->name('monthly');
         Route::get('/yearlylist', [CalbankController::class, 'yearly'])->name('yearly');
+        Route::get('/alllist', [CalbankController::class, 'alllist'])->name('all');
 
  
 });

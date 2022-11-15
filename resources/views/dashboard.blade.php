@@ -70,7 +70,7 @@
                   <a href="{{route('indexdaily')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_today}}</h3>
-                  <p class="mb-2 text-muted opacity-8">Today's Transactions</p>
+                  <p class="mb-2 text-muted opacity-8">Today</p>
                  
                 </a>
                 </div>
@@ -80,7 +80,7 @@
                   <a href="{{route('indexweekly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_week}}</h3>
-                  <p class="mb-2 text-muted opacity-8">This Week's Transactions</p>
+                  <p class="mb-2 text-muted opacity-8">This Week</p>
                 
                   </a>
                 </div>
@@ -90,7 +90,7 @@
                   <a href="{{route('indexmonthly')}}">
                   <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_month}}</h3>
-                  <p class="mb-2 text-muted opacity-8">This Month's Transactions</p>
+                  <p class="mb-2 text-muted opacity-8">This Month</p>
                   
                   </a>
                 </div>

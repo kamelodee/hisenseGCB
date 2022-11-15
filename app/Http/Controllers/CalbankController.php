@@ -20,10 +20,18 @@ class CalbankController extends Controller
     public function indexdaily()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');;
+        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');
         return view('transactions/calbank/daily', compact('total','activities'));
         //
     }
+    public function all()
+    { 
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
+        return view('transactions/all', compact('total','activities'));
+        //
+    }
+
     public function indexweekly()
     { 
         $currentDate = Carbon::now();
@@ -102,6 +110,60 @@ class CalbankController extends Controller
                 ->make(true);
         }
     }
+
+
+    public function alllist(Request $request)
+    {
+       
+       
+       
+        
+        if ($request->ajax()) {
+            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
+     
+            return DataTables::of($transactions_today)
+                ->addIndexColumn()
+                ->addColumn('transaction_id', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    ' . $row->transaction_id . '
+                </a>
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('name', function ($row) {
+                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('created_at', function ($row) {
+                    $created_at = $row->created_at->format('Y.m.d H:i:s');
+                    return $created_at;
+                })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('status', function ($row) {
+                    if($row->status =='PENDING'){
+                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
+               
+                        ';
+                             return $actionBtn;
+                    }else{
+                        return $row->status;
+                    }
+                   
+                })
+                ->rawColumns(['transaction_id','amount', 'name','status'])
+                ->make(true);
+        }
+    }
+
+
     public function weekly(Request $request)
     {
        
