@@ -128,6 +128,14 @@ class CalbankController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('ref', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                        ' . $row->ref . '
+                    </a>
+                   ';
+                    return $actionBtn;
+                })
                 ->addColumn('created_at', function ($row) {
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
@@ -149,7 +157,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id','amount', 'name','status'])
+                ->rawColumns(['transaction_id','ref','amount', 'name','status'])
                 ->make(true);
         }
         //
@@ -220,6 +228,14 @@ class CalbankController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('ref', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                        ' . $row->ref . '
+                    </a>
+                   ';
+                    return $actionBtn;
+                })
                 ->addColumn('name', function ($row) {
                     $actionBtn = ' <a href="#" class="text-primary text-end">' . $row->name . '</a>
                
@@ -247,7 +263,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id','amount', 'name','status'])
+                ->rawColumns(['transaction_id','amount','ref', 'name','status'])
                 ->make(true);
         }
     }

@@ -128,7 +128,7 @@
                           <th class="border-top-0 text-white_">#</th>
                           <th class="border-top-0 text-white_">Date</th>
                           <th class="border-top-0 text-white_">Sales Reference ID</th>
-                          <th class="border-top-0 text-white_">Transaction ID</th>
+                         
                           <th class="border-top-0 text-white_">Transaction Type</th>
                           <th class="border-top-0 text-white_">Amount</th>
                           
@@ -184,10 +184,7 @@
                 name: 'ref',
                 searchable: true
             },
-              {
-                  data: 'transaction_id',
-                  name: 'transaction_id'
-              },
+              
               {
                   data: 'transaction_type',
                   name: 'transaction_type',
