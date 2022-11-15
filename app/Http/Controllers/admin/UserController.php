@@ -123,6 +123,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
+            'showroom' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed',
             
@@ -179,6 +180,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            
+            'password' => 'required|confirmed',
+            
+        ]);
         $input = $request->all();
         
         if(!empty($input['password'])){ 
