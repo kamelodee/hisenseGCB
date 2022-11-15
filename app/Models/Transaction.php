@@ -34,20 +34,20 @@ class Transaction extends Model
         $calbank = Transaction::where('bank',$bank)->get();
         return  $calbank;
     }
-    public function getCashiertransations($bank)
+    public static function getCashiertransations($bank)
     {
-        $calbank = Transaction::where('bank',$bank)->where('showroom',Auth::user()->showroom)->get();
+        $calbank = self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->get();
         return  $calbank;
     }
-    public function transations($bank)
+    public static function transations($bank)
     {
-        $calbank =Transaction::where('bank',$bank)->where('status', 'SUCCESS')->sum('amount');
+        $calbank =self::where('bank',$bank)->where('status', 'SUCCESS')->sum('amount');
         return  $calbank;
     }
 
-    public function cashiertransation($bank)
+    public static function cashiertransation($bank)
     {
-        $calbank =Transaction::where('bank',$bank)->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->sum('amount');
+        $calbank =self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->where('status', 'SUCCESS')->sum('amount');
         return  $calbank;
     }
 }

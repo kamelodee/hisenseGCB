@@ -132,8 +132,8 @@ class PaymentController extends Controller
                 'date' => date('Y.m.d H:i:s'),
             ]);
             if ($transaction) {
-                Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Transaction created",'model_id'=>$transaction->id,'model_name'=>'App\Models\Transaction']);
-                return redirect(json_decode($data->return)->RESULT[0]->APIPAYREDIRECTURL);
+                Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
+                 return redirect(json_decode($data->return)->RESULT[0]->APIPAYREDIRECTURL);
             }
         }
     }

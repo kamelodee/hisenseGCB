@@ -20,18 +20,19 @@ class TransactionController extends Controller
     public function index()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Transaction::where('status', 'SUCCESS')->where('bank','CALBANK')->sum('amount');
-        return view('transactions/index', compact('total','activities'));
+        $total = Transaction::transations('CALBANK');
+         return view('transactions/index', compact('total','activities'));
         //
     }
     public function gcb()
     {
         if(Auth::user()->can('Access All')){
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+            $activities =Activity::activities('App\Models\Transaction');
+      
         $total = Transaction::transations('GCB');
         return view('transactions/gcb',compact('total','activities'));
     }else{
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+        $activities =Activity::activities('App\Models\Transaction');
         $total = Transaction::cashiertransation('GCB');
         return view('transactions/gcb',compact('total','activities'));
     }
@@ -41,13 +42,12 @@ class TransactionController extends Controller
     public function uba()
     {
         if(Auth::user()->can('Access All')){
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+            $activities =Activity::activities('App\Models\Transaction');
        
         $total = Transaction::transations('UBA');
         return view('transactions/uba',compact('total','activities'));
         }else{
-            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-       
+            $activities =Activity::activities('App\Models\Transaction');
             $total = Transaction::cashiertransation('UBA');
             return view('transactions/uba',compact('total','activities'));
         }
@@ -57,14 +57,12 @@ class TransactionController extends Controller
     {
      
         if(Auth::user()->can('Access All')){
-            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-           
+            $activities =Activity::activities('App\Models\Transaction'); 
             $total = Transaction::transations('ZENITH');
         return view('transactions/zenith',compact('total','activities'));
 
         }else{
-            $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-           
+            $activities =Activity::activities('App\Models\Transaction');  
             $total = Transaction::transations('ZENITH');
         return view('transactions/zenith',compact('total','activities'));
         }

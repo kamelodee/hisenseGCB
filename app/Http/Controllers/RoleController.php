@@ -26,7 +26,8 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $data = Role::orderBy('id','DESC')->paginate(5);
-        $activities = Activity::where('model_name','Role')->latest()->paginate(10);
+        $activities =Activity::activities('Role');
+        
         return view('roles.index', compact('data','activities'));
     }
 
@@ -91,8 +92,8 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
     if($role){
-        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Role created",'model_id'=>$role->id,'model_name'=>'Role']);
-    }
+          Activity::activityCreate('Role','Role created',$role->id);
+           }
         return redirect()->route('roles.index')
             ->with('success', 'Role created successfully.');
     }
@@ -150,7 +151,7 @@ class RoleController extends Controller
         $role->save();
     
         $role->syncPermissions($request->input('permission'));
-        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Role Updated",'model_id'=>$role->id,'model_name'=>'Role']);
+        Activity::activityCreate('Role','Role Updated',$role->id);
         return redirect()->route('roles.index')
             ->with('success', 'Role updated successfully.');
     }
@@ -164,7 +165,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role =Role::find($id);
-        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Role Deleted",'model_id'=>$role->id,'model_name'=>'Role']);
+        Activity::activityCreate('Role','Role Deleted',$role->id);
         $role->delete();
         
         return redirect()->route('roles.index')

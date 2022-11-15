@@ -134,8 +134,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
         if($user){
-            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Created",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
-     
+            Activity::activityCreate('App\Models\User','User created',$user->id);    
         }
         $user->assignRole($request->input('roles'));
     
@@ -192,8 +191,7 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));
-        Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"User Updated",'model_id'=>$user->id,'model_name'=>'App\Models\User']);
-     
+        Activity::activityCreate('App\Models\User','User Updated',$user->id);
         return redirect()->route('users')
             ->with('success', 'User updated successfully.');
     }

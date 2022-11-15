@@ -94,8 +94,8 @@ class ShowroomController extends Controller
             'phone'=>$request->phone,
         ]);
         if($showroom){
-            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Showroom created",'model_id'=>$showroom->id,'model_name'=>'App\Models\Showroom']);
-        }
+            Activity::activityCreate('App\Models\Showroom','Showroom Created',$showroom->id);
+            }
         return back();
         //
     }
@@ -134,8 +134,8 @@ class ShowroomController extends Controller
     {
         $showroom =  Showroom::find($id);
         if($showroom){
-            Activity::create(['user_id'=>Auth::user()->id,'user_name'=>Auth::user()->name,'showroom'=>Auth::user()->showroom,'description'=>"Showroom Updated",'model_id'=>$showroom->id,'model_name'=>'App\Models\Showroom']);
-        }
+            Activity::activityCreate('App\Models\Showroom','Showroom Updated',$showroom->id);
+               }
         $showroom->update([
             'name'=>$request->name,
         'street'=>$request->street,
