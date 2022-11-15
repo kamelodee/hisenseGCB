@@ -75,6 +75,12 @@ class CalbankController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('status', function ($row) {
                     if($row->status =='PENDING'){
                         $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
@@ -86,7 +92,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id', 'name','status'])
+                ->rawColumns(['transaction_id','amount', 'name','status'])
                 ->make(true);
         }
     }
@@ -120,6 +126,12 @@ class CalbankController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('status', function ($row) {
                     if($row->status =='PENDING'){
                         $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
@@ -131,7 +143,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id', 'name','status'])
+                ->rawColumns(['transaction_id','amount', 'name','status'])
                 ->make(true);
         }
         //
@@ -163,6 +175,12 @@ class CalbankController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('status', function ($row) {
                     if($row->status =='PENDING'){
                         $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
@@ -174,7 +192,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id', 'name','status'])
+                ->rawColumns(['transaction_id','amount', 'name','status'])
                 ->make(true);
         }
         //
@@ -184,7 +202,7 @@ class CalbankController extends Controller
     public function yearly(Request $request)
     {
         if ($request->ajax()) {
-            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'date', Carbon::now()->year)->get();
+            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->get();
       
             return DataTables::of($transactions_year)
                 ->addIndexColumn()
@@ -197,7 +215,13 @@ class CalbankController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
+                    $actionBtn = ' <a href="#" class="text-primary text-end">' . $row->name . '</a>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
                
                ';
                     return $actionBtn;
@@ -217,7 +241,7 @@ class CalbankController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id', 'name','status'])
+                ->rawColumns(['transaction_id','amount', 'name','status'])
                 ->make(true);
         }
     }

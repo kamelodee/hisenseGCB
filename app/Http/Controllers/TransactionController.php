@@ -98,6 +98,12 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('sales_reference_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
@@ -127,7 +133,7 @@ class TransactionController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id','sales_reference_id', 'name','status'])
+                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','status'])
                 ->make(true);
         }
 
@@ -160,11 +166,17 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('created_at', function ($row) {
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id', 'name'])
+                ->rawColumns(['transaction_id','amount', 'name'])
                 ->make(true);
         }
     }
@@ -197,6 +209,12 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('name', function ($row) {
                     $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
                
@@ -207,7 +225,7 @@ class TransactionController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id','ref', 'name'])
+                ->rawColumns(['transaction_id','ref','amount', 'name'])
                 ->make(true);
         }
     }
@@ -247,11 +265,17 @@ class TransactionController extends Controller
                ';
                     return $actionBtn;
                 })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
                 ->addColumn('created_at', function ($row) {
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['transaction_id','sales_reference_id', 'name'])
+                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name'])
                 ->make(true);
         }
     }
