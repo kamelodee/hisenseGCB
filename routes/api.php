@@ -20,7 +20,7 @@ Route::middleware(['whitelist'])->group(function () {
     });
 
 
-    Route::match(['post','get'],'/test/payment/reconcile', [GcbController::class, 'testdeposit'])->middleware('auth:sanctum');
+    Route::match(['post','get'],'test/payment/reconcile', [GcbController::class, 'testdeposit'])->middleware('auth:sanctum');
     Route::post('/test/payment/login', [GcbController::class, 'testlogin']);
 
     Route::match(['post','get'],'/test/ecobank/payment/reconcile', [GcbController::class, 'ecobankdeposit'])->middleware('auth:sanctum');

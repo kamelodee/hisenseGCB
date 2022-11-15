@@ -15,7 +15,8 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-          return  $domain = parse_url(request()->root())['host'];
+          $domain = parse_url(request()->root())['host'];
+
             if($domain =='api.hisense.com.gh'){
                 return route('unauthorise');
             }
