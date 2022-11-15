@@ -31,7 +31,7 @@ class AdminController extends Controller
        
         $calbank =Transaction::transations('CALBANK');
         $gcb =Transaction::transations('GCB');
-        $uba =Transaction::transations('UBA');
+        $uba =Transaction::transationsu('UBA');
         $zenith =Transaction::transations('ZENITHBANK');
        
         return view('dashboard',compact('zenith','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
