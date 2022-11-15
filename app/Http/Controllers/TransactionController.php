@@ -23,11 +23,11 @@ class TransactionController extends Controller
             $activities =Activity::activities('App\Models\Transaction');
       
         $total = Transaction::transations('CALBANK');
-        return view('transactions/gcb',compact('total','activities'));
+        return view('transactions/index',compact('total','activities'));
     }else{
         $activities =Activity::activities('App\Models\Transaction');
         $total = Transaction::cashiertransation('CALBANK');
-        return view('transactions/gcb',compact('total','activities'));
+        return view('transactions/index',compact('total','activities'));
     }
        
         //

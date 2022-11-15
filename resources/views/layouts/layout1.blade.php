@@ -65,7 +65,7 @@
                 @can('Show Transactions')
                 <li class="dropdown language"> <a class="dropdown-toggle" href="#">Transactions</a>
                   <ul class="dropdown-menu">
-                    {{-- <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li> --}}
+                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li>
                     <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA</a></li>
                     <li><a class="dropdown-item" href="{{route('transactions')}}">CALBANK</a></li>
                     {{-- <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH BANK</a></li> --}}

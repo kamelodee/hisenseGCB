@@ -1,0 +1,288 @@
+[
+    {
+        "id": 2,
+        "name": "Accra Showroom",
+        "street": "Pagan Road, Accra",
+        "city": "Accra",
+        "phone": "0302550001",
+        "warehouse_id": [
+            11,
+            "Accra Opera Sq. WH"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Achimota Mall Showroom",
+        "street": "Achimota Retail Centre, Accra",
+        "city": "Accra",
+        "phone": "0302550002",
+        "warehouse_id": [
+            12,
+            "Achimota Mall WH"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Baatsona Showroom",
+        "street": "Baatsona Spintex Road, Accra",
+        "city": "Accra",
+        "phone": "0302550003",
+        "warehouse_id": [
+            13,
+            "Baatsona WH"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Boundary Road (EL 2) Showroom",
+        "street": "Boundary Road, Accra",
+        "city": "Accra",
+        "phone": "0302550005",
+        "warehouse_id": [
+            15,
+            "Boundary Road WH"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Broadcasting Showroom",
+        "street": "Mallam - Kasoa Road, Accra",
+        "city": "Accra",
+        "phone": "0302550004",
+        "warehouse_id": [
+            14,
+            "Broadcasting WH"
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Dansoman Showroom",
+        "street": "Dansoman, Accra",
+        "city": "Accra",
+        "phone": "0302550006",
+        "warehouse_id": [
+            9,
+            "Dansoman WH"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "East Legon Showroom",
+        "street": "Mensah Wood Road, Accra",
+        "city": "Accra",
+        "phone": "0302550007",
+        "warehouse_id": [
+            16,
+            "East Legon WH"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Hohoe Showroom",
+        "street": "New Site, Alabato Junction, same building with Greenshield Agro Chemicals",
+        "city": "Hohoe",
+        "phone": "0302550022",
+        "warehouse_id": [
+            17,
+            "Hohoe WH"
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Junction Mall Showroom",
+        "street": "Junction Mall, Nungua Barrier, Accra",
+        "city": "Accra",
+        "phone": "0302550008",
+        "warehouse_id": [
+            18,
+            "Junction Mall WH"
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Kaneshie Showroom",
+        "street": "North Industrial Area, Opp. Melcom Plus",
+        "city": "Accra",
+        "phone": "0302550011",
+        "warehouse_id": [
+            25,
+            "Kaneshie WH"
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Kasoa Showroom",
+        "street": "Opposite Pink FM",
+        "city": "Accra",
+        "phone": "0302550019",
+        "warehouse_id": [
+            19,
+            "Kasoa WH"
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Kissieman Showroom",
+        "street": "Christian Village Junction, Adjacent Lapaz Community Hospital Annex",
+        "city": "Accra",
+        "phone": "0302550009",
+        "warehouse_id": [
+            20,
+            "Kissieman WH"
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Koforidua Showroom",
+        "street": "Koforidua",
+        "city": "Koforidua",
+        "phone": "0302550025",
+        "warehouse_id": [
+            21,
+            "Koforidua WH"
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Kumasi Adum Showroom",
+        "street": "Kuffour Clinic, Adum, Kumasi",
+        "city": "Kumasi",
+        "phone": "0302550014",
+        "warehouse_id": [
+            22,
+            "Kumasi Adum WH"
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Kumasi Mall Showroom",
+        "street": "Kumasi City Mall",
+        "city": "Kumasi",
+        "phone": "0302550015",
+        "warehouse_id": [
+            23,
+            "Kumasi Mall WH"
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Lapaz Showroom",
+        "street": "Off the George Walker Bush Highway, Abeka Lapaz, Accra",
+        "city": "Accra",
+        "phone": "0302550010",
+        "warehouse_id": [
+            10,
+            "Lapaz WH"
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Mankessim Showroom",
+        "street": "Opposite Pacific Fueling Station (Main Accra – Cape Coast Road)",
+        "city": "Mankessim",
+        "phone": "0302550020",
+        "warehouse_id": [
+            24,
+            "Mankessim WH"
+        ]
+    },
+    {
+        "id": 18,
+        "name": "Obuasi Showroom",
+        "street": "New Nsuta Opposite Central Mosque",
+        "city": "Obuasi",
+        "phone": "0302550016",
+        "warehouse_id": [
+            26,
+            "Obuasi WH"
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Sunyani Showroom",
+        "street": "Area 1 old GNTC Building, Adjacent Zenith Bank",
+        "city": "Sunyani",
+        "phone": "0302550017",
+        "warehouse_id": [
+            27,
+            "Sunyani WH"
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Takoradi Showroom",
+        "street": "Collins Avenue, near Market Circle",
+        "city": "Takoradi",
+        "phone": "0302550023",
+        "warehouse_id": [
+            28,
+            "Takoradi WH"
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Tamale Showroom",
+        "street": "Adjacent Bank of Africa,Taxi Rank, Central Market",
+        "city": "Tamale",
+        "phone": "0302550021",
+        "warehouse_id": [
+            29,
+            "Tamale WH"
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Tarkwa Showroom",
+        "street": "Ground Floor, Plot 19, European Town",
+        "city": "Tarkwa",
+        "phone": "0302550024",
+        "warehouse_id": [
+            30,
+            "Tarkwa WH"
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Techiman Showroom",
+        "street": "Adjacent Total Fuel Station (Main Entrance of Kumasi Lorry Station)",
+        "city": "Techiman",
+        "phone": "0302550018",
+        "warehouse_id": [
+            31,
+            "Techniman WH"
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Tema Comm. 1 Showroom",
+        "street": "Comm. 1, Baba Yara Road",
+        "city": "Tema",
+        "phone": "0302550012",
+        "warehouse_id": [
+            32,
+            "Tema Comm. 1 WH"
+        ]
+    },
+    {
+        "id": 31,
+        "name": "Tema Comm. 25 Showroom",
+        "street": "Below Noble House Restaurant",
+        "city": "Accra",
+        "phone": "0501563664",
+        "warehouse_id": [
+            34,
+            "Tema Comm. 25 WH"
+        ]
+    },
+    {
+        "id": 25,
+        "name": "West Hills Mall Showroom",
+        "street": "West Hills Mall, Mallam - Kasoa Road, Accra",
+        "city": "Accra",
+        "phone": "0302550013",
+        "warehouse_id": [
+            33,
+            "West Hills WH"
+        ]
+    }
+]
