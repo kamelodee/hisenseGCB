@@ -72,7 +72,7 @@
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB Transactions</a></li>
                     <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA Transactions</a></li>
-                    <li><a class="dropdown-item" href="{{route('transactions')}}">CLBANK Transactions</a></li>
+                    {{-- <li><a class="dropdown-item" href="{{route('transactions')}}">CLBANK Transactions</a></li> --}}
                     {{-- <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH BANK</a></li> --}}
                   
                   </ul>
