@@ -17,6 +17,13 @@
           <li class="fw-500">Showroom:</li>
           <li class="text-muted">{{$transaction->showroom}}</li>
         </ul>
+        @if ($transaction->account_number)
+        <ul class="list-unstyled">
+          <li class="fw-500">Account Number:</li>
+          <li class="text-muted">{{$transaction->account_number}}</li>
+        </ul>
+        @endif
+       
         <ul class="list-unstyled">
           <li class="fw-500">Customer:</li>
           <li class="text-muted">{{$transaction->customer_name}}</li>

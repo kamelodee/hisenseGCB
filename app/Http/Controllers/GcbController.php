@@ -93,6 +93,111 @@ class GcbController extends Controller
             // return [$request->showroom,Auth::user()->showroom];
             if(Auth::user()->showroom === $request->showroom){
                
+                    $transaction =   Transaction::create([
+                        'customer_name' => $request->customer_id,
+                        'showroom' => Auth::user()->showroom,
+                        'order_code' => 'gcb',
+                        'payment_token' => sha1(md5(time())),
+                        'payment_code' =>sha1(md5(time())),
+                        'shortpay_code' => sha1(md5(time())),
+                        'transaction_id' => sha1(md5(time())),
+                        'transaction_type' => $request->transaction_type,
+                        'ref' => $request->ref,
+                        'phone' => $request->customer_id,
+                        'amount' => $request->amount,
+                        'account_number' => $request->account_number,
+                        'status' => 'SUCCESS',
+                        'bank' => 'GCB',
+                        'description' => $request->ref,
+                        'date' => $request->date,
+                    ]);
+                 
+                    if( $transaction){
+                        Auth::user()->tokens->each(function($token, $key) {
+                            $token->delete();
+                        });
+                        return response()->json([
+                            'message' => "Payment Registered",
+                            'statusCode' => 200,
+        
+                        ], 200);
+                    }     
+            }else{
+                return response()->json([
+                    'message' => "Invalid showroom",
+                    'statusCode' => 401,
+
+                ], 401);   
+            } 
+        } catch (ResponseException $e) {
+            report($e);
+         info($e);
+            return response()->json([
+                'message' => 'something went wrong',
+                'statusCode' => 500,
+
+            ], 500);
+        }
+      }catch(Exception $error){
+        report($error);
+        info($error);
+        return response()->json([
+            'message' => 'something went wrong',
+            'statusCode' => 500,
+
+        ], 500);
+      }
+       
+
+       
+    }
+
+
+    public function ecobankdeposit(Request $request)
+    {
+    //   return  $request->all();
+    // GPZEN2022110712244
+      try{
+        $validator = Validator::make($request->all(), [
+            'showroom' => 'required',
+            'customer_phone' => 'required',
+            'customer_name' => 'required',
+            'ref' => 'required',
+            'sales_ref' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
+            'transaction_type' => 'required',
+            'account_number' => 'required',
+        ]);
+
+
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'statusCode' => 401,
+                'error' => $validator->messages()
+            ], 401);
+        }
+
+
+        try {
+            // return [$request->showroom,Auth::user()->showroom];
+            if(Auth::user()->showroom === $request->showroom){
+               $transaction = Transaction::where('order_code',$request->sales_ref)->first();
+                 if(!$transaction){
+                    return response()->json([
+                        'message' => "No Transaction Entry Found",
+                        'statusCode' => 404,
+    
+                    ], 404);
+                 }
+               if($transaction->amount != $request->amount){
+                return response()->json([
+                    'message' => "Transaction Amount Mismatched",
+                    'statusCode' => 404,
+
+                ], 404);
+               }
             $branch = Customer::branch(Auth::user()->showroom);
                 if (count($branch) > 0 ) {
                     $transaction =   Transaction::create([
@@ -228,17 +333,16 @@ class GcbController extends Controller
     }
 
 
-    public function ecobankdeposit(Request $request)
+
+    public function deposit1(Request $request)
     {
     //   return  $request->all();
-    // GPZEN2022110712244
       try{
         $validator = Validator::make($request->all(), [
             'showroom' => 'required',
-            'customer_phone' => 'required',
+            'customer_id' => 'required',
             'customer_name' => 'required',
             'ref' => 'required',
-            'sales_ref' => 'required',
             'date' => 'required',
             'amount' => 'required',
             'transaction_type' => 'required',
@@ -258,21 +362,7 @@ class GcbController extends Controller
         try {
             // return [$request->showroom,Auth::user()->showroom];
             if(Auth::user()->showroom === $request->showroom){
-               $transaction = Transaction::where('order_code',$request->sales_ref)->first();
-                 if(!$transaction){
-                    return response()->json([
-                        'message' => "No Transaction Entry Found",
-                        'statusCode' => 404,
-    
-                    ], 404);
-                 }
-               if($transaction->amount != $request->amount){
-                return response()->json([
-                    'message' => "Transaction Amount Mismatched",
-                    'statusCode' => 404,
-
-                ], 404);
-               }
+               
             $branch = Customer::branch(Auth::user()->showroom);
                 if (count($branch) > 0 ) {
                     $transaction =   Transaction::create([
@@ -284,11 +374,11 @@ class GcbController extends Controller
                         'shortpay_code' => sha1(md5(time())),
                         'transaction_id' => sha1(md5(time())),
                         'transaction_type' => $request->transaction_type,
-                        'ref' => '',
+                        'ref' => $request->ref,
                         'phone' => $request->customer_id,
                         'amount' => $request->amount,
-                        'account_number' => $request->phone,
-                        'status' => 'PAID',
+                        'account_number' => $request->account_number,
+                        'status' => 'SUCCESS',
                         'bank' => 'GCB',
                         'description' => $request->ref,
                         'date' => $request->date,

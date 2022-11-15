@@ -92,6 +92,7 @@ class ShowroomController extends Controller
             'street'=>$request->street,
             'city'=>$request->city,
             'phone'=>$request->phone,
+            'account_number'=>$request->account_number,
         ]);
         if($showroom){
             Activity::activityCreate('App\Models\Showroom','Showroom Created',$showroom->id);
@@ -140,7 +141,9 @@ class ShowroomController extends Controller
             'name'=>$request->name,
         'street'=>$request->street,
         'city'=>$request->city,
-        'phone'=>$request->phone,]);
+        'phone'=>$request->phone,
+        'account_number'=>$request->account_number,
+    ]);
         return back();
     }
 

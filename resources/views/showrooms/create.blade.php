@@ -19,6 +19,11 @@
       <input type="text" value="" name="phone" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Enter Phone Number">
     </div>
     
+    <div class="mb-3">
+      <label for="emailID" class="form-label">Account number</label>
+      <input type="text" value="" name="account_number" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="account_number">
+    </div>
+    
     
    
    

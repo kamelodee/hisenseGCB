@@ -39,6 +39,7 @@
                                             <th class="border-top-0 text-white_">Street</th>
                                             <th class="border-top-0 text-white_">City</th>
                                             <th class="border-top-0 text-white_">Phone</th>
+                                            <th class="border-top-0 text-white_">Account Number</th>
 
 
                                             <th class="border-top-0 text-white_">Ceated At</th>
@@ -122,6 +123,11 @@
                     {
                         data: 'phone',
                         name: 'phone',
+                        searchable: true
+                    },
+                    {
+                        data: 'account_number',
+                        name: 'account_number',
                         searchable: true
                     },
 

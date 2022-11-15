@@ -19,9 +19,17 @@ class TransactionController extends Controller
      */
     public function index()
     { 
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+        if(Auth::user()->can('Access All')){
+            $activities =Activity::activities('App\Models\Transaction');
+      
         $total = Transaction::transations('CALBANK');
-         return view('transactions/index', compact('total','activities'));
+        return view('transactions/gcb',compact('total','activities'));
+    }else{
+        $activities =Activity::activities('App\Models\Transaction');
+        $total = Transaction::cashiertransation('CALBANK');
+        return view('transactions/gcb',compact('total','activities'));
+    }
+       
         //
     }
     public function gcb()
@@ -63,7 +71,7 @@ class TransactionController extends Controller
 
         }else{
             $activities =Activity::activities('App\Models\Transaction');  
-            $total = Transaction::transations('ZENITH');
+            $total = Transaction::cashiertransation('ZENITH');
         return view('transactions/zenith',compact('total','activities'));
         }
         //

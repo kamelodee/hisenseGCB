@@ -13,6 +13,7 @@ class Showroom extends Model
         'city',
         'street',
         'phone',
+        'account_number',
         
     ];
 }
