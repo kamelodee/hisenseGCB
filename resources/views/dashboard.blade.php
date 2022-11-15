@@ -180,9 +180,10 @@
                   name: 'date'
               },
               {
-                        data: 'sales_reference_id',
-                        name: 'sales_reference_id'
-                    },
+                data: 'ref',
+                name: 'ref',
+                searchable: true
+            },
               {
                   data: 'transaction_id',
                   name: 'transaction_id'
