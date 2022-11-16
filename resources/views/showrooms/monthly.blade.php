@@ -106,7 +106,7 @@
             var table = $('.dataTable2').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('showrooms.monthly') }}",
+                ajax: "{{ route('showrooms.monthly',$showroom->name) }}",
                 columns: [{
                         data: 'id',
                         name: 'id',

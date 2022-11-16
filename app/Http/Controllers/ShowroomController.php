@@ -270,14 +270,14 @@ class ShowroomController extends Controller
         return view('showrooms/yearly', compact('total','activities','showroom'));
         //
     }
-    public function daily(Request $request)
+    public function daily(Request $request,$showroom)
     {
        
        
        
         
         if ($request->ajax()) {
-            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereDay('created_at',Carbon::now())->get();
+            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereDay('created_at',Carbon::now())->get();
      
             return DataTables::of($transactions_today)
                 ->addIndexColumn()
@@ -322,14 +322,14 @@ class ShowroomController extends Controller
     }
 
 
-    public function alllist(Request $request)
+    public function alllist(Request $request,$showroom)
     {
        
        
        
         
         if ($request->ajax()) {
-            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->get();
+            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->get();
      
             return DataTables::of($transactions_today)
                 ->addIndexColumn()
@@ -374,7 +374,7 @@ class ShowroomController extends Controller
     }
 
 
-    public function weekly(Request $request)
+    public function weekly(Request $request,$showroom)
     {
        
         if ($request->ajax()) {
@@ -382,7 +382,7 @@ class ShowroomController extends Controller
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-            $transactions_week = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
+            $transactions_week = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
       
             return DataTables::of($transactions_week)
                 ->addIndexColumn()
@@ -435,11 +435,11 @@ class ShowroomController extends Controller
         //
     }
 
-    public function monthly(Request $request)
+    public function monthly(Request $request,$showroom)
     {
      
            if ($request->ajax()) {
-            $transactions_month = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth('created_at', Carbon::now()->month)->get();
+            $transactions_month = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->get();
     
             return DataTables::of($transactions_month)
                 ->addIndexColumn()
@@ -485,10 +485,10 @@ class ShowroomController extends Controller
     }
 
 
-    public function yearly(Request $request)
+    public function yearly(Request $request,$showroom)
     {
         if ($request->ajax()) {
-            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->get();
+            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->get();
       
             return DataTables::of($transactions_year)
                 ->addIndexColumn()
