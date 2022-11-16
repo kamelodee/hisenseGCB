@@ -69,14 +69,12 @@ class UBAController extends Controller
     }
     public function updatetransaction($ref)
     {
-        // dd($request->Ref);
+    
        $data = Uba::getTransaction($ref);
-
-     
        $trans = Transaction::latest()->first();
        
        $transid= Helper::username($trans->id,$trans->customer_name);
-    //    return json_decode($data);
+
          if (json_decode($data)->Status != 0) {
              return back()->with('error', json_decode($data)->response);
          } else {
@@ -100,7 +98,7 @@ class UBAController extends Controller
                  
              ]);
              if ($transaction) {
-                        return redirect()->route('transactions.uba')->with('success', 'Transaction successfully.');;
+                return redirect()->route('transactions.uba')->with('success', 'Transaction successfully.');;
              }
          }
     }
