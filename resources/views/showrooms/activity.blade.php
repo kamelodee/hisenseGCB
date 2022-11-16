@@ -17,16 +17,13 @@
 
 
             <div class="row">
-                <div class="col-md-8 col-lg-8 col-sm-12">
+                <div class="col-md-12 col-lg-12 col-sm-12">
                     <div class="table-responsive">
                         <div class="card p-3">
                             <div class="d-flex">
 
-                                <h5 class="form-header_ ">
-                                    <a href="javascript:void()" class="btn  btn-primary  btn-sm float-right"
-                                        onclick="showroomadd()"><i class="os-icon os-icon-plus-square"></i> Add </a>
-                                </h5>
-                                <h5 class="mx-3">Showrooms</h5>
+                                
+                                <h5 class="mx-3">Activities Logs</h5>
                             </div>
 
                             <div class="table-responsive mt-2">
@@ -35,17 +32,12 @@
                                     <thead class="table-dark_">
                                         <tr>
                                             <th class="border-top-0 text-white_">#</th>
-                                            <th class="border-top-0 text-white_">Name</th>
-                                            <th class="border-top-0 text-white_">Street</th>
-                                            <th class="border-top-0 text-white_">City</th>
-                                            <th class="border-top-0 text-white_">Phone</th>
-                                            <th class="border-top-0 text-white_">Account Number</th>
-
-
+                                            <th class="border-top-0 text-white_">User</th>
+                                            <th class="border-top-0 text-white_">Showroom</th>
+                                            <th class="border-top-0 text-white_">Description</th>
                                             <th class="border-top-0 text-white_">Ceated At</th>
-                                            <th class="border-top-0 text-white_">Action</th>
-
-                                            <th></th>
+                                        
+                                           
                                         </tr>
                                     </thead>
 
@@ -59,8 +51,8 @@
 
                     </div>
                 </div>
-                <div class="col-md-1 col-lg-1 col-sm-0"></div>
-                
+               
+               
             </div>
 
 
@@ -80,47 +72,35 @@
             var table = $('.dataTable2').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('showrooms.list') }}",
+                ajax: "{{ route('activities.list') }}",
                 columns: [{
                         data: 'id',
                         name: 'id',
                         searchable: true
                     },
                     {
-                        data: 'name',
-                        name: 'name'
+                        data: 'user_name',
+                        name: 'user_name'
                     },
                     {
-                        data: 'street',
-                        name: 'street',
+                        data: 'showroom',
+                        name: 'showroom',
                         searchable: true
                     },
                     {
-                        data: 'city',
-                        name: 'city',
+                        data: 'description',
+                        name: 'description',
                         searchable: true
                     },
-                    {
-                        data: 'phone',
-                        name: 'phone',
-                        searchable: true
-                    },
-                    {
-                        data: 'account_number',
-                        name: 'account_number',
-                        searchable: true
-                    },
+                   
+                   
 
                     {
                         data: 'created_at',
                         name: 'created_at',
                         searchable: true
                     },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        searchable: true
-                    }
+                    
 
 
                 ],

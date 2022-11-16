@@ -13,6 +13,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\GcbController;
 use App\Http\Controllers\CalbankController;
 use App\Http\Controllers\UBAController;
+use App\Http\Controllers\ActivityController;
 
 
 Route::get('/', function () {
@@ -30,6 +31,8 @@ Route::get('/admin', [UserController::class, 'loginForm'])->name('admin.loginfor
 Route::get('/unauthorise', [UserController::class, 'unauthorise'])->name('unauthorise');
 Route::post('/admin/login', [UserController::class, 'login'])->name('admin.login');
 Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
+Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
+Route::get('/activities/list', [ActivityController::class, 'list'])->name('activities.list');
 
 
 Route::group(['middleware' => ['auth']], function () {

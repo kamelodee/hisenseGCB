@@ -113,8 +113,7 @@
                   <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
                   <li class="dropdown-divider mx-n3"></li>
                   <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
-
-                  <li><a class="dropdown-item" href="{{route('transactions')}}"><i class="fas fa-credit-card"></i>Transactions</a></li>
+                 <li><a class="dropdown-item" href="{{route('activities')}}"><i class="fas fa-credit-card"></i>Activities Logs</a></li>
                     
                   {{-- <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li> --}}
                   <li>
