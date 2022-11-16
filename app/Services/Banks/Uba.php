@@ -37,7 +37,7 @@ class Uba
       "uniqueID": ' . json_encode($order_code) . ',
       "description": " test pay",
       "amount": ' . json_encode($amount) . ',
-      "returnUrl": "http://127.0.0.1:8000/transactions/uba/returnoute",
+      "returnUrl": "https://api.hisense.com.gh/transactions/uba/returnoute",
       "hash":' . json_encode($hash) . '
       }',
       CURLOPT_HTTPHEADER => array(
