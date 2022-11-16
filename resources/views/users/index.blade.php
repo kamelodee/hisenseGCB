@@ -57,24 +57,7 @@
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-12">
                     <hr> 
-                    @can('Access All')
-                    <h3 class="text-3 fw-400">Activities</h3>
-                    @foreach ($activities as $cti )
-                    <div class=" shadow-sm rounded text-center p-3 mb-4">
-                     
-                      <h3 class="text-2 fw-400"><i class="fas fa-user mx-2"></i>{{ $cti->user_name }}</h3>
-                      <hr class="mx-n3">
-                      <p class="mb-1 text-1 "><a  href="javascript:void()">{{$cti->description}} at <br>{{$cti->created_at}}</a></p>
-                   
-                      
-
-                  </div>
-                    @endforeach
-                    {{ $activities->links() }}
-                    <!-- Available Balance End -->
-
-
-                @endcan
+                  
                 </div>
             </div>
 
