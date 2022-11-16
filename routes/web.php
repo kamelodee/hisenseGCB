@@ -34,16 +34,36 @@ Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
 
 Route::group(['middleware' => ['auth']], function () {
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+
 Route::prefix('showrooms')->group(function () {
     Route::get('/', [ShowroomController::class, 'index'])->name('showrooms');
     Route::get('/gettable', [ShowroomController::class, 'gettable'])->name('showrooms.gettable');
+    Route::get('/transaction', [ShowroomController::class, 'transaction'])->name('showrooms.transaction');
+    Route::get('/translist', [ShowroomController::class, 'translist'])->name('showrooms.translist');
     Route::get('/list', [ShowroomController::class, 'list'])->name('showrooms.list');
+    Route::get('/details', [ShowroomController::class, 'details'])->name('showrooms.details');
     Route::post('/store', [ShowroomController::class, 'store'])->name('showrooms.store');
     
     Route::get('/create', [ShowroomController::class, 'create'])->name('showrooms.create');
     Route::post('/update/{id}', [ShowroomController::class, 'update'])->name('showrooms.update');
     Route::get('/edit/{id}', [ShowroomController::class, 'edit'])->name('showrooms.edit');
     Route::post('/remove/{id}', [ShowroomController::class, 'remove'])->name('showrooms.remove');
+
+
+    Route::get('/calbank', [ShowroomController::class, 'index'])->name('showrooms.calbank');
+    Route::get('/daily', [ShowroomController::class, 'indexdaily'])->name('showrooms.indexdaily');
+    Route::get('/weekly', [ShowroomController::class, 'indexweekly'])->name('showrooms.indexweekly');
+    Route::get('/monthly', [ShowroomController::class, 'indexmonthly'])->name('showrooms.indexmonthly');
+    Route::get('/yearly', [ShowroomController::class, 'indexyearly'])->name('showrooms.indexyearly');
+    Route::get('/all', [ShowroomController::class, 'all'])->name('showrooms.all');
+   
+   
+    Route::get('/dailylist/{showroom}', [ShowroomController::class, 'daily'])->name('showrooms.daily');
+    Route::get('/weeklylist/{showroom}', [ShowroomController::class, 'weekly'])->name('showrooms.weekly');
+    Route::get('/monthlylist/{showroom}', [ShowroomController::class, 'monthly'])->name('showrooms.monthly');
+    Route::get('/yearlylist/{showroom}', [ShowroomController::class, 'yearly'])->name('showrooms.yearly');
+    Route::get('/alllist/{showroom}', [ShowroomController::class, 'alllist'])->name('showrooms.all');
 });
 
 Route::prefix('payments')->group(function () {

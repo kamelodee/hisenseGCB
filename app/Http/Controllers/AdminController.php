@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Transaction;
+use App\Models\Showroom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -16,14 +17,21 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+
+    
+
+  
+
+   
         if(Auth::user()->can('Access All')){
 
        
         $currentDate = Carbon::now();
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
-       
+       $showrooms = Showroom::all();
+        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
         $transactions_today = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');
         $transactions_week = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount');
         $transactions_month = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount');
@@ -34,7 +42,7 @@ class AdminController extends Controller
         $uba =Transaction::transationsu('UBA');
         $zenith =Transaction::transations('ZENITHBANK');
        
-        return view('dashboard',compact('zenith','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
+        return view('dashboard',compact('zenith','uba','total','gcb','showrooms','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
     }else{
         $currentDate = Carbon::now();
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);

@@ -14,6 +14,7 @@ class Showroom extends Model
         'street',
         'phone',
         'account_number',
+        'total',
         
     ];
 }

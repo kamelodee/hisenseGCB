@@ -16,7 +16,7 @@
             <a href="{{route('showrooms.transaction')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3  fw-400">GHC {{$total}}</h3>
-            <p class="text-muted   fw-600">All Showrooms Total</p>
+            <p class="text-muted   fw-600"> Total</p>
             </a>
            
           
@@ -76,7 +76,7 @@
             <div class="row">
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
-                  <a href="{{route('indexdaily')}}">
+                  <a href="{{route('showrooms.indexdaily').'?showroom='.$showroom->name}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_today}}</h3>
                   <p class=" text-muted   fw-600">Today</p>
@@ -86,7 +86,7 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
-                  <a href="{{route('indexweekly')}}">
+                  <a href="{{route('showrooms.indexweekly').'?showroom='.$showroom->name}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_week}}</h3>
                   <p class=" text-muted   fw-600">This Week</p>
@@ -96,7 +96,7 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-2">
-                  <a href="{{route('indexmonthly')}}">
+                  <a href="{{route('showrooms.indexmonthly').'?showroom='.$showroom->name}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_month}}</h3>
                   <p class=" text-muted   fw-600">This Month</p>
@@ -106,7 +106,7 @@
               </div>
               <div class="col-sm-6 col-md-3">
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
-                  <a href="{{route('indexyearly')}}">
+                  <a href="{{route('showrooms.indexyearly').'?showroom='.$showroom->name}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
                   <h3 class="text-3  fw-400">GHC {{$transactions_year}}</h3>
                   <p class=" text-muted   fw-600">This Year</p>
@@ -176,7 +176,7 @@
       var table = $('.dataTable2').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "{{ route('weekly') }}",
+          ajax: "{{ route('showrooms.weekly',$showroom->name) }}",
           columns: [
               {
                   data: 'id',
