@@ -112,14 +112,10 @@
           <!-- Recent Activity
           =============================== -->
           <div class="bg-white shadow-sm rounded py-4 mb-4">
-            <h3 class="text-5 fw-400 d-flex align-items-center px-4 mb-1">Recent Transactions</h3>
-            
-            
-            
+            <h3 class="text-5 fw-400 d-flex align-items-center px-4 mb-1">Recent</h3>
+  
             <!-- Transaction List-->
-           <div class="bg-white shadow-sm rounded p-4 mb-4">
-           
-           
+           <div class="bg-white shadow-sm rounded p-4 mb-4">   
             <div class="table-responsive mt-2">
                  
               <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">

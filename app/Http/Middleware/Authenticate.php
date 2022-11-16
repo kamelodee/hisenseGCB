@@ -17,9 +17,9 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
           $domain = parse_url(request()->root())['host'];
 
-            if($domain =='api.hisense.com.gh'){
-                return route('unauthorise');
-            }
+            // if($domain =='api.hisense.com.gh'){
+            //     return route('unauthorise');
+            // }
             return route('login');
         }
     }

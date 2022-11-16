@@ -25,6 +25,7 @@ class Transaction extends Model
         'amount',
         'status',
         'bank',
+        'bank_ref',
         'sales_reference_id',
         
     ];

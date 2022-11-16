@@ -14,7 +14,8 @@
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
             <h3 class="text-3 fw-400">GHC {{$total}}</h3>
-            <p class="mb-2 text-muted opacity-8">Total Copleted Transactions</p>
+            <p class="mb-1 text-muted opacity-8">Total Sum</p>
+            <small class="text-muted opacity-8">Successful Payments</small>
             <hr class="mx-n3">
            
           </div>
@@ -46,7 +47,19 @@
         ============================================= -->
         <div class="col-lg-10 col-md-9 col-sm-12 ">
           <h4 class="fw-400 mb-3">UBA Transactions</h4>
-          
+          @foreach ($errors->all() as $error)
+          <li class="text-danger">{{ $error }}</li>
+      @endforeach
+      @if ($message = Session::get('success'))
+          <div class="alert alert-success">
+              <p>{{ $message }}</p>
+          </div>
+      @endif
+      @if ($message = Session::get('error'))
+          <div class="alert alert-danger">
+              <p>{{ $message }}</p>
+          </div>
+      @endif
           <!-- All Transactions
           ============================================= -->
           <div class="bg-white shadow-sm rounded p-4 mb-4">

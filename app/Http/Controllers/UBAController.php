@@ -29,32 +29,37 @@ class UBAController extends Controller
        $data = Uba::getTransaction(request()->Ref);
 
      
-       $trans = Transaction::latest()->first();
+       
        $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
-
-       $transid= Helper::username($trans->id,$trans->customer_name);
+      $trans = Transaction::where('order_code',json_decode($data)->Response->unique_value)->first();
+       
     //    return json_decode($data);
-         if (json_decode($data)->Status != 0) {
-             return back()->with('error', json_decode($data)->response);
+         if (json_decode($data)->Response->status =='CANCELED') {
+            $transaction =   $trans->update([
+                'transaction_id' => json_decode($data)->Response->transaction_id,
+                'transaction_type' =>json_decode($data)->Response->description,
+                'ref' => json_decode($data)->Response->reference_no,
+                'amount' => json_decode($data)->Response->amount,
+                'status' => json_decode($data)->Response->status,
+                'bank_ref' => request()->Ref,
+                'description' => json_decode($data)->Response->description,
+            ]);
+            Activity::activityCreate('App\Models\Transaction','Transaction Failed',$trans->id);
+            
+            return redirect()->route('transactions.uba')->with('error', json_decode($data)->Response->info);
+
          } else {
-             $transaction =   Transaction::updateOrCreate([
-                 'customer_name' => $request->name,
-                 'showroom' => Auth::user()->showroom,
-                 'order_code' => json_decode($data)->Response->unique_value,
+             $transaction =   $trans->update([
                  'payment_token' => json_decode($data)->Response->unique_value,
                  'payment_code' => json_decode($data)->Response->approval_code,
                  'shortpay_code' => json_decode($data)->Response->unique_value,
                  'transaction_id' => json_decode($data)->Response->transaction_id,
                  'transaction_type' =>json_decode($data)->Response->description,
                  'ref' => json_decode($data)->Response->reference_no,
-                 'phone' => $request->phone,
                  'amount' => json_decode($data)->Response->amount,
-                 'sales_reference_id' => $transid,
-                 'account_number' => $request->phone,
                  'status' => json_decode($data)->Response->status,
-                 'bank' => 'UBA',
+                 'bank_ref' => request()->Ref,
                  'description' => json_decode($data)->Response->description,
-                 'date' => date('Y.m.d H:i:s'),
              ]);
              if ($transaction) {
                 Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
@@ -75,7 +80,7 @@ class UBAController extends Controller
          if (json_decode($data)->Status != 0) {
              return back()->with('error', json_decode($data)->response);
          } else {
-             $transaction =   Transaction::update([
+             $transaction =   Transaction::find()->update([
                  'customer_name' => json_decode($data)->Response->unique_value,
                  'showroom' => Auth::user()->showroom,
                  'order_code' => json_decode($data)->Response->unique_value,
@@ -116,6 +121,28 @@ class UBAController extends Controller
             'phone' => 'required',
 
 
+        ]);
+        // return $request->all();
+        $trans = Transaction::latest()->first();
+        $transid= Helper::username($trans->id,$trans->customer_name);
+        Transaction::updateOrCreate([
+            'customer_name' => $request->name,
+            'showroom' => Auth::user()->showroom,
+            'order_code' => $request->order_code,
+            'payment_token' => '',
+            'payment_code' => '',
+            'shortpay_code' => '',
+            'transaction_id' => '',
+            'transaction_type' =>'',
+            'ref' => '',
+            'phone' => $request->phone,
+            'amount' => $request->amount,
+            'sales_reference_id' => $transid,
+            'account_number' => $request->phone,
+            'status' => 'PENDING',
+            'bank' => 'UBA',
+            'description' => '',
+            'date' => date('Y.m.d H:i:s'),
         ]);
 // return $request->all();
        
