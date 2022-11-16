@@ -14,6 +14,9 @@ class Showroom extends Model
         'street',
         'phone',
         'account_number',
+        'momo',
+        'gcb',
+        'card',
         'total',
         
     ];

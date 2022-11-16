@@ -45,6 +45,9 @@
                                         <tr>
                                             <th class="border-top-0 text-white_">#</th>
                                             <th class="border-top-0 text-white_">Showroom</th>
+                                            <th class="border-top-0 text-white_">MOMO</th>
+                                            <th class="border-top-0 text-white_">GCB</th>
+                                            <th class="border-top-0 text-white_">Card</th>
                                             <th class="border-top-0 text-white_">Total Amount</th>
                                            
                                         </tr>
@@ -90,6 +93,21 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'momo',
+                        name: 'momo',
+                        searchable: true
+                    },
+                    {
+                        data: 'gcb',
+                        name: 'gcb',
+                        searchable: true
+                    },
+                    {
+                        data: 'card',
+                        name: 'card',
+                        searchable: true
                     },
                     {
                         data: 'total',
