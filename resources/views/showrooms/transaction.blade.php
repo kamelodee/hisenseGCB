@@ -48,7 +48,7 @@
                                             <th class="border-top-0 text-white_">MOMO</th>
                                             <th class="border-top-0 text-white_">GCB</th>
                                             <th class="border-top-0 text-white_">Card</th>
-                                            <th class="border-top-0 text-white_">Total Amount</th>
+                                            <th class="border-top-0 text-white_">Total</th>
                                            
                                         </tr>
                                     </thead>
