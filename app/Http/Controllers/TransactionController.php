@@ -477,7 +477,7 @@ class TransactionController extends Controller
     public function show(Transaction $transaction, $id)
     {
         $transaction = Transaction::find($id);
-      $amount =  Helper::money($transaction->amount);
+       $amount =  Helper::money($transaction->amount);
         return view('transactions/show', compact('transaction','amount'));
     }
 
