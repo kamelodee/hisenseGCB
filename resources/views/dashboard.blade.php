@@ -24,7 +24,7 @@
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('transactions.gcb')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-            <h3 class="text-3  fw-400">GHC {{$gcb}}</h3>
+            <h3 class="text-3  fw-400"> {{$gcb}}</h3>
             <p class="text-muted   fw-600">GCB Transactions</p>
             </a>
            
