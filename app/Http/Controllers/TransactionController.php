@@ -135,7 +135,7 @@ class TransactionController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -238,7 +238,7 @@ class TransactionController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -316,7 +316,7 @@ class TransactionController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' .Helper::money( $row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -407,7 +407,7 @@ class TransactionController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' .Helper::money( $row->amount) . '</div>
                
                ';
                     return $actionBtn;

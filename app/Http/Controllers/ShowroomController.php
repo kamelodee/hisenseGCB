@@ -373,7 +373,25 @@ class ShowroomController extends Controller
                     return $created_at;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('momo', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('gcb', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('card', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -389,7 +407,7 @@ class ShowroomController extends Controller
                     }
                    
                 })
-                ->rawColumns(['transaction_id','amount', 'name','status'])
+                ->rawColumns(['transaction_id','amount','momo','gcb','card', 'name','status'])
                 ->make(true);
         }
     }
@@ -434,7 +452,7 @@ class ShowroomController extends Controller
                     return $created_at;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -483,7 +501,7 @@ class ShowroomController extends Controller
                     return $created_at;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
@@ -536,7 +554,7 @@ class ShowroomController extends Controller
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
