@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Carbon\Carbon;
-
+use Illuminate\Support\Str;
 class CalbankController extends Controller
 {
     /**
@@ -119,10 +119,47 @@ class CalbankController extends Controller
        
         
         if ($request->ajax()) {
-            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
-     
+           
+            if(!empty($request->date1))
+            {
+             $transactions_today = Transaction::whereBetween('created_at', array($request->date1, $request->date2))
+               ->get();
+            }
+            else
+            {
+                $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
+            }
+
             return DataTables::of($transactions_today)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+
+                   
+
+                })
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use DataTables;
 use App\Services\Banks\CalBank;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
 class TransactionController extends Controller
 {
     /**
@@ -81,15 +81,50 @@ class TransactionController extends Controller
     public function callist(Request $request)
     {
         if ($request->ajax()) {
-            if(Auth::user()->can('Access All')){
-            $users = Transaction::getTransations('CALBANK');
-          
-            }else{
-                $users = Transaction::getCashiertransations('CALBANK');
-              
+
+            if(!empty($request->date1))
+            {
+             $trans = Transaction::where('bank','CALBANK')->whereBetween('created_at', array($request->date1, $request->date2))
+               ->get();
             }
-            return DataTables::of($users)
+            else
+            {
+                if(Auth::user()->can('Access All')){
+                    $trans = Transaction::getTransations('CALBANK');
+                  
+                    }else{
+                        $trans = Transaction::getCashiertransations('CALBANK');
+                      
+                    }
+            }
+            
+            return DataTables::of($trans)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+                })
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
@@ -142,16 +177,51 @@ class TransactionController extends Controller
     public function zenithlist(Request $request)
     {
         if ($request->ajax()) {
-            if(Auth::user()->can('Access All')){
-                $users = Transaction::getTransations('ZENITH');
-              
-                }else{
-                    $users = Transaction::getCashiertransations('ZENITH');
+
+            if(!empty($request->date1))
+            {
+             $trans = Transaction::where('bank','ZENITH')->whereBetween('created_at', array($request->date1, $request->date2))
+               ->get();
+            }
+            else
+            {
+                if(Auth::user()->can('Access All')){
+                    $trans = Transaction::getTransations('ZENITH');
                   
-                }
+                    }else{
+                        $trans = Transaction::getCashiertransations('ZENITH');
+                      
+                    }
+            }
+           
           
-            return DataTables::of($users)
+            return DataTables::of($trans)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+                })
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
@@ -183,16 +253,51 @@ class TransactionController extends Controller
     public function gcblist(Request $request)
     {
         if ($request->ajax()) {
-            if(Auth::user()->can('Access All')){
-                $users = Transaction::getTransations('GCB');
-              
-                }else{
-                    $users = Transaction::getCashiertransations('GCB');
+
+            if(!empty($request->date1))
+            {
+             $trans = Transaction::where('bank','GCB')->whereBetween('created_at', array($request->date1, $request->date2))
+               ->get();
+            }
+            else
+            {
+                if(Auth::user()->can('Access All')){
+                    $trans = Transaction::getTransations('GCB');
                   
-                }
+                    }else{
+                        $trans = Transaction::getCashiertransations('GCB');
+                      
+                    }
+            }
+            
       
-            return DataTables::of($users)
+            return DataTables::of($trans)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+                })
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
@@ -233,16 +338,51 @@ class TransactionController extends Controller
     public function ubalist(Request $request)
     {
         if ($request->ajax()) {
+            if(!empty($request->date1))
+            {
+             $trans = Transaction::where('bank','UBA')->whereBetween('created_at', array($request->date1, $request->date2))
+               ->get();
+            }
+            else
+            {
+                
             if(Auth::user()->can('Access All')){
-                $users = Transaction::getTransations('UBA');
+                $trans = Transaction::getTransations('UBA');
               
                 }else{
-                    $users = Transaction::getCashiertransations('UBA');
+                    $trans = Transaction::getCashiertransations('UBA');
                   
                 }
            
-            return DataTables::of($users)
+            }
+
+            return DataTables::of($trans)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+                })
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
