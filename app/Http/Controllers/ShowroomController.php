@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 class ShowroomController extends Controller
 {
@@ -109,9 +109,21 @@ class ShowroomController extends Controller
     public function translist(Request $request)
     {
         if ($request->ajax()) {
-            $users = Showroom::orderBy('id', 'desc')->get();
+            $users = Showroom::all();
             return DataTables::of($users)
                 ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['name']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+
+                            return false;
+                        });
+                    }
+
+                })
                 ->addColumn('action', function($row){
                     if(Auth::user()->can('Edit Showroom')){
                         $actionBtn = '<a onclick="ShowroomEdit('."'$row->id'".')"  href="javascript:void()" class="btn btn-primary btn-sm text-white">

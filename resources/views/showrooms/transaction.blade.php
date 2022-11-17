@@ -32,10 +32,16 @@
                 <div class="col-md-8 col-lg-8 col-sm-12">
                     <div class="table-responsive">
                         <div class="card p-3">
-                            <div class="d-flex">
-
-                               
+                            <div class="d-md-flex justify-content-between flex-sm-column flex-md-row">
                                 <h5 class="mx-3">Showrooms</h5>
+                                <div class="flex-shrink-1">
+                                    <div class="input-group input-group-sm mb-3 ">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                                        <input type="text" placeholder="search showrooms" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                      </div>
+                                </div>
+                               
+                                  <div class="mx-3"><h3 class="text-3  fw-600">GHC{{$total}}</h3></div>
                             </div>
 
                             <div class="table-responsive mt-2">
@@ -80,11 +86,20 @@
 @section('script')
     <script type="text/javascript">
         $(function() {
-
+console.log($('#search1').val());
             var table = $('.dataTable2').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('showrooms.translist') }}",
+                bFilter: false,
+                ajax: {
+                    url: "{{ route('showrooms.translist') }}",
+                data: function (d) {
+                          d._token = "{{ csrf_token() }}",
+                            d.search = $('#search1').val()
+                        
+                        }
+                    },
+        
                 columns: [{
                         data: 'id',
                         name: 'id',
@@ -124,7 +139,9 @@
                     [0, 1, 2, 3, 'desc']
                 ]
             });
-
+            $("#search1").keyup(function(){
+        table.draw();
+    });
         });
     </script>
 @endsection
