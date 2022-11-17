@@ -11,7 +11,7 @@
      
       <div class="px-3">
         
-        <p class="d-flex align-items-center fw-500 mb-0">Total Amount <span class="text-3 ms-auto">GHC {{$transaction->amount}}</span></p>
+        <p class="d-flex align-items-center fw-500 mb-0">Total Amount <span class="text-3 ms-auto">{{$amount}}</span></p>
         <hr class="mb-4 mt-2">
         <ul class="list-unstyled">
           <li class="fw-500">Showroom:</li>
