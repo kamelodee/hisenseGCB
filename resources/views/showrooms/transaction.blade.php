@@ -41,7 +41,7 @@
                                       </div>
                                 </div>
                                
-                                  <div class="mx-3"><h3 class="text-3  fw-600">GHC{{$total}}</h3></div>
+                                  <div class="mx-3"><h3 class="text-3  fw-600">GHC {{$total}}</h3></div>
                             </div>
 
                             <div class="table-responsive mt-2">
