@@ -21,7 +21,7 @@
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('showrooms.transaction')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-            <h3 class="text-3  fw-400">GHC {{$total}}</h3>
+            <h3 class="text-3  fw-400">GHC  {{$total}} </h3>
             <p class="text-muted   fw-600">All Showrooms Total</p>
             </a>
            

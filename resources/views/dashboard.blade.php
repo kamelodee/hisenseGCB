@@ -15,7 +15,7 @@
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('showrooms.transaction')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-            <h3 class="text-3  fw-400">GHC {{$total}}</h3>
+            <h3 class="text-3  fw-400"> {{$total}}</h3>
             <p class="text-muted   fw-600">All Showrooms Total</p>
             </a>
            
@@ -42,7 +42,7 @@
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('transactions.uba')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-            <h3 class="text-3 fw-400">GHC {{$uba}}</h3>
+            <h3 class="text-3 fw-400"> {{$uba}}</h3>
             <p class="text-muted   fw-600 ">UBA Transactions</p>
             </a>
           
@@ -78,7 +78,7 @@
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
                   <a href="{{route('indexdaily')}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3  fw-400">GHC {{$transactions_today}}</h3>
+                  <h3 class="text-3  fw-400"> {{$transactions_today}}</h3>
                   <p class=" text-muted   fw-600">Today</p>
                  
                 </a>
@@ -88,7 +88,7 @@
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
                   <a href="{{route('indexweekly')}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3  fw-400">GHC {{$transactions_week}}</h3>
+                  <h3 class="text-3  fw-400">{{$transactions_week}}</h3>
                   <p class=" text-muted   fw-600">This Week</p>
                 
                   </a>
@@ -98,7 +98,7 @@
                 <div class="bg-white shadow-sm rounded text-center p-2">
                   <a href="{{route('indexmonthly')}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3  fw-400">GHC {{$transactions_month}}</h3>
+                  <h3 class="text-3  fw-400">{{$transactions_month}}</h3>
                   <p class=" text-muted   fw-600">This Month</p>
                   
                   </a>
@@ -108,7 +108,7 @@
                 <div class="bg-white shadow-sm rounded text-center p-2 ">
                   <a href="{{route('indexyearly')}}">
                   <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                  <h3 class="text-3  fw-400">GHC {{$transactions_year}}</h3>
+                  <h3 class="text-3  fw-400"> {{$transactions_year}}</h3>
                   <p class=" text-muted   fw-600">This Year</p>
                   </a>
                 

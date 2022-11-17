@@ -2,12 +2,16 @@
 
 namespace App\Services;
 
-
+use NumberFormatter;
 
 class Helper
 {
 
 
+    static public function money($number){
+        $amount = new NumberFormatter("en_US", NumberFormatter::CURRENCY);
+            return  $amount->formatCurrency($number, 'GHC');
+    }
     static public function tranId($id){
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $cha =substr(str_shuffle($characters), 7, 7);
