@@ -3,7 +3,7 @@
       <div class="my-auto text-center">
         <div class="text-17 text-white my-3"><i class="fas fa-building"></i></div>
         <h3 class="text-4 text-white fw-400 my-3">{{$transaction->customer_name}}</h3>
-        <div class="text-8 fw-500 text-white my-4">GHC {{$transaction->amount}}</div>
+        <div class="text-8 fw-500 text-white my-4">{{$amount}}</div>
         <p class="text-white">{{$transaction->date}}</p>
       </div>
     </div>
