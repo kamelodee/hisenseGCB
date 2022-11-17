@@ -104,8 +104,8 @@ $(function() {
                 searchable: true
             },
             {
-                data: 'ref',
-                name: 'ref',
+                data: 'sales_reference_id',
+                name: 'sales_reference_id',
                 searchable: true
             },
             {
