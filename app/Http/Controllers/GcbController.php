@@ -19,7 +19,11 @@ use App\Models\Transaction;
 use App\Models\TestTransaction;
 use App\Services\Odoo;
 
+use App\Models\Showroom;
+use App\Models\Activity;
 use App\Services\Odoo\Customer;
+use App\Services\Helper;
+
 use Ripoo\Exception\{CodingException, ResponseException, ResponseEntryException, ResponseFaultException, ResponseStatusException};
 
 class GcbController extends Controller
@@ -128,24 +132,28 @@ class GcbController extends Controller
 
         try {
             // return [$request->showroom,Auth::user()->showroom];
+            $trans = Transaction::latest()->first();
+           
+               $transid= Helper::username($trans->id,$trans->customer_name);
             if(Auth::user()->showroom === $request->showroom){
                
                     $transaction =   Transaction::create([
-                        'customer_name' => $request->customer_id,
+                        'customer_name' => $request->customer_name,
                         'showroom' => Auth::user()->showroom,
                         'order_code' => 'gcb',
-                        'payment_token' => sha1(md5(time())),
-                        'payment_code' =>sha1(md5(time())),
-                        'shortpay_code' => sha1(md5(time())),
+                        'payment_token' => $transid,
+                        'payment_code' =>$transid,
+                        'shortpay_code' => $transid,
                         'transaction_id' => sha1(md5(time())),
                         'transaction_type' => $request->transaction_type,
                         'ref' => $request->ref,
                         'phone' => $request->customer_id,
+                        'sales_reference_id' => $transid,
                         'amount' => $request->amount,
                         'account_number' => $request->account_number,
                         'status' => 'SUCCESS',
                         'bank' => 'GCB',
-                        'description' => $request->ref,
+                        'description' => "GCB Transaction",
                         'date' => $request->date,
                     ]);
                  
