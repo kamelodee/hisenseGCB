@@ -61,18 +61,12 @@ class ShowroomController extends Controller
            $gcbsum = Transaction::where('showroom',$showroom->name)->where('bank','GCB')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
            $momo = Transaction::where('showroom',$showroom->name)->where('transaction_type','momo')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
            $card = Transaction::where('showroom',$showroom->name)->where('bank','UBA')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
-           if($sum ){
-            //    $showroom->update([
-            //     'total'=>$sum,
-            //     'gcb'=>$gcbsum,
-            //     'momo'=>$momo
-            // ]);
-             $showroom->update([
-                'total'=>0,
-                'gcb'=>0,
-                'momo'=>0
-            ]);
-           }
+           $showroom->update([
+            'total'=>$sum,
+            'gcb'=>$gcbsum,
+            'momo'=>$momo
+        ]);
+          
         
         }
         $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
