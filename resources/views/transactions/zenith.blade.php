@@ -13,7 +13,7 @@
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
-            <h3 class="text-3 fw-400">GHC {{$total}}</h3>
+            <h3 class="text-3 fw-400"> {{$total}}</h3>
             <p class="mb-2 text-muted opacity-8">Total Copleted Transactions</p>
             <hr class="mx-n3">
            
@@ -64,7 +64,7 @@
                       </div>
                 </div>
                
-                  <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600">GHC {{$total}}</h3></div>
+                  <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600"> {{$total}}</h3></div>
             </div>
               <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
                   <thead class="table-dark_">

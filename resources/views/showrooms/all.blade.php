@@ -12,31 +12,14 @@
               =============================== -->
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                        <h3 class="text-3 fw-400">GHC {{ $total }}</h3>
+                        <h3 class="text-3 fw-400">{{ $total }}</h3>
                         <p class="mb-1 text-muted opacity-8">Total Sum</p>
                         <small class="text-muted opacity-8">Successful Payments</small>
                         <hr class="mx-n3">
 
                     </div>
                     <hr> 
-                    @can('Access All')
-                    <h3 class="text-3 fw-400">Activities</h3>
-                    @foreach ($activities as $cti )
-                    <div class=" shadow-sm rounded text-center p-3 mb-4">
-                     
-                      <h3 class="text-2 fw-400"><i class="fas fa-user mx-2"></i>{{ $cti->user_name }}</h3>
-                      <hr class="mx-n3">
-                      <p class="mb-1 text-1 "><a onclick="TransactionDetails({{$cti->model_id}})" href="javascript:void()">{{$cti->description}} at <br>{{$cti->created_at}}</a></p>
-                   
-                      
-
-                  </div>
-                    @endforeach
-                    {{ $activities->links() }}
-                    <!-- Available Balance End -->
-
-
-                @endcan
+                    
                 </aside>
                 <!-- Left Panel End -->
 

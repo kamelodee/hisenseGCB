@@ -10,6 +10,7 @@ use DataTables;
 use App\Services\Banks\CalBank;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Services\Helper;
 class TransactionController extends Controller
 {
     /**
@@ -22,11 +23,11 @@ class TransactionController extends Controller
         if(Auth::user()->can('Access All')){
             $activities =Activity::activities('App\Models\Transaction');
       
-        $total = Transaction::transations('CALBANK');
+        $total = Helper::money(Transaction::transations('CALBANK'));
         return view('transactions/index',compact('total','activities'));
     }else{
         $activities =Activity::activities('App\Models\Transaction');
-        $total = Transaction::cashiertransation('CALBANK');
+        $total = Helper::money(Transaction::cashiertransation('CALBANK'));
         return view('transactions/index',compact('total','activities'));
     }
        
@@ -37,11 +38,11 @@ class TransactionController extends Controller
         if(Auth::user()->can('Access All')){
             $activities =Activity::activities('App\Models\Transaction');
       
-        $total = Transaction::transations('GCB');
+        $total = Helper::money(Transaction::transations('GCB'));
         return view('transactions/gcb',compact('total','activities'));
     }else{
         $activities =Activity::activities('App\Models\Transaction');
-        $total = Transaction::cashiertransation('GCB');
+        $total = Helper::money(Transaction::cashiertransation('GCB'));
         return view('transactions/gcb',compact('total','activities'));
     }
         //
@@ -52,11 +53,11 @@ class TransactionController extends Controller
         if(Auth::user()->can('Access All')){
             $activities =Activity::activities('App\Models\Transaction');
        
-        $total = Transaction::transationsu('UBA');
+        $total = Helper::money(Transaction::transationsu('UBA'));
         return view('transactions/uba',compact('total','activities'));
         }else{
             $activities =Activity::activities('App\Models\Transaction');
-            $total = Transaction::cashiertransation('UBA');
+            $total = Helper::money(Transaction::cashiertransation('UBA'));
             return view('transactions/uba',compact('total','activities'));
         }
         //
@@ -66,12 +67,12 @@ class TransactionController extends Controller
      
         if(Auth::user()->can('Access All')){
             $activities =Activity::activities('App\Models\Transaction'); 
-            $total = Transaction::transations('ZENITH');
+            $total = Helper::money(Transaction::transations('ZENITH'));
         return view('transactions/zenith',compact('total','activities'));
 
         }else{
             $activities =Activity::activities('App\Models\Transaction');  
-            $total = Transaction::cashiertransation('ZENITH');
+            $total = Helper::money(Transaction::cashiertransation('ZENITH'));
         return view('transactions/zenith',compact('total','activities'));
         }
         //

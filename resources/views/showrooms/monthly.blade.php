@@ -12,7 +12,7 @@
               =============================== -->
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <div class="text-10 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                        <h3 class="text-3 fw-400">GHC {{ $total }}</h3>
+                        <h3 class="text-3 fw-400"> {{ $total }}</h3>
                         <p class="mb-2 text-muted opacity-8">Total Copleted Transactions</p>
                         <hr class="mx-n3">
 

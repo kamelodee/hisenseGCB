@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Services\Helper;
 class CalbankController extends Controller
 {
     /**
@@ -20,14 +21,14 @@ class CalbankController extends Controller
     public function indexdaily()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
         return view('transactions/calbank/daily', compact('total','activities'));
         //
     }
     public function all()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
         return view('transactions/all', compact('total','activities'));
         //
     }
@@ -39,7 +40,7 @@ class CalbankController extends Controller
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
        
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
         return view('transactions/calbank/weekly', compact('total','activities'));
         //
     }
@@ -47,7 +48,7 @@ class CalbankController extends Controller
     { 
       
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
         return view('transactions/calbank/monthly', compact('total','activities'));
         //
     }
@@ -55,7 +56,7 @@ class CalbankController extends Controller
     public function indexyearly()
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total =  DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount');
+        $total =  Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
    
         return view('transactions/calbank/yearly', compact('total','activities'));
         //
@@ -155,9 +156,6 @@ class CalbankController extends Controller
                             return false;
                         });
                     }
-
-
-                   
 
                 })
                 ->addColumn('transaction_id', function ($row) {

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Services\Helper;
 class ShowroomController extends Controller
 {
     function __construct()
@@ -36,16 +37,17 @@ class ShowroomController extends Controller
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
        $showroom = Showroom::where('name',$request->showroom)->first();
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->sum('amount');
-        $transactions_today = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereDay('created_at',Carbon::now())->sum('amount');
-        $transactions_week = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount');
-        $transactions_month = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount');
-        $transactions_year = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->sum('amount');
+
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->sum('amount'));
+        $transactions_today = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_week = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_month = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_year = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
        
-        $calbank =Transaction::showroomtransations('CALBANK',$request->showroom);
-        $gcb =Transaction::showroomtransations('GCB',$request->showroom);
-        $uba =Transaction::showroomtransations('UBA',$request->showroom);
-        $zenith =Transaction::showroomtransations('ZENITHBANK',$request->showroom);
+        $calbank =Helper::money(Transaction::showroomtransations('CALBANK',$request->showroom));
+        $gcb =Helper::money(Transaction::showroomtransations('GCB',$request->showroom));
+        $uba =Helper::money(Transaction::showroomtransations('UBA',$request->showroom));
+        $zenith =Helper::money(Transaction::showroomtransations('ZENITHBANK',$request->showroom));
        
         return view('showrooms/details',compact('zenith','uba','total','gcb','showroom','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
    
@@ -68,7 +70,7 @@ class ShowroomController extends Controller
            }
         
         }
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
        
         return view('showrooms/transaction',compact('total'));
         //
@@ -248,7 +250,7 @@ class ShowroomController extends Controller
     public function indexdaily(Request $request)
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
         $showroom = Showroom::where('name',$request->showroom)->first();
         return view('showrooms/daily', compact('total','activities','showroom'));
         //
@@ -256,7 +258,7 @@ class ShowroomController extends Controller
     public function all(Request $request)
     {  $showroom = Showroom::where('name',$request->showroom)->first();
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->sum('amount'));
         return view('showrooms/all', compact('total','activities','showroom'));
         //
     }
@@ -268,7 +270,7 @@ class ShowroomController extends Controller
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
         $showroom = Showroom::where('name',$request->showroom)->first();
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
         return view('showrooms/weekly', compact('total','activities','showroom'));
         //
     }
@@ -276,7 +278,7 @@ class ShowroomController extends Controller
     { 
         $showroom = Showroom::where('name',$request->showroom)->first();
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount');
+        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
         return view('showrooms/monthly', compact('total','activities','showroom'));
         //
     }
@@ -284,7 +286,7 @@ class ShowroomController extends Controller
     public function indexyearly(Request $request)
     { 
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total =  DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->sum('amount');
+        $total =  Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
         $showroom = Showroom::where('name',$request->showroom)->first();
         return view('showrooms/yearly', compact('total','activities','showroom'));
         //
