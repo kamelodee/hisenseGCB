@@ -5,6 +5,13 @@
   ============================================= -->
   <div id="content" class="py-4">
     <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">home</a></li>
+          <li class="breadcrumb-item">Dashboard</li>
+        
+        </ol>
+      </nav>
       <div class="row"> 
         <!-- Left Panel
         ============================================= -->

@@ -4,7 +4,13 @@
 
         <div class="container">
 
-
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                  <li class="breadcrumb-item">All Showrooms</li>
+                
+                </ol>
+              </nav>
 
             @foreach ($errors->all() as $error)
                 <li class="text-danger">{{ $error }}</li>
@@ -18,6 +24,13 @@
 
             <div class="row">
             <div class="col-md-3 col-lg-3 col-sm-12">
+                <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
+                    <a href="#">
+                    <h3 class="text-4 text-white  fw-600">All Showrooms</h3>
+                   
+                    </a>
+                
+                  </div>
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
             <a href="{{route('showrooms.transaction')}}">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>

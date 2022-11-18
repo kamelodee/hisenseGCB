@@ -5,6 +5,14 @@
   ============================================= -->
   <div id="content" class="py-4">
     <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+          <li class="breadcrumb-item"><a href="{{route('showrooms.transaction')}}">All Showrooms</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{$showroom->name}}</li>
+        </ol>
+      </nav>
+     
       <div class="row"> 
         <!-- Left Panel
         ============================================= -->
@@ -12,8 +20,16 @@
        
           <!-- Available Balance
           =============================== -->
+          <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
+            <a href="">
+            <h3 class="text-4 text-white  fw-600">{{$showroom->name}}</h3>
+          
+            </a>
+           
+          
+          </div>
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-            <a href="{{route('showrooms.transaction')}}">
+            <a href="#">
             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
             <h3 class="text-3  fw-400"> {{$total}}</h3>
             <p class="text-muted   fw-600"> Total</p>

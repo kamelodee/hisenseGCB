@@ -4,10 +4,23 @@
       ============================================= -->
     <div id="content" class="py-4">
         <div class="container">
+           <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+                  <li class="breadcrumb-item">All Payments</li>
+                
+                </ol>
+              </nav>
             <div class="row">
 
                 <aside class="col-lg-2 col-md-3 col-sm-12">
-
+                    <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
+                        <a href="">
+                        <h3 class="text-4 text-white  fw-600">All Payments</h3>
+                       
+                        </a>
+                    
+                      </div>
                     <!-- Available Balance
               =============================== -->
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
@@ -26,7 +39,7 @@
                 <!-- Middle Panel
             ============================================= -->
                 <div class="col-lg-10 col-md-9 col-sm-12 ">
-                    <h4 class="fw-400 mb-3">All payments</h4>
+                   
                     @foreach ($errors->all() as $error)
                         <li class="text-danger">{{ $error }}</li>
                     @endforeach

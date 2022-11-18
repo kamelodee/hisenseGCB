@@ -8,7 +8,13 @@
       <div class="row"> 
 
         <aside class="col-lg-2 col-md-3 col-sm-12"> 
-          
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+              <li class="breadcrumb-item">CALBANK Payments</li>
+            
+            </ol>
+          </nav>
           <!-- Available Balance
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
