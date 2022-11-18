@@ -53,32 +53,23 @@
           <nav class="primary-menu navbar navbar-expand-lg">
             <div id="header-nav" class="collapse navbar-collapse">
               <ul class="navbar-nav me-auto">
-               <li>
-                
-                 <a class="d-flex" href="{{route('dashboard')}}" title=""><i class="fas fa-th text-3 me-2"></i><span class=" text-3">Hisense Pay</span></a> 
-               </li>
-                <li>
-                  <a href="{{route('payments')}}">Take Payment</a>
+                <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="{{route('dashboard')}}"><i class="fas fa-th text-3 me-2"></i><span class="text-5 ms-2">Hisense Pay</span></a>
                   
-                </li>
-                @can('Show Transactions')
-               
-               
-               
-                
-                
-             
-                <li class="dropdown language"> <a class="dropdown-toggle" href="#">Payments</a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{route('transactions.all')}}">ALL</a></li>
-                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB</a></li>
-                    <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA</a></li>
-                    {{-- <li><a class="dropdown-item" href="{{route('transactions')}}">CLBANK Transactions</a></li> --}}
-                    {{-- <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH BANK</a></li> --}}
+                    @can('Show Transactions')
+                    <li><a class="dropdown-item" href="{{route('transactions.all')}}">ALL Payments</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB Payments</a></li>
+                    <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA Payments</a></li>
                   
+                    @endcan
                   </ul>
                 </li>
-                @endcan
+               
+                <li>
+                  <a class="btn btn-primary btn-sm mx-5 my-3" href="{{route('payments')}}">Take Payment</a>
+                  
+                </li>
+               
                 
               
                 @yield('bank')
@@ -107,8 +98,7 @@
               </li>
               @endcan
               <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2">{{Auth::user()->name}}</span></a>
-                
-                
+                  
                 <ul class="dropdown-menu">
                   <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
                   <li class="dropdown-divider mx-n3"></li>
@@ -133,6 +123,8 @@
                  </li>
                 </ul>
               </li>
+
+
             </ul>
           </nav>
           <!-- My Profile end --> 

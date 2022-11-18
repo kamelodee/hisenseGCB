@@ -68,7 +68,7 @@
             <div class="col-md-6 col-sm-12 col-lg-6">
               <div class="flex-grow-2 mx-2">
                 <div class="input-group input-group-sm mb-3 ">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                    <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
                     <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                   </div>
             </div>

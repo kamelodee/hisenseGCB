@@ -49,7 +49,7 @@
                                 <h5 class="mx-3">Showrooms</h5>
                                 <div class="flex-shrink-1">
                                     <div class="input-group input-group-sm mb-3 ">
-                                        <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                                        <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
                                         <input type="text" placeholder="search showrooms" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                       </div>
                                 </div>
