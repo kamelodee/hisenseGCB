@@ -140,29 +140,29 @@
               <div class="table-responsive mt-2">
                 <div class="d-md-flex justify-content-between flex-sm-column flex-md-row">
                   <div class="flex-grow-2">
-                      <div class="input-group input-group-sm mb-3 ">
+                      <div class="input-group input-group-sm mb-1 ">
                           <span class="input-group-text" id="inputGroup-sizing-sm">From</span>
                           <input type="date" placeholder="" id="date1" name="date1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                   </div>
                   <div class="flex-grow-2 mx-2">
-                      <div class="input-group input-group-sm mb-3 ">
+                      <div class="input-group input-group-sm mb-1 ">
                           <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
                           <input type="date" placeholder="search showrooms" name="date2" id="date2" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                         </div>
                   </div>
                   <div class="flex-grow-2 mx-2 ">
-                      <div class="input-group input-group-sm mb-3 ">
+                      <div class="input-group input-group-sm mb-1 ">
                       <button type="button" name="filter" id="filter" class=" btn btn-sm btn-outline-primary mb-4">Filter</button>
                       <button type="button" name="refresh" id="refresh" class="btn btn-sm btn-outline-primary mb-4">Refresh</button>
                   </div>
                   </div>
                  
                  
-                    <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600"> {{$total}}</h3></div>
+                    <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600 "> <a class="btn btn-sm btn-outline-primary fw-600 btn-sm mb-4" href="#">{{$total}}</a> </h3></div>
               </div>
              <div class="col-md-6 col-sm-12 col-lg-6">
-              <div class="flex-grow-2 mx-2">
+              <div class="flex-grow-2">
                 <div class="input-group input-group-sm mb-3 ">
                     <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
                     <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
