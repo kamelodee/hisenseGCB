@@ -121,7 +121,7 @@
                           <tr>
                               <th class="border-top-0 text-white_">#</th>
                               <th class="border-top-0 text-white_">Date</th>
-                              <th class="border-top-0 text-white_">Sales Reference ID</th>
+                              <th class="border-top-0 text-white_">Sales Ref</th>
                               <th class="border-top-0 text-white_">Transaction ID</th>
                               <th class="border-top-0 text-white_">Transaction Type</th>
                               <th class="border-top-0 text-white_">Amount</th>
@@ -168,6 +168,7 @@ function load_data(from_date = '', to_date = '')
                 processing: true,
                 serverSide: true, 
                 bFilter: false,
+                "dom": '<"top"f>rt<"bottom"lp><"clear">',
                 ajax: {
                     url: "{{ route('weekly') }}",
                 data: function (d) {

@@ -80,6 +80,7 @@
             var table = $('.dataTable2').DataTable({
                 processing: true,
                 serverSide: true,
+                "dom": '<"top"f>rt<"bottom"lp><"clear">',
                 ajax: "{{ route('showrooms.list') }}",
                 columns: [{
                         data: 'id',

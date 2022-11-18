@@ -112,6 +112,7 @@ function load_data(from_date = '', to_date = '')
                 processing: true,
                 serverSide: true, 
                 bFilter: false,
+                "dom": '<"top"f>rt<"bottom"lp><"clear">',
                 ajax: {
                     url: "{{ route('transactions.zenithlist') }}",
                 data: function (d) {
