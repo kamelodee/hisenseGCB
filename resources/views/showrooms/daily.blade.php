@@ -79,15 +79,18 @@
                         <button type="button" name="refresh" id="refresh" class="btn btn-sm btn-outline-primary mb-4">Refresh</button>
                     </div>
                     </div>
-                    <div class="flex-grow-2 mx-2">
-                        <div class="input-group input-group-sm mb-3 ">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
-                            <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                          </div>
-                    </div>
+                   
                    
                       <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600"> {{$total}}</h3></div>
                 </div>
+                <div class="col-md-6 col-sm-12 col-lg-6">
+                    <div class="flex-grow-2 mx-2">
+                      <div class="input-group input-group-sm mb-3 ">
+                          <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+                          <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                        </div>
+                  </div>
+                  </div>
                   <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
                       <thead class="table-dark_">
                           <tr>
