@@ -98,443 +98,70 @@ class TransactionController extends Controller
 
     public function callist(Request $request)
     {
-        if($request->ajax()){
 
-            if(!empty($request->date1))
-            {
-             $trans = Transaction::where('bank','CALBANK')->whereBetween('created_at', array($request->date1, $request->date2))
-               ->get();
-            }
-            else
-            {
-                if(Auth::user()->can('Access All')){
-                    $trans = Transaction::getTransations('CALBANK');
-                  
-                    }else{
-                        $trans = Transaction::getCashiertransations('CALBANK');
-                      
-                    }
-            }
-            
-            return DataTables::of($trans)
-                ->addIndexColumn()
-                ->filter(function ($instance) use ($request) {
-                    if (!empty($request->get('search'))) {
-                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                           
 
-                            return false;
-                        });
-                    }
-
-                })
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('sales_reference_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->sales_reference_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','status'])
-                ->make(true);
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+    
+        }else{
+            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+    
         }
 
+        
         
     }
 
     public function transist(Request $request)
     {
-        if ($request->ajax()) {
-
-            if(!empty($request->showroom))
-            {
-             $trans = Transaction::where('showroom',$request->showroom)->where('transaction_type',$request->transaction_type)
-               ->get();
-            }
-            else{
-                if(Auth::user()->can('Access All')){
-                    $trans = Transaction::where('transaction_type',$request->transaction_type)
-               ->get();
-                  
-                    }else{
-                        $trans = Transaction::getCashiertransations('CALBANK');
-                      
-                    }
-            }
-            
-            return DataTables::of($trans)
-                ->addIndexColumn()
-                ->filter(function ($instance) use ($request) {
-                    if (!empty($request->get('search'))) {
-                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                           
-
-                            return false;
-                        });
-                    }
-
-                })
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('sales_reference_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->sales_reference_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','status'])
-                ->make(true);
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+    
+        }else{
+            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+    
         }
-
+       
         
     }
 
     public function zenithlist(Request $request)
     {
-        if ($request->ajax()) {
-
-            if(!empty($request->date1))
-            {
-             $trans = Transaction::where('bank','ZENITH')->whereBetween('created_at', array($request->date1, $request->date2))
-               ->get();
-            }
-            else
-            {
-                if(Auth::user()->can('Access All')){
-                    $trans = Transaction::getTransations('ZENITH');
-                  
-                    }else{
-                        $trans = Transaction::getCashiertransations('ZENITH');
-                      
-                    }
-            }
-           
-          
-            return DataTables::of($trans)
-                ->addIndexColumn()
-                ->filter(function ($instance) use ($request) {
-                    if (!empty($request->get('search'))) {
-                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                           
-
-                            return false;
-                        });
-                    }
-
-                })
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->rawColumns(['transaction_id','amount', 'name'])
-                ->make(true);
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
+    
+        }else{
+            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
+    
         }
+
+        
+    }
+    public function ubalist(Request $request)
+    {
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='UBA',request());
+    
+        }else{
+            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='UBA',request());
+    
+        }
+
+        
     }
     public function gcblist(Request $request)
     {
-        if ($request->ajax()) {
 
-            if(!empty($request->date1))
-            {
-             $trans = Transaction::where('bank','GCB')->whereBetween('created_at', array($request->date1, $request->date2))
-               ->get();
-            }
-            else
-            {
-                if(Auth::user()->can('Access All')){
-                    $trans = Transaction::getTransations('GCB');
-                  
-                    }else{
-                        $trans = Transaction::getCashiertransations('GCB');
-                      
-                    }
-            }
-            
-      
-            return DataTables::of($trans)
-                ->addIndexColumn()
-                ->filter(function ($instance) use ($request) {
-                    if (!empty($request->get('search'))) {
-                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                           
-
-                            return false;
-                        });
-                    }
-
-                })
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('ref', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->ref . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' .Helper::money( $row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->rawColumns(['transaction_id','ref','amount', 'name'])
-                ->make(true);
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
+    
+        }else{
+            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
+    
         }
-    }
 
-    public function ubalist(Request $request)
-    {
-        if ($request->ajax()) {
-            if(!empty($request->date1))
-            {
-             $trans = Transaction::where('bank','UBA')->whereBetween('created_at', array($request->date1, $request->date2))
-               ->get();
-            }
-            else
-            {
-                
-            if(Auth::user()->can('Access All')){
-                $trans = Transaction::getTransations('UBA');
-              
-                }else{
-                    $trans = Transaction::getCashiertransations('UBA');
-                  
-                }
-           
-            }
-
-            return DataTables::of($trans)
-                ->addIndexColumn()
-                ->filter(function ($instance) use ($request) {
-                    if (!empty($request->get('search'))) {
-                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
-                                return true;
-                            }
-                           
-
-                            return false;
-                        });
-                    }
-
-                })
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                        ' . $row->transaction_id . '
-                    </a>
-                   ';
-                    return $actionBtn;
-                })
-                ->addColumn('sales_reference_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                        ' . $row->sales_reference_id . '
-                    </a>
-                   ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' .Helper::money( $row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                
-                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name'])
-                ->make(true);
-        }
+        
+        
     }
 
     /**

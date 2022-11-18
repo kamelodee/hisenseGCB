@@ -293,7 +293,13 @@ class ShowroomController extends Controller
     public function daily(Request $request,$showroom)
     {
        
-       
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='today',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
+    
+        }
        
         
         if ($request->ajax()) {
@@ -346,7 +352,13 @@ class ShowroomController extends Controller
     {
        
        
-       
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
+    
+        }
         
         if ($request->ajax()) {
             $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->get();
@@ -415,6 +427,13 @@ class ShowroomController extends Controller
     public function weekly(Request $request,$showroom)
     {
        
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='week',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
+    
+        }
         if ($request->ajax()) {
             $currentDate = Carbon::now();
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
@@ -475,7 +494,13 @@ class ShowroomController extends Controller
 
     public function monthly(Request $request,$showroom)
     {
-     
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='month',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
+    
+        }
            if ($request->ajax()) {
             $transactions_month = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->get();
     

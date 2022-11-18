@@ -99,6 +99,7 @@
 @section('script')
     <script type="text/javascript">
         $(function() {
+            
 console.log($('#search1').val());
             var table = $('.dataTable2').DataTable({
                 processing: true,

@@ -42,7 +42,7 @@ class Helper
        
     }
 
-    static public function datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank=''){
+    static public function datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='',$request){
        $trans =[];
        if(!empty($showroom)){
         if(!empty($date1)  && !empty($transaction_type)&& empty($period) && empty($bank) ){
@@ -163,6 +163,10 @@ class Helper
             $trans = Transaction::where('bank',$bank)->get();
 
         }
+        if(empty($date1) && empty($period) && empty($transaction_type) && empty($bank)){
+            $trans = Transaction::all();
+
+        }
         if($period =='week' && empty($bank)){
             $currentDate = Carbon::now();
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
@@ -205,16 +209,16 @@ class Helper
        
        }
     
-       dd($trans);
+         return self::transist($request,$trans);
 
            }
     
 
-    public function transist( $request,$trans)
+    public static function transist( $request,$trans)
     {
       
 
-            
+        if($request->ajax()){
             
             return DataTables::of($trans)
                 ->addIndexColumn()
@@ -293,4 +297,5 @@ class Helper
         
     
 
+}
 }

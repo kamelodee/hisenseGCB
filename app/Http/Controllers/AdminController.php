@@ -25,8 +25,7 @@ class AdminController extends Controller
 
     
 
-        // Helper::datatable($showroom='Achimotal Mall Showroom',$date1='',$date2='2022-11-03',$transaction_type='',$period='',$bank='GCB');
-
+      
    
         if(Auth::user()->can('Access All')){
 
@@ -65,7 +64,7 @@ class AdminController extends Controller
         $uba =Helper::money(Transaction::cashiertransation('UBA'));
         $zenith =Helper::money(Transaction::cashiertransation('ZENITHBANK'));
        
-        return view('dashboard',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));  
+        return view('dashboard',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month','showroom'));  
     }
     }
 

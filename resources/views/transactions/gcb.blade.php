@@ -193,16 +193,9 @@ function load_data(from_date = '', to_date = '')
 
             
         ],
+        
             });
-            $("#search1").keyup(function(){
-        table.draw();
-    });
-            $("#date1").keyup(function(){
-        table.draw();
-    });
-            $("#date2").keyup(function(){
-        table.draw();
-    });
+           
 
 }
 
