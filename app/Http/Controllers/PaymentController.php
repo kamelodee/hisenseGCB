@@ -109,7 +109,8 @@ class PaymentController extends Controller
 
         $data = CalBank::pay($request->amount, $request->phone, $request->name, $request->order_code, $showroom->city ? $showroom->city : "", $trans->id);
         $transid= Helper::username($trans->id,$trans->customer_name);
-        if (json_decode($data->return)->CODE == 1) {
+        // return json_decode($data->return);
+        if (json_decode($data->return)->SUCCESS == false) {
             return back()->with('error', json_decode($data->return)->MESSAGE);
         } else {
             $transaction =   Transaction::create([

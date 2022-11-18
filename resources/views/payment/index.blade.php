@@ -2,22 +2,22 @@
 @section('content')
     <!-- Secondary menu
                   ============================================= -->
-    {{-- <div class="bg-primary sticky-top">
+     <div class="bg-primary sticky-top">
         <div class="container d-flex justify-content-center">
             <ul class="nav nav-pills alternate nav-lg border-bottom-0 nav nav-pills nav-lg" id="pillsmyTab" role="tablist">
-                {{-- <li class="nav-item"> <a class="nav-link active" id="calbanks" href="#calbank" role="tab"
-                        data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li> --}}
-                {{-- <li class="nav-item"> <a class="nav-link " id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
-                        aria-controls="uba" aria-selected="true">UBA</a></li> --}}
-                {{-- <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
-                        aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
+                <li class="nav-item"> <a class="nav-link " id="calbanks" href="#calbank" role="tab"
+                        data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li>
+                 <li class="nav-item"> <a class="nav-link active" id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
+                        aria-controls="uba" aria-selected="true">UBA</a></li> 
+                 {{-- <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
+                        aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li> --}}
 
 
-                <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
-                        aria-controls="gcb" aria-selected="true">GCB</a></li> --}}
-            {{-- </ul>
+                {{-- <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
+                        aria-controls="gcb" aria-selected="true">GCB</a></li>  --}}
+            </ul>
         </div>
-    </div> --}} 
+    </div>  
 
 <div class="container my-1">
     <div class="row">
