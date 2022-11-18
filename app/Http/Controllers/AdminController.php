@@ -58,7 +58,7 @@ class AdminController extends Controller
         $transactions_week = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
         $transactions_month = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
         $transactions_year = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
-       
+       $showroom='';
         $calbank =Helper::money(Transaction::cashiertransation('CALBANK'));
         $gcb =Helper::money(Transaction::cashiertransation('GCB'));
         $uba =Helper::money(Transaction::cashiertransation('UBA'));
