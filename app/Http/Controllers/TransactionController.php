@@ -33,6 +33,23 @@ class TransactionController extends Controller
        
         //
     }
+
+
+    public function trans()
+    { 
+        if(Auth::user()->can('Access All')){
+            $activities =Activity::activities('App\Models\Transaction');
+      
+        $total = Helper::money(Transaction::transations('CALBANK'));
+        return view('transactions/trans',compact('total','activities'));
+    }else{
+        $activities =Activity::activities('App\Models\Transaction');
+        $total = Helper::money(Transaction::cashiertransation('CALBANK'));
+        return view('transactions/trans',compact('total','activities'));
+    }
+       
+        //
+    }
     public function gcb()
     {
         if(Auth::user()->can('Access All')){
@@ -81,7 +98,7 @@ class TransactionController extends Controller
 
     public function callist(Request $request)
     {
-        if ($request->ajax()) {
+        if($request->ajax()){
 
             if(!empty($request->date1))
             {
@@ -175,6 +192,104 @@ class TransactionController extends Controller
 
         
     }
+
+    public function transist(Request $request)
+    {
+        if ($request->ajax()) {
+
+            if(!empty($request->showroom))
+            {
+             $trans = Transaction::where('showroom',$request->showroom)->where('transaction_type',$request->transaction_type)
+               ->get();
+            }
+            else{
+                if(Auth::user()->can('Access All')){
+                    $trans = Transaction::where('transaction_type',$request->transaction_type)
+               ->get();
+                  
+                    }else{
+                        $trans = Transaction::getCashiertransations('CALBANK');
+                      
+                    }
+            }
+            
+            return DataTables::of($trans)
+                ->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['showroom']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['transaction_type']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['ref']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['sales_reference_id']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                            if (Str::contains(Str::lower($row['bank']), Str::lower($request->get('search')))){
+                                return true;
+                            }
+                           
+
+                            return false;
+                        });
+                    }
+
+                })
+                ->addColumn('transaction_id', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    ' . $row->transaction_id . '
+                </a>
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('amount', function ($row) {
+                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('sales_reference_id', function ($row) {
+
+                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    ' . $row->sales_reference_id . '
+                </a>
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('name', function ($row) {
+                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
+               
+               ';
+                    return $actionBtn;
+                })
+                ->addColumn('created_at', function ($row) {
+                    $created_at = $row->created_at->format('Y.m.d H:i:s');
+                    return $created_at;
+                })
+                ->addColumn('status', function ($row) {
+                    if($row->status =='PENDING'){
+                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
+               
+                        ';
+                             return $actionBtn;
+                    }else{
+                        return $row->status;
+                    }
+                   
+                })
+                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','status'])
+                ->make(true);
+        }
+
+        
+    }
+
     public function zenithlist(Request $request)
     {
         if ($request->ajax()) {

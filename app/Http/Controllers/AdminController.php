@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Services\Helper;
 use NumberFormatter;
+use PHPUnit\TextUI\Help;
+
 class AdminController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class AdminController extends Controller
 
     
 
-  
+        // Helper::datatable($showroom='Achimotal Mall Showroom',$date1='',$date2='2022-11-03',$transaction_type='',$period='',$bank='GCB');
 
    
         if(Auth::user()->can('Access All')){
@@ -51,6 +53,7 @@ class AdminController extends Controller
         $currentDate = Carbon::now();
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+        $total = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
        
         $transactions_today = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
         $transactions_week = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
@@ -62,7 +65,7 @@ class AdminController extends Controller
         $uba =Helper::money(Transaction::cashiertransation('UBA'));
         $zenith =Helper::money(Transaction::cashiertransation('ZENITHBANK'));
        
-        return view('dashboard',compact('zenith','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));  
+        return view('dashboard',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));  
     }
     }
 
