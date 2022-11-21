@@ -120,12 +120,7 @@
                             </div>
                       </div>
                       </div>
-                      <div class="reconsile">
-                       <form method="POST" action="{{route('payments.reconsile')}}" id="reconsile">
-                       @csrf
-                        <button type="submit" class="btn btn-sm btn-primary">Reconcile</button>
-                       </form>
-                      </div>
+                     
                    </div>
                   <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
                       <thead class="table-dark_">
@@ -150,7 +145,12 @@
                          
                       </tbody>
                   </table>
-              
+                  <div class="reconsile">
+                    <form method="POST" action="{{route('payments.reconsile')}}" id="reconsile">
+                    @csrf
+                     <button type="submit" class="btn btn-sm btn-primary">Reconcile</button>
+                    </form>
+                   </div>
               </div>
                
               </div>
@@ -179,7 +179,7 @@ function load_data(from_date = '', to_date = '')
                 processing: true,
                 serverSide: true, 
                 bFilter: false,
-                "dom": '<"top"f>rt<"bottom"lp><"clear">',
+                "dom": '<"top"f>rt<"bottom m-3"lp><"clear">',
                 ajax: {
                     url: "{{ route('weekly') }}",
                 data: function (d) {

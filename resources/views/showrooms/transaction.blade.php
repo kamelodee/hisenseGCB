@@ -105,7 +105,7 @@ console.log($('#search1').val());
                 processing: true,
                 serverSide: true,
                 bFilter: false,
-                "dom": '<"top"f>rt<"bottom"lp><"clear">',
+                "dom": '<"top"f>rt<"bottom m-3"lp><"clear">',
                 ajax: {
                     url: "{{ route('showrooms.translist') }}",
                 data: function (d) {
