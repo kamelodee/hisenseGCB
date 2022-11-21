@@ -36,7 +36,7 @@
   <!-- Header
   ============================================= -->
      
-  <nav class="navbar navbar-expand-lg bg-white">
+  <nav class="navbar navbar-expand-lg bg-white sticky-top">
     <div class="container">
       
       <nav class="primary-menu ">
