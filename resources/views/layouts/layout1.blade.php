@@ -43,7 +43,7 @@
         <div id="header-nav_" class="collapse navbar-collapse">
           <ul class="navbar-nav me-auto">
 
-            <li class="dropdown language"> <a class="px-0 dropdown-toggle fw-600" href="{{route('dashboard')}}"><i class="fas fa-th text-3 me-2"></i><span class="text-3 ms-2 me-4">Hisense Pay</span></a>
+            <li class="dropdown language"> <a class="px-0 dropdown-toggle fw-600" href="{{route('dashboard')}}"><i class="fas fa-th text-3 me-2"></i><span class="text-2 ms-2 me-4">Hisense Pay</span></a>
               @can('Show Transactions')
               <ul class="dropdown-menu">
              
@@ -62,7 +62,7 @@
           </ul>
         </div>
       </nav>
-      <a class="btn btn-primary btn-sm mx-5 my-3 fw-600 ms-5" href="{{route('payments')}}">TAKE PAYMENT</a>
+      <a class="btn text-2 btn-primary btn-sm mx-5 my-3 fw-600 ms-5" href="{{route('payments')}}">TAKE PAYMENT</a>
   
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span></span> <span></span> <span></span> 
@@ -75,9 +75,9 @@
           <div >
           <ul class="navbar-nav">
            
-            <li class="dropdown language fw-600"><a class="fw-600" href=""><i class="fas fa-map-marker-alt mx-2"></i> {{Auth::user()->showroom}}</a></li>
+            <li class="dropdown language fw-600"><a class="fw-600 text-2" href=""><i class="fas fa-map-marker-alt mx-2"></i> {{Auth::user()->showroom}}</a></li>
             @can('Access All')
-            <li class="dropdown language"> <a class="dropdown-toggle fw-600" href="#"><i class="fas text-3 fa-user-cog me-2"></i>Settings</a>
+            <li class="dropdown language"> <a class="dropdown-toggle fw-600" href="#"><i class="fas text-2 fa-user-cog me-2"></i>Settings</a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{route('users')}}">Users</a></li>
                 <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
@@ -89,7 +89,7 @@
             </li>
             @endcan
            
-            <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle fw-600 " href="#"><i class="fas fa-user text-3 text-primary"></i><span class="text-1 ms-2 mx-4">{{Auth::user()->name}}</span></a>
+            <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle fw-600 " href="#"><i class="fas fa-user text-2 text-primary"></i><span class="text-1 ms-2 mx-4">{{Auth::user()->name}}</span></a>
                 
               <ul class="dropdown-menu">
                 <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
