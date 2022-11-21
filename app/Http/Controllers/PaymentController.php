@@ -47,7 +47,7 @@ class PaymentController extends Controller
     public function reconsile(Request $request)
     {
         if(Auth::user()->can('Access All')){
-       $data = Transaction::whereIn('id', $request->id)->get();
+       $data = Transaction::whereIn('id', $request->id)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
             foreach( $data as $d){
             if($d->reconsile ==1){
                 $d->update([
@@ -63,7 +63,7 @@ class PaymentController extends Controller
       
      return back();
     }else{
-        Transaction::whereIn('id', $request->id)
+        Transaction::whereIn('id', $request->id)->whereIn('status', ['SUCCESS','SUCCESSFUL'])
         ->update([
             'reconsile' =>  1,
         ]);
