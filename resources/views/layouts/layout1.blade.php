@@ -36,11 +36,11 @@
   <!-- Header
   ============================================= -->
      
-  <nav class="navbar navbar-expand-lg bg-white sticky-top">
+  <nav class="navbar navbar-expand-lg bg-white">
     <div class="container">
       
       <nav class="primary-menu ">
-        <div id="header-nav_" class="">
+        <div id="header-nav_" class="collapse navbar-collapse">
           <ul class="navbar-nav me-auto">
 
             <li class="dropdown language"> <a class="px-0 dropdown-toggle fw-600" href="{{route('dashboard')}}"><i class="fas fa-th text-3 me-2"></i><span class="text-3 ms-2 me-4">Hisense Pay</span></a>
