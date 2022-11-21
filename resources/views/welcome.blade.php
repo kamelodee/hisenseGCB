@@ -48,7 +48,7 @@
               <div class="col-10 col-lg-9 mx-auto">
                 <h1 class="text-11 text-white mb-4">Welcome back!</h1>
                 <p class="text-4 text-white lh-base mb-5">We are glad to see you again!</p>
-                <a class="btn btn-primary" href="{{route('api')}}">API Docs</a>
+                {{-- <a class="btn btn-primary" href="{{route('api')}}">API Docs</a> --}}
               </div>
             </div>
           </div>
