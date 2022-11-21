@@ -44,6 +44,33 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function reconsile(Request $request)
+    {
+        if(Auth::user()->can('Access All')){
+       $data = Transaction::whereIn('id', $request->id)->get();
+            foreach( $data as $d){
+            if($d->reconsile ==1){
+                $d->update([
+                    'reconsile' =>  0,
+                ]);
+            }else{
+                $d->update([
+                    'reconsile' =>  1,
+                ]);
+            }
+            }
+        
+      
+     return back();
+    }else{
+        Transaction::whereIn('id', $request->id)
+        ->update([
+            'reconsile' =>  1,
+        ]);
+        return back();
+     }
+
+    }
     public function create()
     {
     }

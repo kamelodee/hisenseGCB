@@ -247,6 +247,7 @@ class Helper
                     }
 
                 })
+               
                 ->addColumn('transaction_id', function ($row) {
 
                     $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
@@ -275,6 +276,15 @@ class Helper
                ';
                     return $actionBtn;
                 })
+                ->addColumn('reconsile', function ($row) {
+                    if($row->reconsile ==1){
+                        $actionBtn = ' <a href="#" class="text-primary">Reconciled </a>';
+                    }else{
+                        $actionBtn = ' <a href="#" class="text-primary">PENDDING </a>';
+                    }
+                   
+                    return $actionBtn;
+                })
                 ->addColumn('created_at', function ($row) {
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
@@ -290,7 +300,7 @@ class Helper
                     }
                    
                 })
-                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','status'])
+                ->rawColumns(['transaction_id','sales_reference_id','amount', 'name','reconsile','status'])
                 ->make(true);
         }
 

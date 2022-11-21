@@ -15,12 +15,12 @@
 
 <!-- Stylesheet
 ============================================= -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.css">
 <link rel="stylesheet" type="text/css" href="{{asset("assets1/vendor/bootstrap/css/bootstrap.min.css")}}">
 <link rel="stylesheet" type="text/css" href="{{asset("assets1/vendor/font-awesome/css/all.min.css")}}">
 <link rel="stylesheet" type="text/css" href="{{asset("assets1/css/stylesheet.css")}}">
 <!-- Colors Css -->
-
+<link type="text/css" href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -45,7 +45,7 @@
            <!-- Logo end --> 
           <!-- Collapse Button
           ============================== -->
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#header-nav"> <span></span> <span></span> <span></span> </button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sheader-nav"> <span></span> <span></span> <span></span> </button>
           <!-- Collapse Button end --> 
           
             
@@ -190,8 +190,10 @@
 
 <!-- Script --> 
 
-<script src="{{asset("assets1/vendor/jquery/jquery.min.js")}}"></script> 
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+<script src="https://cdn.datatables.net/v/dt/dt-1.10.16/sl-1.2.5/datatables.min.js"></script>
+
+<script type="text/javascript" src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
 <script src="{{asset("assets1/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script> 
 <!-- Style Switcher --> 
 <script src="{{asset("assets1/js/switcher.min.js")}}"></script> 

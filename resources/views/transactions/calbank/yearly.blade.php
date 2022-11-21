@@ -81,14 +81,22 @@
                    
                       <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600"> {{$total}}</h3></div>
                 </div>
-                <div class="col-md-6 col-sm-12 col-lg-6">
-                    <div class="flex-grow-2 mx-2">
-                      <div class="input-group input-group-sm mb-3 ">
-                          <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
-                          <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                  </div>
-                  </div>
+                <div class="d-md-flex justify-content-between flex-sm-column flex-md-row">
+                    <div class="col-md-6 col-sm-12 col-lg-6">
+                        <div class="flex-grow-2 ">
+                          <div class="input-group input-group-sm mb-3 ">
+                              <span class="input-group-text" id="inputGroup-sizing-sm"><i class="fas fa-search"></i></span>
+                              <input type="text" placeholder="transactions" id="search1" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            </div>
+                      </div>
+                      </div>
+                      <div class="reconsile">
+                       <form method="POST" action="{{route('payments.reconsile')}}" id="reconsile">
+                       @csrf
+                        <button type="submit" class="btn btn-sm btn-primary">Reconcile</button>
+                       </form>
+                      </div>
+                   </div>
                   <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
                       <thead class="table-dark_">
                           <tr>
@@ -101,7 +109,8 @@
                             
                               <th class="border-top-0 text-white_">Showroom</th>
                               <th class="border-top-0 text-white_">Status</th>
-                             
+                              <th class="border-top-0 text-white_">Reconcile Status</th>
+                              <th class="border-top-0 text-white_">Reconcile Status</th>
                              
                              
                              
@@ -153,11 +162,14 @@ function load_data(from_date = '', to_date = '')
                         }
                     },
                     columns: [
-            {
-                data: 'id',
-                name: 'id',
-                searchable: true
-            },
+                        {
+            'targets': 0,
+            data: 'id',
+            name: 'id',
+            'checkboxes': {
+               'selectRow': true
+            }
+         },
             {
                 data: 'date',
                 name: 'date',
@@ -195,15 +207,40 @@ function load_data(from_date = '', to_date = '')
             },
           
            
-            
+            {
+                data: 'reconsile',
+                name: 'reconsile',
+                searchable: true
+            },
 
             
         ],
-        
+        'select': {
+            'style': 'multi'
+        },
             });
            
             $("#search1").keyup(function(){
         table.draw();})
+
+        $('#reconsile').on('submit', function(e){
+    // e.preventDefault();
+      var form = this;
+
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+      console.log(form)
+   });
 }
 
 $('#filter').click(function(){

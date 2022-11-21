@@ -26,6 +26,7 @@ class Transaction extends Model
         'status',
         'bank',
         'bank_ref',
+        'reconsile',
         'sales_reference_id',
         
     ];
@@ -48,6 +49,11 @@ class Transaction extends Model
     public static function showroomtransations($bank,$showroom)
     {
         $calbank =self::where('bank',$bank)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->sum('amount');
+        return  $calbank;
+    }
+    public static function showroomtransationsType($type,$showroom)
+    {
+        $calbank =self::where('transaction_type',$type)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->sum('amount');
         return  $calbank;
     }
 

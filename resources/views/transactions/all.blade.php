@@ -32,7 +32,34 @@
 
                     </div>
                     <hr> 
-                   
+                    <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <a href="{{route('transactions.gcb')}}">
+                        <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+                        <h3 class="text-3  fw-400"> {{$gcb}}</h3>
+                        <p class="text-muted   fw-600">GCB Transactions</p>
+                        </a>
+                       
+                      
+                      </div>
+                      {{-- <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <a href="{{route('transactions.calbank')}}">
+                        <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+                        <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
+                        <p class="mb-2 ">CalBank Transactions</p>
+                      </a>
+                        <hr class="mx-n3">
+                      
+                      </div> --}}
+                      <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <a href="{{route('transactions.uba')}}">
+                        <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+                        <h3 class="text-3 fw-400"> {{$uba}}</h3>
+                        <p class="text-muted   fw-600 ">UBA Transactions</p>
+                        </a>
+                      
+                      
+                      </div>
+                     
                 </aside>
                 <!-- Left Panel End -->
 
@@ -81,6 +108,7 @@
                                
                                   <div class="mx-3 flex-grow-1 "><h3 class="text-3 text-end  fw-600"> {{$total}}</h3></div>
                             </div>
+                           <div class="d-md-flex justify-content-between flex-sm-column flex-md-row">
                             <div class="col-md-6 col-sm-12 col-lg-6">
                                 <div class="flex-grow-2 mx-2">
                                   <div class="input-group input-group-sm mb-3 ">
@@ -89,10 +117,19 @@
                                     </div>
                               </div>
                               </div>
-                            <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
+                              <div class="reconsile">
+                               <form method="POST" action="{{route('payments.reconsile')}}" id="reconsile">
+                               @csrf
+                                <button type="submit" class="btn btn-sm btn-primary">Reconcile</button>
+                               </form>
+                              </div>
+                           </div>
+                            <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2 display"  cellspacing="0"  width="100%">
                                 <thead class="table-dark_">
                                     <tr>
-                                        <th class="border-top-0 text-white_">#</th>
+                                      
+                                        <th class="border-top-0 text-white_"></th>
+
                                         <th class="border-top-0 text-white_">Date</th>
                                         <th class="border-top-0 text-white_">Sales Ref</th>
                                         <th class="border-top-0 text-white_">Bank Transaction ID</th>
@@ -100,13 +137,29 @@
                                         <th class="border-top-0 text-white_">Amount</th>
                                         <th class="border-top-0 text-white_">Showroom</th>
                                         <th class="border-top-0 text-white_">Staus</th>
-
+                                        <th class="border-top-0 text-white_">Reconcile Staus</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                      
+                                        <th class="border-top-0 text-white_"></th>
+                                     
+                                        <th class="border-top-0 text-white_">Date</th>
+                                        <th class="border-top-0 text-white_">Sales Ref</th>
+                                        <th class="border-top-0 text-white_">Bank Transaction ID</th>
+                                       
+                                        <th class="border-top-0 text-white_">Amount</th>
+                                        <th class="border-top-0 text-white_">Showroom</th>
+                                        <th class="border-top-0 text-white_">Staus</th>
+                                        <th class="border-top-0 text-white_">Reconsile Staus</th>
+
+                                    </tr>
+                                 </tfoot>
                             </table>
 
                         </div>
@@ -127,6 +180,7 @@
 @section('script')
     <script type="text/javascript">
         $(function() {
+           
             load_data();
 
 function load_data(from_date = '', to_date = '')
@@ -146,11 +200,18 @@ function load_data(from_date = '', to_date = '')
                         
                         }
                     },
-                columns: [{
-                        data: 'id',
-                        name: 'id',
-                        searchable: true
-                    },
+                    
+                columns: [
+                    {
+            'targets': 0,
+            data: 'id',
+            name: 'id',
+            'checkboxes': {
+               'selectRow': true
+            }
+         },
+         
+                   
                     {
                         data: 'date',
                         name: 'date',
@@ -182,12 +243,20 @@ function load_data(from_date = '', to_date = '')
                         name: 'status',
                         searchable: true
                     },
+                    {
+                        data: 'reconsile',
+                        name: 'reconsile',
+                        searchable: true
+                    },
 
 
 
 
 
                 ],
+                        'select': {
+            'style': 'multi'
+        },
                 "order": [
                     [0, 1, 2, 3, 'desc']
                 ]
@@ -202,7 +271,28 @@ function load_data(from_date = '', to_date = '')
         table.draw();
     });
 
+
+
+    $('#reconsile').on('submit', function(e){
+    // e.preventDefault();
+      var form = this;
+
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+      console.log(form)
+   });
 }
+
 
 $('#filter').click(function(){
   var from_date = $('#date1').val();
@@ -224,6 +314,10 @@ $('#filter').click(function(){
   $('#dataTable2').DataTable().destroy();
   load_data();
  });
+
+
+
         });
+      
     </script>
 @endsection

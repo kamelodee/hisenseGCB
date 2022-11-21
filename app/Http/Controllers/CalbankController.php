@@ -27,9 +27,14 @@ class CalbankController extends Controller
     }
     public function all()
     { 
+        $calbank =Helper::money(Transaction::transations('CALBANK'));
+        $gcb =Helper::money(Transaction::transations('GCB'));
+        $uba =Helper::money(Transaction::transationsu('UBA'));
+        $zenith =Helper::money(Transaction::transations('ZENITHBANK'));
+       
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
-        return view('transactions/all', compact('total','activities'));
+        return view('transactions/all', compact('total','activities','uba','gcb'));
         //
     }
 

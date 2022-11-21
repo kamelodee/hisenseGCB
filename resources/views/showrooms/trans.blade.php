@@ -1,33 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @extends('layouts.layout1')
 @section('content')
     <!-- Content
@@ -37,8 +7,10 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                  <li class="breadcrumb-item">This Week's Payments</li>
-                
+                  <li class="breadcrumb-item"><a href="{{route('showrooms.transaction')}}">All Showrooms</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('showrooms.details').'?showroom='.$showroom}}">{{$showroom}}</a></li>
+
+                  <li class="breadcrumb-item active" aria-current="page">{{$type}}</li>
                 </ol>
               </nav>
             <div class="row">
@@ -46,7 +18,7 @@
                 <aside class="col-lg-2 col-md-3 col-sm-12">
                     <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
                         <a href="">
-                        <h3 class="text-4 text-white  fw-600">This Week's Payments</h3>
+                        <h3 class="text-4 text-white  fw-600">{{$showroom}}</h3>
                        
                         </a>
                     
@@ -61,14 +33,14 @@
 
                     </div>
                     <hr> 
-                    
+                   
                 </aside>
                 <!-- Left Panel End -->
 
                 <!-- Middle Panel
             ============================================= -->
                 <div class="col-lg-10 col-md-9 col-sm-12 ">
-                  
+                   
                     @foreach ($errors->all() as $error)
                         <li class="text-danger">{{ $error }}</li>
                     @endforeach
@@ -98,7 +70,7 @@
                     <div class="flex-grow-2 mx-2">
                         <div class="input-group input-group-sm mb-3 ">
                             <span class="input-group-text" id="inputGroup-sizing-sm">To</span>
-                            <input type="date" placeholder="search showrooms" name="date2" id="date2" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                            <input type="date" placeholder="search " name="date2" id="date2" class="form-control form-control-sm search" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                           </div>
                     </div>
                     <div class="flex-grow-2 mx-2 ">
@@ -140,9 +112,7 @@
                               <th class="border-top-0 text-white_">Showroom</th>
                               <th class="border-top-0 text-white_">Status</th>
                               <th class="border-top-0 text-white_">Reconcile Status</th>
-                             
-                             
-                             
+      
                           </tr>
                       </thead>
               
@@ -169,8 +139,6 @@
 @section('script')
     <script type="text/javascript">
         $(function() {
-
-
             load_data();
 
 function load_data(from_date = '', to_date = '')
@@ -181,12 +149,14 @@ function load_data(from_date = '', to_date = '')
                 bFilter: false,
                 "dom": '<"top"f>rt<"bottom"lp><"clear">',
                 ajax: {
-                    url: "{{ route('weekly') }}",
+                    url: "{{ route('showrooms.trans') }}",
                 data: function (d) {
                           d._token = "{{ csrf_token() }}",
                             d.search = $('#search1').val(),
                             d.date1 = from_date,
-                            d.date2 = to_date
+                            d.date2 = to_date,
+                            d.type = "{{$type}}"
+                            d.showroom = "{{$showroom}}"
                         
                         }
                     },
@@ -234,12 +204,13 @@ function load_data(from_date = '', to_date = '')
                 name: 'status',
                 searchable: true
             },
-          
             {
                 data: 'reconsile',
                 name: 'reconsile',
                 searchable: true
             },
+          
+           
             
 
             
@@ -247,11 +218,12 @@ function load_data(from_date = '', to_date = '')
         'select': {
             'style': 'multi'
         },
+        
             });
             $("#search1").keyup(function(){
         table.draw();})     
 
-
+        
         $('#reconsile').on('submit', function(e){
     // e.preventDefault();
       var form = this;
@@ -287,7 +259,7 @@ $('#filter').click(function(){
  });
 
  $('#refresh').click(function(){
-  $('#fdate1').val('');
+  $('#date1').val('');
   $('#date2').val('');
   $('#dataTable2').DataTable().destroy();
   load_data();
@@ -295,14 +267,7 @@ $('#filter').click(function(){
 
 
 
-
-
-
-
-
-
-
-
+           
 
         });
     </script>

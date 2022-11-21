@@ -60,6 +60,8 @@ Route::prefix('showrooms')->group(function () {
     Route::get('/monthly', [ShowroomController::class, 'indexmonthly'])->name('showrooms.indexmonthly');
     Route::get('/yearly', [ShowroomController::class, 'indexyearly'])->name('showrooms.indexyearly');
     Route::get('/all', [ShowroomController::class, 'all'])->name('showrooms.all');
+    Route::get('/typeTrans/{type}', [ShowroomController::class, 'typeTrans'])->name('showrooms.typeTrans');
+    Route::get('/typeTrans', [ShowroomController::class, 'transactionWithTypes'])->name('showrooms.trans');
    
    
     Route::get('/dailylist/{showroom}', [ShowroomController::class, 'daily'])->name('showrooms.daily');
@@ -76,6 +78,7 @@ Route::prefix('payments')->group(function () {
     Route::get('/uba', [PaymentController::class, 'uba'])->name('payments.uba');
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');
+    Route::post('/reconsile', [PaymentController::class, 'reconsile'])->name('payments.reconsile');
     Route::get('/processing', [PaymentController::class, 'processing'])->name('payments.processing');
     Route::post('/update/{id}', [PaymentController::class, 'update'])->name('payments.update');
     Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payments.edit');

@@ -34,7 +34,7 @@
                                 <table id="dataTable2" width="100%" class="table table-striped table-hover dataTable2">
                                     <thead class="table-dark_">
                                         <tr>
-                                            <th class="border-top-0 text-white_">#</th>
+                                            <th class="border-top-0 text-white_"></th>
                                             <th class="border-top-0 text-white_">Name</th>
                                             <th class="border-top-0 text-white_">Street</th>
                                             <th class="border-top-0 text-white_">City</th>
@@ -129,6 +129,26 @@
                     [0, 1, 2, 3, 'desc']
                 ]
             });
+
+            
+        $('#reconsile').on('submit', function(e){
+    // e.preventDefault();
+      var form = this;
+
+      var rows_selected = table.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+      console.log(form)
+   });
 
         });
     </script>

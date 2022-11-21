@@ -36,7 +36,7 @@ class ShowroomController extends Controller
         $currentDate = Carbon::now();
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
-       $showroom = Showroom::where('name',$request->showroom)->first();
+        $showroom = Showroom::where('name',$request->showroom)->first();
 
         $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->sum('amount'));
         $transactions_today = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereDay('created_at',Carbon::now())->sum('amount'));
@@ -49,7 +49,11 @@ class ShowroomController extends Controller
         $uba =Helper::money(Transaction::showroomtransations('UBA',$request->showroom));
         $zenith =Helper::money(Transaction::showroomtransations('ZENITHBANK',$request->showroom));
        
-        return view('showrooms/details',compact('zenith','uba','total','gcb','showroom','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
+        $momo =Helper::money(Transaction::showroomtransationsType('MOMO',$request->showroom));
+        $cash =Helper::money(Transaction::showroomtransationsType('CASH',$request->showroom));
+        $card =Helper::money(Transaction::showroomtransationsType('CARD',$request->showroom));
+       
+        return view('showrooms/details',compact('zenith','uba','momo','cash','card','total','gcb','showroom','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
    
     }
 
@@ -290,11 +294,30 @@ class ShowroomController extends Controller
         return view('showrooms/yearly', compact('total','activities','showroom'));
         //
     }
+
+    public function typeTrans(Request $request,$type)
+    { 
+        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
+       $total='';
+        if($type =='GCB'){
+            
+            $total =  Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->where('bank',$type)->sum('amount'));
+        // dd( $total);
+        }else{
+            $total =  Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->where('transaction_type',$type)->sum('amount'));
+      
+        }
+         $showroom =$request->showroom;
+        return view('showrooms/trans', compact('total','activities','showroom','type'));
+        //
+    }
+
+
     public function daily(Request $request,$showroom)
     {
        
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='today',$period='',$bank='',request());
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='today',$bank='',request());
     
         }else{
             return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
@@ -302,49 +325,31 @@ class ShowroomController extends Controller
         }
        
         
-        if ($request->ajax()) {
-            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereDay('created_at',Carbon::now())->get();
-     
-            return DataTables::of($transactions_today)
-                ->addIndexColumn()
-                ->addColumn('transaction_id', function ($row) {
+        
+    }
 
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . $row->amount . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','amount', 'name','status'])
-                ->make(true);
+    //transactiontype
+    public function transactionWithTypes(Request $request)
+    {
+       
+        if(!empty($request->date1)){
+            if($request->type =="GCB"){
+                return Helper::datatable($showroom=$request->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank=$request->type,request());
+      
+            }
+            return Helper::datatable($showroom=$request->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type=$request->type,$period='',$bank='',request());
+    
+        }else{
+            if($request->type =="GCB"){
+                return Helper::datatable($showroom=$request->showroom,$date1='',$date2=$request->date2,$transaction_type='',$period='',$bank=$request->type,request());
+      
+            }
+            return Helper::datatable($showroom=$request->showroom,$date1='',$date2='',$transaction_type=$request->type,$period='',$bank='',request());
+    
         }
+       
+        
+        
     }
 
 
@@ -360,67 +365,7 @@ class ShowroomController extends Controller
     
         }
         
-        if ($request->ajax()) {
-            $transactions_today = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->get();
-     
-            return DataTables::of($transactions_today)
-                ->addIndexColumn()
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('momo', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('gcb', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('card', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','amount','momo','gcb','card', 'name','status'])
-                ->make(true);
-        }
+       
     }
 
 
@@ -434,66 +379,12 @@ class ShowroomController extends Controller
             return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
     
         }
-        if ($request->ajax()) {
-            $currentDate = Carbon::now();
-            $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
-            $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
-             
-            $transactions_week = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
-      
-            return DataTables::of($transactions_week)
-                ->addIndexColumn()
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('ref', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                        ' . $row->ref . '
-                    </a>
-                   ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','ref','amount', 'name','status'])
-                ->make(true);
-        }
-        //
+       
+           
     }
-
     public function monthly(Request $request,$showroom)
     {
+       
         if(!empty($request->date1)){
             return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='month',$period='',$bank='',request());
     
@@ -501,106 +392,22 @@ class ShowroomController extends Controller
             return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
     
         }
-           if ($request->ajax()) {
-            $transactions_month = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->get();
-    
-            return DataTables::of($transactions_month)
-                ->addIndexColumn()
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','amount', 'name','status'])
-                ->make(true);
-        }
-        //
+       
+           
     }
 
 
     public function yearly(Request $request,$showroom)
     {
-        if ($request->ajax()) {
-            $transactions_year = Transaction::whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->get();
-      
-            return DataTables::of($transactions_year)
-                ->addIndexColumn()
-                ->addColumn('transaction_id', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                    ' . $row->transaction_id . '
-                </a>
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('ref', function ($row) {
-
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
-                        ' . $row->ref . '
-                    </a>
-                   ';
-                    return $actionBtn;
-                })
-                ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary text-end">' . $row->name . '</a>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
-               
-               ';
-                    return $actionBtn;
-                })
-                ->addColumn('created_at', function ($row) {
-                    $created_at = $row->created_at->format('Y.m.d H:i:s');
-                    return $created_at;
-                })
-                ->addColumn('status', function ($row) {
-                    if($row->status =='PENDING'){
-                        $actionBtn = ' <a href="https://calpay.caleservice.net/pay/secure/index.php?paytoken='.$row->transaction_id.'" class="text-primary">' . $row->status . '</a>
-               
-                        ';
-                             return $actionBtn;
-                    }else{
-                        return $row->status;
-                    }
-                   
-                })
-                ->rawColumns(['transaction_id','amount','ref', 'name','status'])
-                ->make(true);
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='year',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
+    
         }
+
+
     }
 
 
