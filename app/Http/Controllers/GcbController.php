@@ -202,13 +202,8 @@ class GcbController extends Controller
       try{
         $validator = Validator::make($request->all(), [
             'showroom' => 'required',
-            'customer_id' => 'required',
-            'customer_name' => 'required',
             'ref' => 'required',
-            'date' => 'required',
-            'amount' => 'required',
-            'transaction_type' => 'required',
-            'account_number' => 'required',
+           
         ]);
 
 
@@ -242,6 +237,13 @@ class GcbController extends Controller
                             ]
         
                         ], 200);
+                    }else{
+                        return response()->json([
+                            'message' => "No transaction",
+                            'statusCode' => 404,
+                            
+        
+                        ], 404); 
                     }     
             }else{
                 return response()->json([
