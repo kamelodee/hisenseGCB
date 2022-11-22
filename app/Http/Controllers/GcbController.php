@@ -196,6 +196,82 @@ class GcbController extends Controller
 
        
     }
+    public function verify(Request $request)
+    {
+    //   return  $request->all();
+      try{
+        $validator = Validator::make($request->all(), [
+            'showroom' => 'required',
+            'customer_id' => 'required',
+            'customer_name' => 'required',
+            'ref' => 'required',
+            'date' => 'required',
+            'amount' => 'required',
+            'transaction_type' => 'required',
+            'account_number' => 'required',
+        ]);
+
+
+        
+        if ($validator->fails()) {
+            return response()->json([
+                'statusCode' => 401,
+                'error' => $validator->messages()
+            ], 401);
+        }
+
+
+        try {
+            // return [$request->showroom,Auth::user()->showroom];
+            $trans = Transaction::latest()->first();
+           
+               $transid= Helper::username($trans->id,$trans->customer_name);
+            if(Auth::user()->showroom === $request->showroom){
+               
+                    $transaction =   Transaction::where('sales_reference_id',$request->ref)->first();
+                 
+                    if( $transaction){
+                     
+                        return response()->json([
+                            'message' => "success",
+                            'statusCode' => 200,
+                            'data'=>[
+                                'amount'=>$transaction->amount,
+                                'ref'=>$transaction->sales_reference_id,
+                                
+                            ]
+        
+                        ], 200);
+                    }     
+            }else{
+                return response()->json([
+                    'message' => "Invalid showroom",
+                    'statusCode' => 401,
+
+                ], 401);   
+            } 
+        } catch (ResponseException $e) {
+            report($e);
+         info($e);
+            return response()->json([
+                'message' => 'something went wrong',
+                'statusCode' => 500,
+
+            ], 500);
+        }
+      }catch(Exception $error){
+        report($error);
+        info($error);
+        return response()->json([
+            'message' => 'something went wrong',
+            'statusCode' => 500,
+
+        ], 500);
+      }
+       
+
+       
+    }
 
 
 
