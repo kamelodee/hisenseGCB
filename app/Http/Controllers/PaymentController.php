@@ -65,7 +65,7 @@ class PaymentController extends Controller
       
      return back();
     }else{
-        Transaction::whereIn('id', $request->id)->whereIn('status', ['SUCCESS','SUCCESSFUL'])
+        Transaction::where('showroom',Auth::user()->showroom)->whereIn('id', $request->id)->whereIn('status', ['SUCCESS','SUCCESSFUL'])
         ->update([
             'reconsile' =>  1,
         ]);
@@ -79,7 +79,7 @@ class PaymentController extends Controller
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
         if(Auth::user()->can('Access All')){
-       $data = Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
+       $data = Transaction::where('showroom',Auth::user()->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
             foreach( $data as $d){
             if($d->reconsile ==1){
                 $d->update([
@@ -95,7 +95,7 @@ class PaymentController extends Controller
       
      return back();
     }else{
-        Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])
+        Transaction::where('showroom',Auth::user()->showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])
         ->update([
             'reconsile' =>  1,
         ]);

@@ -89,6 +89,15 @@
                   <p class=" text-muted   fw-600">Today</p>
                  
                 </a>
+                @if (!Auth::user()->can('Access All'))
+                <div class="reconsile">
+                  <form method="POST" action="{{route('payments.reconsileweek')}}" id="reconsile2">
+                  @csrf
+                   <button type="submit" class="btn btn-sm btn-primary">Reconcile Today</button>
+                  </form>
+                 </div>   
+                @endif
+                
                 </div>
               </div>
               <div class="col-sm-6 col-md-3">
