@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Showroom;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
-use Carbon\Carbon;
+
 use Illuminate\Support\Str;
 use App\Services\Helper;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 class CalbankController extends Controller
 {
     /**
@@ -27,16 +30,52 @@ class CalbankController extends Controller
     }
     public function all()
     { 
-        $calbank =Helper::money(Transaction::transations('CALBANK'));
-        $gcb =Helper::money(Transaction::transations('GCB'));
-        $uba =Helper::money(Transaction::transationsu('UBA'));
-        $zenith =Helper::money(Transaction::transations('ZENITHBANK'));
-       
-        $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
-        $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
-        return view('transactions/all', compact('total','activities','uba','gcb'));
-        //
-    }
+
+
+
+
+
+        if(Auth::user()->can('Access All')){
+
+            
+            $currentDate = Carbon::now();
+            $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+            $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+           $showrooms = Showroom::all();
+            $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
+           
+    
+            $transactions_today = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+            $transactions_week = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+            $transactions_month = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+            $transactions_year = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+           
+            $calbank =Helper::money(Transaction::transations('CALBANK'));
+            $gcb =Helper::money(Transaction::transations('GCB'));
+            $uba =Helper::money(Transaction::transationsu('UBA'));
+            $zenith =Helper::money(Transaction::transations('ZENITHBANK'));
+           
+            return view('transactions/all',compact('zenith','uba','total','gcb','showrooms','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
+        }else{
+            $currentDate = Carbon::now();
+            $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+            $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+            $total = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
+           
+            $transactions_today = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+            $transactions_week = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+            $transactions_month = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+            $transactions_year = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+           $showroom='';
+            $calbank =Helper::money(Transaction::cashiertransation('CALBANK'));
+            $gcb =Helper::money(Transaction::cashiertransation('GCB'));
+            $uba =Helper::money(Transaction::cashiertransation('UBA'));
+            $zenith =Helper::money(Transaction::cashiertransation('ZENITHBANK'));
+           
+            return view('transactions/all',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month','showroom'));  
+        }
+
+          }
 
     public function indexweekly()
     { 
