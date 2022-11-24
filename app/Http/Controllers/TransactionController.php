@@ -99,14 +99,24 @@ class TransactionController extends Controller
     public function callist(Request $request)
     {
 
-
-        if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
-    
+        if(Auth::user()->can('Access All')){
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }else{
+                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
-    
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }else{
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }
         }
+       
 
         
         
@@ -114,51 +124,95 @@ class TransactionController extends Controller
 
     public function transist(Request $request)
     {
-        if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
-    
+        if(Auth::user()->can('Access All')){
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }else{
+                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
-    
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }else{
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='CALBANK',request());
+        
+            }
         }
+       
        
         
     }
 
     public function zenithlist(Request $request)
     {
-        if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
-    
+        if(Auth::user()->can('Access All')){
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
+        
+            }else{
+                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
+        
+            }
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
-    
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
+        
+            }else{
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
+        
+            }
         }
+        
 
         
     }
     public function ubalist(Request $request)
     {
-        if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='UBA',request());
-    
+        if(Auth::user()->can('Access All')){
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='UBA',request());
+        
+            }else{
+                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='UBA',request());
+        
+            }
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='UBA',request());
-    
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='UBA',request());
+        
+            }else{
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='UBA',request());
+        
+            }
         }
+        
 
         
     }
     public function gcblist(Request $request)
     {
-
-        if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
-    
+        if(Auth::user()->can('Access All')){
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
+        
+            }else{
+                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
+        
+            }
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
-    
+            if(!empty($request->date1)){
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
+        
+            }else{
+                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
+        
+            }
         }
+
+       
 
         
         
