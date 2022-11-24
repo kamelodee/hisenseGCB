@@ -79,6 +79,7 @@ Route::prefix('payments')->group(function () {
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');
     Route::post('/reconsile', [PaymentController::class, 'reconsile'])->name('payments.reconsile');
+    Route::post('/reconsileweek', [PaymentController::class, 'reconsileweek'])->name('payments.reconsileweek');
     Route::get('/processing', [PaymentController::class, 'processing'])->name('payments.processing');
     Route::post('/update/{id}', [PaymentController::class, 'update'])->name('payments.update');
     Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payments.edit');

@@ -70,6 +70,12 @@
                                         <p class=" text-muted   fw-600">Today</p>
 
                                     </a>
+                                    <div class="reconsile">
+                                        <form method="POST" action="{{route('payments.reconsileweek')}}" id="reconsile2">
+                                        @csrf
+                                         <button type="submit" class="btn btn-sm btn-primary">Reconcile Today</button>
+                                        </form>
+                                       </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -80,6 +86,12 @@
                                         <p class=" text-muted   fw-600">This Week</p>
 
                                     </a>
+                                    <div class="reconsile my-1">
+                                        <form method="POST" action="" id="reconsile">
+                                        @csrf
+                                         <button type="submit" class="btn btn-sm btn-link"></button>
+                                        </form>
+                                       </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -90,6 +102,12 @@
                                         <p class=" text-muted   fw-600">This Month</p>
 
                                     </a>
+                                    <div class="reconsile">
+                                        <form method="POST" action="#" id="reconsile">
+                                        @csrf
+                                         <button type="submit" class="btn btn-sm btn-link"></button>
+                                        </form>
+                                       </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-3">
@@ -99,7 +117,12 @@
                                         <h3 class="text-3  fw-400"> {{ $transactions_year }}</h3>
                                         <p class=" text-muted   fw-600">This Year</p>
                                     </a>
-
+                                    <div class="reconsile">
+                                        <form method="POST" action="#" id="reconsile">
+                                        @csrf
+                                         <button type="submit" class="btn btn-sm btn-link"></button>
+                                        </form>
+                                       </div>
                                 </div>
                             </div>
                         </div>

@@ -14,6 +14,8 @@ use App\Services\Banks\CalBank;
 use App\Services\Banks\Uba;
 use App\Services\Banks\Gcb;
 use App\Services\Banks\Zenith;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 use App\Services\Helper;
 
 
@@ -64,6 +66,36 @@ class PaymentController extends Controller
      return back();
     }else{
         Transaction::whereIn('id', $request->id)->whereIn('status', ['SUCCESS','SUCCESSFUL'])
+        ->update([
+            'reconsile' =>  1,
+        ]);
+        return back();
+     }
+
+    }
+    public function reconsileweek(Request $request)
+    {
+        $currentDate = Carbon::now();
+        $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+        $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+        if(Auth::user()->can('Access All')){
+       $data = Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])->get();
+            foreach( $data as $d){
+            if($d->reconsile ==1){
+                $d->update([
+                    'reconsile' =>  0,
+                ]);
+            }else{
+                $d->update([
+                    'reconsile' =>  1,
+                ]);
+            }
+            }
+        
+      
+     return back();
+    }else{
+        Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->whereIn('status', ['SUCCESS','SUCCESSFUL'])
         ->update([
             'reconsile' =>  1,
         ]);
