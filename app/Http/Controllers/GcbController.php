@@ -218,10 +218,12 @@ class GcbController extends Controller
 
         try {
             // return [$request->showroom,Auth::user()->showroom];
-            $trans = Transaction::latest()->first();
+            // $trans = Transaction::latest()->first();
            
-               $transid= Helper::username($trans->id,$trans->customer_name);
+            //    $transid= Helper::username($trans->id,$trans->customer_name);
             if(Auth::user()->showroom === $request->showroom){
+             $showroom = Showroom::where('name',$request->showroom)->first();
+
                
                     $transaction =   Transaction::where('sales_reference_id',$request->ref)->first();
                  
@@ -233,6 +235,8 @@ class GcbController extends Controller
                             'data'=>[
                                 'amount'=>$transaction->amount,
                                 'ref'=>$transaction->sales_reference_id,
+                                'showroom'=>$showroom->showroom,
+                                'account'=>$showroom->account_number,
                                 
                             ]
         
