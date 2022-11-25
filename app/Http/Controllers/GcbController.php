@@ -225,7 +225,7 @@ class GcbController extends Controller
              $showroom = Showroom::where('name',$request->showroom)->first();
 
                
-                    $transaction =   Transaction::where('sales_reference_id',$request->ref)->first();
+                    $transaction =   Transaction::where('sales_reference_id',$request->ref)->where('showroom',$request->showroom)->first();
                  
                     if( $transaction){
                      
