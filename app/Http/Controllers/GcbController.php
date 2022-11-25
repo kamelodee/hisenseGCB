@@ -235,7 +235,6 @@ class GcbController extends Controller
                             'data'=>[
                                 'amount'=>$transaction->amount,
                                 'ref'=>$transaction->sales_reference_id,
-                                'showroom'=>$showroom->showroom,
                                 'account'=>$showroom->account_number,
                                 
                             ]
