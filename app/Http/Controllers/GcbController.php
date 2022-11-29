@@ -234,7 +234,7 @@ class GcbController extends Controller
                             'statusCode' => 200,
                             'data'=>[
                                 'amount'=>$transaction->amount,
-                                'ref'=>$transaction->ref,
+                                'ref'=>$transaction->sales_reference_id,
                                 'account'=>$showroom->account_number,
                                 
                             ]
