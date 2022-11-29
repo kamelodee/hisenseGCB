@@ -135,7 +135,8 @@ class GcbController extends Controller
             $trans = Transaction::latest()->first();
            
                $transid= Helper::username($trans->id,$trans->customer_name);
-            if(Auth::user()->showroom === $request->showroom){
+               $showroom = Showroom::where('name',Auth::user()->showroom)->first();
+            if(Auth::user()->showroom === $request->showroom && $showroom->account_number ==$request->account_number){
                
                     $transaction =   Transaction::create([
                         'customer_name' => $request->customer_name,
@@ -152,7 +153,7 @@ class GcbController extends Controller
                         'amount' => $request->amount,
                         'account_number' => $request->account_number,
                         'status' => 'SUCCESS',
-                        'bank' => 'GCB',
+                        'bank' =>$request->bank? $request->bank: 'GCB',
                         'description' => "GCB Transaction",
                         'date' => $request->date,
                     ]);
@@ -235,7 +236,7 @@ class GcbController extends Controller
                             'data'=>[
                                 'amount'=>$transaction->amount,
                                 'ref'=>$transaction->sales_reference_id,
-                                'account'=>$showroom->account_number,
+                                'account'=>$transaction->account_number,
                                 
                             ]
         
