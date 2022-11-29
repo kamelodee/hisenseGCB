@@ -146,7 +146,7 @@ class GcbController extends Controller
                         'shortpay_code' => $transid,
                         'transaction_id' => $transid,
                         'transaction_type' => $request->transaction_type,
-                        'ref' => $transid,
+                        'ref' => $request->ref,
                         'phone' => $request->customer_id,
                         'sales_reference_id' =>$request->ref,
                         'amount' => $request->amount,
