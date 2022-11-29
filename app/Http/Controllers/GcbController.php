@@ -113,7 +113,7 @@ class GcbController extends Controller
             'showroom' => 'required',
             'customer_id' => 'required',
             'customer_name' => 'required',
-            'ref' => 'required',
+            'ref' => ['required', 'string', 'unique:transactions'],
             'date' => 'required',
             'amount' => 'required',
             'transaction_type' => 'required',
@@ -234,7 +234,7 @@ class GcbController extends Controller
                             'statusCode' => 200,
                             'data'=>[
                                 'amount'=>$transaction->amount,
-                                'ref'=>$transaction->sales_reference_id,
+                                'ref'=>$transaction->ref,
                                 'account'=>$showroom->account_number,
                                 
                             ]
