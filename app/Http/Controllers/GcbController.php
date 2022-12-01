@@ -137,7 +137,28 @@ class GcbController extends Controller
                $transid= Helper::username($trans->id,$trans->customer_name);
                $showroom = Showroom::where('name',Auth::user()->showroom)->first();
             if(Auth::user()->showroom === $request->showroom && $showroom->account_number ==$request->account_number){
-               
+                $transa=  Transaction::where('ref',  $request->ref)->first();
+                if($transa){
+                    $transa->update([
+                        'customer_name' => $request->customer_name,
+                        'showroom' => Auth::user()->showroom,
+                        'order_code' => 'gcb',
+                        'payment_token' => $transid,
+                        'payment_code' =>$transid,
+                        'shortpay_code' => $transid,
+                        'transaction_id' => $transid,
+                        'transaction_type' => $request->transaction_type,
+                        'ref' => $request->ref,
+                        'phone' => $request->customer_id,
+                        'sales_reference_id' =>$request->ref,
+                        'amount' => $request->amount,
+                        'account_number' => $request->account_number,
+                        'status' => 'SUCCESS',
+                        'bank' =>$request->bank? $request->bank: 'GCB',
+                        'description' => "GCB Transaction",
+                        'date' => $request->date,
+                    ]);
+                }
                     $transaction =   Transaction::create([
                         'customer_name' => $request->customer_name,
                         'showroom' => Auth::user()->showroom,
@@ -226,7 +247,7 @@ class GcbController extends Controller
              $showroom = Showroom::where('name',$request->showroom)->first();
 
                
-                    $transaction =   Transaction::where('sales_reference_id',$request->ref)->where('showroom',$request->showroom)->first();
+                    $transaction =   TestTransaction::where('sales_reference_id',$request->ref)->where('showroom',$request->showroom)->first();
                  
                     if( $transaction){
                      
@@ -309,7 +330,7 @@ class GcbController extends Controller
         try {
             // return [$request->showroom,Auth::user()->showroom];
             if(Auth::user()->showroom === $request->showroom){
-               
+             
                     $transaction =   TestTransaction::create([
                         'customer_name' => $request->customer_id,
                         'showroom' => Auth::user()->showroom,
