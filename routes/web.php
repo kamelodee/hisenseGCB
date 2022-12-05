@@ -78,6 +78,7 @@ Route::prefix('payments')->group(function () {
     Route::get('/calbank', [PaymentController::class, 'index'])->name('payments.calbank');
     Route::get('/uba', [PaymentController::class, 'uba'])->name('payments.uba');
     Route::post('/zenith', [ZenithController::class, 'pay'])->name('payments.zenith');
+    Route::post('/zenith/redirect', [ZenithController::class, 'redirect'])->name('payments.redirect');
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');
     Route::post('/reconsile', [PaymentController::class, 'reconsile'])->name('payments.reconsile');

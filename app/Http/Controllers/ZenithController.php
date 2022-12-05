@@ -32,6 +32,12 @@ class ZenithController extends Controller
     {
         //
     }
+    public function redirect(Request $request)
+    {if($request->ref){
+      return  Zenith::redirectPay($request->ref);
+    }
+        
+    }
     public function pay(Request $request)
     {
       

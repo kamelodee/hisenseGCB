@@ -17,7 +17,7 @@ class Zenith
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/SecurePaymentRequest?GPID=GPZEN098&amount='.$amount.'&desc=Hisensegh%20now&referenceID='.$referenceID.'&productID='.$productID.'&customerID=112302&merchantlogo=12322&merchantName=Cedipay',
+  CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/SecurePaymentRequest?GPID=GPZEN098&amount='.$amount.'&desc=Hisensegh%20now&referenceID='.$referenceID.'&productID='.$productID.'&customerID=112302&merchantlogo=12322&merchantName=Cedipay&callbackurl=https://api.hisense.com.gh/zenith/redirect',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
