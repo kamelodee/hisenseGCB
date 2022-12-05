@@ -14,6 +14,7 @@ use App\Http\Controllers\GcbController;
 use App\Http\Controllers\CalbankController;
 use App\Http\Controllers\UBAController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\ZenithController;
 
 
 Route::get('/', function () {
@@ -76,6 +77,7 @@ Route::prefix('payments')->group(function () {
     Route::get('/gettable', [PaymentController::class, 'gettable'])->name('payments.gettable');
     Route::get('/calbank', [PaymentController::class, 'index'])->name('payments.calbank');
     Route::get('/uba', [PaymentController::class, 'uba'])->name('payments.uba');
+    Route::post('/zenith', [ZenithController::class, 'pay'])->name('payments.zenith');
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');
     Route::post('/reconsile', [PaymentController::class, 'reconsile'])->name('payments.reconsile');

@@ -9,8 +9,8 @@
                         data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li>
                  <li class="nav-item"> <a class="nav-link fw-600 active" id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
                         aria-controls="uba" aria-selected="true">UBA</a></li> 
-                 {{-- <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
-                        aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li> --}}
+                 <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
+                        aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
 
 
                 {{-- <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
@@ -214,9 +214,9 @@
                                 <!-- Request Money Form
                             ============================================= -->
                                 
-                                <form id="form-send-money_">
+                                <form id="form-send-money_" action="{{route('payments.zenith')}}" method="POST">
                                     @csrf
-                                    @csrf
+                                   
                                     <div class="mb-3">
                                         <label for="payerName" class="form-label">Full Name</label>
                                         <input type="text" value="" class="form-control"
@@ -229,7 +229,7 @@
                                         <label for="emailID" class="form-label">Phone</label>
                                         <input type="text" value="" class="form-control"
                                             data-bv-field="emailid" id="emailID" required=""
-                                            placeholder="Enter Phone Number">
+                                            placeholder="Enter Phone Number" name="phone">
                                     </div>
 
 
