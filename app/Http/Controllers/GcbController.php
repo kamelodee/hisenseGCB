@@ -223,7 +223,7 @@ class GcbController extends Controller
     //   return  $request->all();
       try{
         $validator = Validator::make($request->all(), [
-            'showroom' => 'required',
+           
             'ref' => 'required',
            
         ]);
@@ -243,11 +243,11 @@ class GcbController extends Controller
             // $trans = Transaction::latest()->first();
            
             //    $transid= Helper::username($trans->id,$trans->customer_name);
-            if(Auth::user()->showroom === $request->showroom){
+            if(Auth::user()->showroom){
              $showroom = Showroom::where('name',$request->showroom)->first();
 
                
-                    $transaction =   TestTransaction::where('sales_reference_id',$request->ref)->where('showroom',$request->showroom)->first();
+                    $transaction =   TestTransaction::where('sales_reference_id',$request->ref)->where('showroom',Auth::user()->showroom)->first();
                  
                     if( $transaction){
                      
