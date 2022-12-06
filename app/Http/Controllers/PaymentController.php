@@ -120,9 +120,51 @@ class PaymentController extends Controller
     }
     public function processing(Request $request)
     {
+
+        if($request->ref){
+            return redirect('dashboard');
+            $data =  Zenith::getTransaction($request->ref);
+            $trans = Transaction::latest()->first();
+            $showroom = Showroom::where('name', Auth::user()->showroom)->first();
+      
+             $transid= Helper::username($trans->id,$trans->customer_name);
+          //   return json_decode($data)->amount;
+            if (json_decode($data)->status == false) {
+                return back()->with('error', json_decode($data)->MESSAGE);
+            } else {
+              // dd('lkkk');
+                $transaction =   Transaction::create([
+                    'customer_name' => json_decode($data)->pan,
+                    'showroom' => '$showroom->name',
+                    'order_code' => json_decode($data)->productID,
+                    'payment_token' => json_decode($data)->refID,
+                    'payment_code' => json_decode($data)->refID,
+                    'shortpay_code' => json_decode($data)->refID,
+                    'transaction_id' => json_decode($data)->refID,
+                    'transaction_type' => json_decode($data)->type,
+                    'ref' => json_decode($data)->refID,
+                    'phone' => json_decode($data)->description,
+                    'amount' => json_decode($data)->amount,
+                    'sales_reference_id' => $transid,
+                    'account_number' => json_decode($data)->pan,
+                    'status' => 'PENDING',
+                    'bank' => 'ZENITH',
+                    'description' => json_decode($data)->description,
+                    'date' => date('Y.m.d H:i:s'),
+                ]);
+                if ($transaction) {
+                    Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
+                     return redirect('dashboard');
+                }
+            }
+          }
+
         $token= request()->paytoken;
        $data = CalBank::getTransactions($token);
         //  return json_decode($data->return);
+
+            
+
        if (json_decode($data->return)->CODE == 1) {
         
            return back()->with('error', json_decode($data->return)->MESSAGE);

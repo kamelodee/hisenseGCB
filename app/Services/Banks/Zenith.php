@@ -69,25 +69,28 @@ return $response;
     {
 
 
-        $curl = curl_init();
+  
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/PaySecure?gpid=GPZEN098&Ref=' . json_encode($ref) . '',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Cookie: .AspNetCore.Antiforgery.LG2h8eouDQU=CfDJ8B7Xcv9SsfNCgElcEp5d8PHHqEJVL3IYLiPUIiSUxISyalhs4LMJ4LwtCXw9K5MbNuhE0N83WcMk-aRabX81GQ35A8jFeOhIyE30VTVf17wRZimmOR9mWwEeiDeHqEu2E7hOxrdTXDfCLWXb0egRZHM'
-            ),
-        ));
+$curl = curl_init();
 
-        $response = curl_exec($curl);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/confirmTransaction?gpid=GPZEN098&Ref='.$ref.'',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'GET',
+  CURLOPT_HTTPHEADER => array(
+    'Cookie: .AspNetCore.Antiforgery.LG2h8eouDQU=CfDJ8B7Xcv9SsfNCgElcEp5d8PHHqEJVL3IYLiPUIiSUxISyalhs4LMJ4LwtCXw9K5MbNuhE0N83WcMk-aRabX81GQ35A8jFeOhIyE30VTVf17wRZimmOR9mWwEeiDeHqEu2E7hOxrdTXDfCLWXb0egRZHM'
+  ),
+));
 
-        curl_close($curl);
-        return $response;
+$response = curl_exec($curl);
+
+curl_close($curl);
+return $response;
+
     }
 }
