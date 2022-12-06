@@ -122,8 +122,8 @@ class PaymentController extends Controller
     {
 
         if($request->ref){
-            return redirect('dashboard');
-            $data =  Zenith::getTransaction($request->ref);
+            // return redirect('dashboard');
+          return  $data =  Zenith::getTransaction($request->ref);
             $trans = Transaction::latest()->first();
             $showroom = Showroom::where('name', Auth::user()->showroom)->first();
       
