@@ -280,7 +280,7 @@ class Helper
                     if($row->reconsile ==1){
                         $actionBtn = ' <a href="#" class="text-primary">Reconciled </a>';
                     }else{
-                        $actionBtn = ' <a href="#" class="text-primary">PENDDING </a>';
+                        $actionBtn = ' <a href="#" class="text-primary">PENDING </a>';
                     }
                    
                     return $actionBtn;

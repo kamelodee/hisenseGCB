@@ -53,7 +53,7 @@ class CalbankController extends Controller
             $calbank =Helper::money(Transaction::transations('CALBANK'));
             $gcb =Helper::money(Transaction::transations('GCB'));
             $uba =Helper::money(Transaction::transationsu('UBA'));
-            $zenith =Helper::money(Transaction::transations('ZENITHBANK'));
+            $zenith =Helper::money(Transaction::transations('ZENITH'));
            
             return view('transactions/all',compact('zenith','uba','total','gcb','showrooms','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
         }else{
@@ -70,7 +70,7 @@ class CalbankController extends Controller
             $calbank =Helper::money(Transaction::cashiertransation('CALBANK'));
             $gcb =Helper::money(Transaction::cashiertransation('GCB'));
             $uba =Helper::money(Transaction::cashiertransation('UBA'));
-            $zenith =Helper::money(Transaction::cashiertransation('ZENITHBANK'));
+            $zenith =Helper::money(Transaction::cashiertransation('ZENITH'));
            
             return view('transactions/all',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month','showroom'));  
         }
