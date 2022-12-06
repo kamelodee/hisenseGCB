@@ -5,6 +5,13 @@
   ============================================= -->
   <div id="content" class="py-4">
     <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
+          <li class="breadcrumb-item">Zenith Payments</li>
+        
+        </ol>
+      </nav>
       <div class="row"> 
 
         <aside class="col-lg-2 col-md-3 col-sm-12"> 

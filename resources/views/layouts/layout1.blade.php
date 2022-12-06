@@ -50,6 +50,7 @@
                 <li><a class="dropdown-item" href="{{route('transactions.all')}}">ALL Payments</a></li>
                 <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB Payments</a></li>
                 <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA Payments</a></li>
+                <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH Payments</a></li>
               
                
               </ul>
