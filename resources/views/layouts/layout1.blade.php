@@ -32,7 +32,7 @@
 
 <!-- Document Wrapper   
 ============================================= -->
-<div id="main-wrapper"> 
+<div id="main-wrapper" style="font-size: 12px !important"> 
   <!-- Header
   ============================================= -->
      

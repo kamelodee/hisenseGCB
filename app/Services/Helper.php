@@ -250,28 +250,28 @@ class Helper
                
                 ->addColumn('transaction_id', function ($row) {
 
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    $actionBtn = '<a class="text-dark" onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
                     ' . $row->transaction_id . '
                 </a>
                ';
                     return $actionBtn;
                 })
                 ->addColumn('amount', function ($row) {
-                    $actionBtn = ' <div class="text-primary text-end">' . Helper::money($row->amount) . '</div>
+                    $actionBtn = ' <div class="text-dark text-end">' . Helper::money($row->amount) . '</div>
                
                ';
                     return $actionBtn;
                 })
                 ->addColumn('sales_reference_id', function ($row) {
 
-                    $actionBtn = '<a onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
+                    $actionBtn = '<a  onclick="TransactionDetails(' . "'$row->id'" . ')"  href="javascript:void()" class="text-primary">
                     ' . $row->sales_reference_id . '
                 </a>
                ';
                     return $actionBtn;
                 })
                 ->addColumn('name', function ($row) {
-                    $actionBtn = ' <a href="#" class="text-primary">' . $row->name . '</a>
+                    $actionBtn = ' <a  href="#" class="text-primary">' . $row->name . '</a>
                
                ';
                     return $actionBtn;
