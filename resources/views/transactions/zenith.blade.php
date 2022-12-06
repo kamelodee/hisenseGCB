@@ -85,7 +85,7 @@
                           <th class="border-top-0 text-white_">Transaction Type</th>
                           <th class="border-top-0 text-white_">Amount</th>
                           <th class="border-top-0 text-white_">Showroom</th>
-                          <th class="border-top-0 text-white_">Staus</th>
+                          <th class="border-top-0 text-white_">Status</th>
                           
                       </tr>
                   </thead>

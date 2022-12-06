@@ -41,15 +41,15 @@
                        
                       
                       </div>
-                      {{-- <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
-                        <a href="{{route('transactions.calbank')}}">
+                      <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <a href="{{route('transactions.zenith')}}">
                         <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
-                        <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
-                        <p class="mb-2 ">CalBank Transactions</p>
+                        <h3 class="text-3 fw-400">GHC {{$zenith}}</h3>
+                        <p class="mb-2 ">Zenith Transactions</p>
                       </a>
                         <hr class="mx-n3">
                       
-                      </div> --}}
+                      </div>
                       <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{route('transactions.uba')}}">
                         <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -131,8 +131,8 @@
                                        
                                         <th class="border-top-0 text-white_">Amount</th>
                                         <th class="border-top-0 text-white_">Showroom</th>
-                                        <th class="border-top-0 text-white_">Staus</th>
-                                        <th class="border-top-0 text-white_">Reconcile Staus</th>
+                                        <th class="border-top-0 text-white_">Status</th>
+                                        <th class="border-top-0 text-white_">Reconcile Status</th>
                                     </tr>
                                 </thead>
 
