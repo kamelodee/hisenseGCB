@@ -35,7 +35,10 @@ class ZenithController extends Controller
 
 
     public function redirect(Request $request)
-    {if($request->ref){
+    {
+        
+        
+        if($request->ref){
       $data =  Zenith::getTransaction($request->ref);
       $trans = Transaction::latest()->first();
       $showroom = Showroom::where('name', Auth::user()->showroom)->first();
@@ -85,10 +88,36 @@ class ZenithController extends Controller
 
 
         ]);
-
-     $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
-    return redirect('https://aspd.zenithbank.com.gh/globalpayapiV2/Service/PaySecure?gpid=GPZEN098&tid='.$transId.'');
-    }
+        $trans = Transaction::latest()->first();
+        
+        $transid= Helper::username($trans->id,$trans->customer_name);
+        $transaction= Transaction::updateOrCreate([
+            'customer_name' => $request->name,
+            'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,
+            'order_code' => $request->order_code,
+            'payment_token' => '',
+            'payment_code' => '',
+            'shortpay_code' => '',
+            'transaction_id' => '',
+            'transaction_type' =>'',
+            'ref' => '',
+            'phone' => $request->phone,
+            'amount' => $request->amount,
+            'sales_reference_id' => $transid,
+            'account_number' => $request->phone,
+            'status' => 'PENDING',
+            'bank' => 'ZENITH',
+            'description' => '',
+            'date' => date('Y.m.d H:i:s'),
+        ]);
+        if ($transaction) {
+            Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
+            $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
+       return redirect('https://aspd.zenithbank.com.gh/globalpayapiV2/Service/PaySecure?gpid=GPZEN098&tid='.$transId.'');
+   
+        }
+    
+}
 
     /**
      * Show the form for creating a new resource.

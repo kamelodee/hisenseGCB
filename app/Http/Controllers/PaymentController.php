@@ -133,10 +133,10 @@ class PaymentController extends Controller
                 return back()->with('error', json_decode($data)->MESSAGE);
             } else {
               // dd('lkkk');
-                $transaction =   Transaction::create([
-                    'customer_name' => json_decode($data)->pan,
-                    'showroom' => $showroom->name,
-                    'order_code' => json_decode($data)->productID,
+                $transaction =   Transaction::where("order_code",$request->ref)->first();
+                
+                $transaction->update([
+                
                     'payment_token' => json_decode($data)->refID,
                     'payment_code' => json_decode($data)->refID,
                     'shortpay_code' => json_decode($data)->refID,
@@ -148,13 +148,12 @@ class PaymentController extends Controller
                     'sales_reference_id' => $transid,
                     'account_number' => json_decode($data)->pan,
                     'status' => json_decode($data)->transaction_status=='APPROVED'?"SUCCESS":"PENDING",
-                    'bank' => 'ZENITH',
+                
                     'description' => json_decode($data)->description,
-                    'date' => date('Y.m.d H:i:s'),
+                   
                 ]);
                 if ($transaction) {
-                    Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
-                     return redirect('dashboard');
+                       return redirect('dashboard');
                 }
             }
           }
