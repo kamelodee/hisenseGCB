@@ -35,7 +35,7 @@ Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 Route::get('/activities/list', [ActivityController::class, 'list'])->name('activities.list');
 
-Route::get('payments/processing', [PaymentController::class, 'processing'])->name('payments.processing');
+
 Route::group(['middleware' => ['auth']], function () {
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
@@ -83,7 +83,7 @@ Route::prefix('payments')->group(function () {
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');
     Route::post('/reconsile', [PaymentController::class, 'reconsile'])->name('payments.reconsile');
     Route::post('/reconsileweek', [PaymentController::class, 'reconsileweek'])->name('payments.reconsileweek');
- 
+    Route::get('/processing', [PaymentController::class, 'processing'])->name('payments.processing');
     Route::post('/update/{id}', [PaymentController::class, 'update'])->name('payments.update');
     Route::get('/edit/{id}', [PaymentController::class, 'edit'])->name('payments.edit');
     Route::post('/remove/{id}', [PaymentController::class, 'remove'])->name('payments.remove');

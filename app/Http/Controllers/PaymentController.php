@@ -123,7 +123,7 @@ class PaymentController extends Controller
 
         if($request->ref){
             // return redirect('dashboard');
-          return  $data =  Zenith::getTransaction($request->ref);
+           $data =  Zenith::getTransaction($request->ref);
             $trans = Transaction::latest()->first();
             $showroom = Showroom::where('name', Auth::user()->showroom)->first();
       
@@ -135,7 +135,7 @@ class PaymentController extends Controller
               // dd('lkkk');
                 $transaction =   Transaction::create([
                     'customer_name' => json_decode($data)->pan,
-                    'showroom' => '$showroom->name',
+                    'showroom' => $showroom->name,
                     'order_code' => json_decode($data)->productID,
                     'payment_token' => json_decode($data)->refID,
                     'payment_code' => json_decode($data)->refID,
@@ -147,7 +147,7 @@ class PaymentController extends Controller
                     'amount' => json_decode($data)->amount,
                     'sales_reference_id' => $transid,
                     'account_number' => json_decode($data)->pan,
-                    'status' => 'PENDING',
+                    'status' => json_decode($data)->transaction_status=='APPROVED'?"SUCCESS":"PENDING",
                     'bank' => 'ZENITH',
                     'description' => json_decode($data)->description,
                     'date' => date('Y.m.d H:i:s'),
