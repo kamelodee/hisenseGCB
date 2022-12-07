@@ -54,9 +54,10 @@ class CalbankController extends Controller
             $gcb =Helper::money(Transaction::transations('GCB'));
             $uba =Helper::money(Transaction::transationsu('UBA'));
             $zenith =Helper::money(Transaction::transations('ZENITH'));
-           
+          
             return view('transactions/all',compact('zenith','uba','total','gcb','showrooms','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
         }else{
+            
             $currentDate = Carbon::now();
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
@@ -123,15 +124,23 @@ class CalbankController extends Controller
 
     public function alllist(Request $request)
     {
-       
+        if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
+            return Helper::datatable($showroom='',$date1=$request->date1,$date2='',$transaction_type='',$period='',$bank='',request());
     
         }else{
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
     
         }
-       
+    }else{
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2='',$transaction_type='',$period='',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
+    
+        }
+    }
        
     }
 

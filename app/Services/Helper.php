@@ -54,6 +54,10 @@ class Helper
             $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->get();
 
         }
+        if(empty($date1) && empty($transaction_type) && empty($period) && empty($bank)){
+            $trans = Transaction::where('showroom',$showroom)->get();
+
+        }
 
         if(!empty($date1) && empty($transaction_type) && empty($period) && empty($bank)){
             $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', array($date1, $date2))->get();

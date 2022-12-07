@@ -5,11 +5,11 @@
      <div class="bg-primary  z-index-0">
         <div class="container d-flex justify-content-center">
             <ul class="nav nav-pills alternate nav-lg border-bottom-0 nav nav-pills nav-lg" id="pillsmyTab" role="tablist">
-                <li class="nav-item"> <a class="nav-link fw-600" id="calbanks" href="#calbank" role="tab"
+                {{-- <li class="nav-item"> <a class="nav-link fw-600" id="calbanks" href="#calbank" role="tab"
                         data-bs-toggle="tab" aria-controls="calbank" aria-selected="true">CALBANK</a></li>
-                 <li class="nav-item"> <a class="nav-link fw-600 active" id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
-                        aria-controls="uba" aria-selected="true">UBA</a></li> 
-                 <li class="nav-item"> <a class="nav-link " id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
+                 <li class="nav-item"> <a class="nav-link fw-600 " id="ubas" href="#uba" role="tab" data-bs-toggle="tab"
+                        aria-controls="uba" aria-selected="true">UBA</a></li>  --}}
+                 <li class="nav-item"> <a class="nav-link fw-600 active" id="zeniths" href="#zenith" role="tab" data-bs-toggle="tab"
                         aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
 
 
@@ -121,7 +121,7 @@
             </div>
             <!-- Content end -->
         </div>
-        <div class="tab-pane fade show active" id="uba" role="tabpanel" aria-labelledby="ubas">
+        <div class="tab-pane fade show " id="uba" role="tabpanel" aria-labelledby="ubas">
             <!-- Content
                   ============================================= -->
             <div id="content" class="py-4">
@@ -200,7 +200,7 @@
             </div>
             <!-- Content end -->
         </div>
-        <div class="tab-pane fade show " id="zenith" role="tabpanel" aria-labelledby="zeniths">
+        <div class="tab-pane fade show active" id="zenith" role="tabpanel" aria-labelledby="zeniths">
 
             <div id="content" class="py-4">
                 <div class="container">
