@@ -127,7 +127,7 @@ class PaymentController extends Controller
             $trans = Transaction::latest()->first();
             $showroom = Showroom::where('name', Auth::user()->showroom)->first();
       
-             $transid= Helper::username($trans->id?$trans->id:1,$trans->customer_name);
+             $transid= Helper::username($trans?$trans->id:1,$trans->customer_name);
           //   return json_decode($data)->amount;
             if (json_decode($data)->status == false) {
                 return back()->with('error', json_decode($data)->MESSAGE);
@@ -207,7 +207,7 @@ class PaymentController extends Controller
         $trans = Transaction::latest()->first();
         $showroom = Showroom::where('name', Auth::user()->can('Access All')?$request->showroom:Auth::user()->showroom)->first();
 
-        $data = CalBank::pay($request->amount, $request->phone, $request->name, $request->order_code, $showroom->city ? $showroom->city : "", $trans->id?$trans->id:1);
+        $data = CalBank::pay($request->amount, $request->phone, $request->name, $request->order_code, $showroom->city ? $showroom->city : "", $trans?$trans->id:1);
         $transid= Helper::username($trans->id,$trans->customer_name);
         // return json_decode($data->return);
         if (json_decode($data->return)->SUCCESS == false) {
