@@ -109,13 +109,23 @@ class CalbankController extends Controller
     public function daily(Request $request)
     {
        
-       
+        if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='today',request());
     
         }else{
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
     
+        }
+        }else{
+
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='today',request());
+    
+        }else{
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
+    
+        }
         }
         
         
@@ -147,7 +157,7 @@ class CalbankController extends Controller
 
     public function weekly(Request $request)
     {
-       
+        if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
     
@@ -155,20 +165,37 @@ class CalbankController extends Controller
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
     
         }
-
+    }else{
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
+    
+        }
+    }
         
         //
     }
 
     public function monthly(Request $request)
     {
-     
+        if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
     
         }else{
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
     
+        }
+    }else{
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
+    
+        }
         }
           
         
@@ -177,13 +204,25 @@ class CalbankController extends Controller
 
     public function yearly(Request $request)
     {
-
+        if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
     
         }else{
             return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
     
+        }
+        }else{
+
+        
+
+        if(!empty($request->date1)){
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
+    
+        }else{
+            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
+    
+        }
         }
         
     }
