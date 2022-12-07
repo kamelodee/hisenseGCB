@@ -105,7 +105,7 @@ class GcbController extends Controller
 
     public function depositecobank(Request $request)
     {
-          return  $request->all();
+        //   return  $request->all();
         try {
             $validator = Validator::make($request->all(), [
                 'showroom' => 'required',
@@ -137,6 +137,7 @@ class GcbController extends Controller
                 if ($showroom->account_number == $request->account_number) {
                     $transa =  Transaction::where('ref',  $request->ref)->first();
                     if ($transa) {
+                        return $transa;
                         $transa->update([
                             'customer_name' => $request->customer_name,
                             'showroom' => $request->showroom,
