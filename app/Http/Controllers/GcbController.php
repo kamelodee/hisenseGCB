@@ -131,11 +131,51 @@ class GcbController extends Controller
 
 
         try {
-            // return [$request->showroom,Auth::user()->showroom];
+            if(Auth::user()->can('Access All')){
+             
+                $transa=  Transaction::where('ref',  $request->ref)->first();
+                if($transa){
+                    $transa->update([
+                        'customer_name' => $request->customer_name,
+                        'showroom' => Auth::user()->showroom,
+                        'order_code' => 'gcb',
+                        'payment_token' => $transa,
+                        'payment_code' =>$transa,
+                        'shortpay_code' => $transa,
+                        'transaction_id' => $transa,
+                        'transaction_type' => $request->transaction_type,
+                        'ref' => $request->ref,
+                        'phone' => $request->customer_id,
+                        'sales_reference_id' =>$request->ref,
+                        'amount' => $request->amount,
+                        'account_number' => $request->account_number,
+                        'status' => 'SUCCESS',
+                        'bank' =>$request->bank? $request->bank: 'EOBANK',
+                        'description' => "EOBANK Transaction",
+                        'date' => $request->date,
+                    ]);
+
+                    return response()->json([
+                        'message' => "Payment Registered",
+                        'statusCode' => 200,
+    
+                    ], 200);
+            }else{
+                return response()->json([
+                    'message' => "Invalid showroom",
+                    'statusCode' => 401,
+
+                ], 401); 
+            }
+
+
+        }
+           return [$request->showroom,Auth::user()->showroom];
             $trans = Transaction::latest()->first();
            
                $transid= Helper::username($trans->id,$trans->customer_name);
                $showroom = Showroom::where('name',Auth::user()->showroom)->first();
+
             if(Auth::user()->showroom === $request->showroom && $showroom->account_number ==$request->account_number){
                 $transa=  Transaction::where('ref',  $request->ref)->first();
                 if($transa){
@@ -247,7 +287,7 @@ class GcbController extends Controller
              $showroom = Showroom::where('name',$request->showroom)->first();
 
                
-                    $transaction =   TestTransaction::where('sales_reference_id',$request->ref)->where('showroom',Auth::user()->showroom)->first();
+                    $transaction =   TestTransaction::where('sales_reference_id',$request->ref)->first();
                  
                     if( $transaction){
                      
@@ -258,6 +298,7 @@ class GcbController extends Controller
                                 'amount'=>$transaction->amount,
                                 'ref'=>$transaction->sales_reference_id,
                                 'account'=>$transaction->account_number,
+                                'showroom'=>$transaction->showroom,
                                 
                             ]
         
