@@ -120,8 +120,6 @@ class GcbController extends Controller
             'account_number' => 'required',
         ]);
 
-
-        
         if ($validator->fails()) {
             return response()->json([
                 'statusCode' => 401,
@@ -131,7 +129,7 @@ class GcbController extends Controller
 
 
         try {
-            if(Auth::user()->can('Access All')){
+            if(Auth::user()->showroom =="Head Office"){
              
                 $transa=  Transaction::where('ref',  $request->ref)->first();
                 if($transa){
