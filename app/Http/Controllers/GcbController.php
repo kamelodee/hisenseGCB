@@ -135,7 +135,7 @@ class GcbController extends Controller
                 $transid = Helper::username($trans->id, $trans->customer_name);
                 $showroom = Showroom::where('name', $request->showroom)->first();
                 if ($showroom->account_number == $request->account_number) {
-                   return $transa =  Transaction::where('ref',  $request->ref)->first();
+                    $transa =  Transaction::where('sales_reference_id',  $request->ref)->first();
                     if ($transa) {
                      
                         $transa->update([
@@ -149,7 +149,6 @@ class GcbController extends Controller
                             'transaction_type' => $request->transaction_type,
                             'ref' => $request->ref,
                             'phone' => $request->customer_id,
-                            'sales_reference_id' => $request->ref,
                             'amount' => $request->amount,
                             'account_number' => $request->account_number,
                             'status' => 'SUCCESS',
@@ -164,6 +163,13 @@ class GcbController extends Controller
 
                             ], 200);
                         }
+                    }else{
+                        return response()->json([
+                            'message' => "No transaction",
+                            'statusCode' => 404,
+
+
+                        ], 404);
                     }
                 } else {
                     return response()->json([
