@@ -11,6 +11,7 @@ use App\Http\Controllers\GcbController;
 
 
 Route::middleware(['whitelist'])->group(function () {
+    Route::match(['post','get'],'/hisense/payment/reconcile/ecobank', [GcbController::class, 'depositecobank'])->middleware('auth:sanctum');
     Route::match(['post','get'],'/hisense/payment/reconcile', [GcbController::class, 'deposit'])->middleware('auth:sanctum');
     Route::match(['post','get'],'/verify/payment/reconcile', [GcbController::class, 'verify'])->middleware('auth:sanctum');
     Route::match(['post','get'],'/payment/reconcile', [GcbController::class, 'deposit'])->middleware('auth:sanctum');
