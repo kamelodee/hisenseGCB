@@ -57,7 +57,7 @@ class UBAController extends Controller
                  'transaction_type' =>json_decode($data)->Response->description,
                  'ref' => json_decode($data)->Response->reference_no,
                  'amount' => json_decode($data)->Response->amount,
-                 'status' => json_decode($data)->Response->status,
+                 'status' => json_decode($data)->Response->status=="SUCCESSFUL"?'SUCCESS':json_decode($data)->Response->status,
                  'bank_ref' => request()->Ref,
                  'description' => json_decode($data)->Response->description,
              ]);
@@ -92,7 +92,7 @@ class UBAController extends Controller
                  'amount' => json_decode($data)->Response->amount,
                  'sales_reference_id' => $transid,
                  'account_number' => json_decode($data)->Response->unique_value,
-                 'status' => json_decode($data)->Response->status,
+                 'status' => json_decode($data)->Response->status=="SUCCESSFUL"?'SUCCESS':json_decode($data)->Response->status,
                  'bank' => 'UBA',
                  'description' => json_decode($data)->Response->description,
                  

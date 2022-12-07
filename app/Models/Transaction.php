@@ -41,6 +41,7 @@ class Transaction extends Model
         $calbank = self::where('bank',$bank)->where('showroom',Auth::user()->showroom)->get();
         return  $calbank;
     }
+    
     public static function transations($bank)
     {
         $calbank =self::where('bank',$bank)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
