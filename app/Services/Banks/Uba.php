@@ -35,7 +35,7 @@ class Uba
       "phone": ' . json_encode($phone) . ',
       "merchantID" : "GH1400134",
       "uniqueID": ' . json_encode($order_code) . ',
-      "description": " test pay",
+      "description": " payment ",
       "amount": ' . json_encode($amount) . ',
       "returnUrl": "https://api.hisense.com.gh/transactions/uba/returnoute",
       "hash":' . json_encode($hash) . '

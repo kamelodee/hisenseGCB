@@ -74,7 +74,7 @@ return $response;
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/confirmTransaction?gpid=GPZEN098&Ref='.$ref.'',
+  CURLOPT_URL => 'https://www.globalpay.com.gh/paymentapiV2/Service/confirmTransaction?gpid=GPZEN098&Ref='.$ref.'',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
