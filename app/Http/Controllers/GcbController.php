@@ -105,7 +105,7 @@ class GcbController extends Controller
 
     public function depositecobank(Request $request)
     {
-        //   return  $request->all();
+          return  $request->all();
         try {
             $validator = Validator::make($request->all(), [
                 'showroom' => 'required',
