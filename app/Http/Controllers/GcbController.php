@@ -135,10 +135,11 @@ class GcbController extends Controller
                 $transid = Helper::username($trans->id, $trans->customer_name);
                 $showroom = Showroom::where('name', $request->showroom)->first();
                 if ($showroom->account_number == $request->account_number) {
-                    $transa =  Transaction::where('sales_reference_id',  $request->ref)->first();
-                    if ($transa) {
+                    $transaction =   TestTransaction::where('sales_reference_id', $request->ref)->first();
+
+                    if ($transaction) {
                      
-                        $transa->update([
+                        $transaction->update([
                             'customer_name' => $request->customer_name,
                             'showroom' => $request->showroom,
                             'order_code' => 'ECOBANK',
@@ -156,7 +157,7 @@ class GcbController extends Controller
                             'description' => "ECOBANK Transaction",
                             'date' => $request->date,
                         ]);
-                        if ($transa) {
+                        if ($transaction) {
                             return response()->json([
                                 'message' => "Payment Registered",
                                 'statusCode' => 200,
