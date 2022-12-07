@@ -42,8 +42,7 @@ class ZenithController extends Controller
       $data =  Zenith::getTransaction($request->ref);
       $trans = Transaction::latest()->first();
       $showroom = Showroom::where('name', Auth::user()->showroom)->first();
-
-       $transid= Helper::username($trans?$trans->id:1,$trans->customer_name);
+      $transid= Helper::username($trans?$trans->id+1:1,$request->name);
     //   return json_decode($data)->amount;
       if (json_decode($data)->status == false) {
           return back()->with('error', json_decode($data)->MESSAGE);
@@ -90,7 +89,7 @@ class ZenithController extends Controller
         ]);
         $trans = Transaction::latest()->first();
         
-        $transid= Helper::username($trans?$trans->id:1,$trans->customer_name);
+        $transid= Helper::username($trans?$trans->id+1:1,$request->name);
         $transaction= Transaction::updateOrCreate([
             'customer_name' => $request->name,
             'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,

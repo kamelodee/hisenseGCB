@@ -73,7 +73,7 @@ class UBAController extends Controller
        $data = Uba::getTransaction($ref);
        $trans = Transaction::latest()->first();
        
-       $transid= Helper::username($trans->id,$trans->customer_name);
+       $transid= Helper::username($trans?$trans->id+1:1,'customer');
 
          if (json_decode($data)->Status != 0) {
              return back()->with('error', json_decode($data)->response);
@@ -123,7 +123,7 @@ class UBAController extends Controller
         // return $request->all();
         $trans = Transaction::latest()->first();
         
-        $transid= Helper::username($trans?$trans->id:1,$trans->customer_name);
+        $transid= Helper::username($trans?$trans->id+1:1,$request->name);
         Transaction::updateOrCreate([
             'customer_name' => $request->name,
             'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,
