@@ -135,9 +135,9 @@ class GcbController extends Controller
                 $transid = Helper::username($trans->id, $trans->customer_name);
                 $showroom = Showroom::where('name', $request->showroom)->first();
                 if ($showroom->account_number == $request->account_number) {
-                    $transa =  Transaction::where('ref',  $request->ref)->first();
+                   return $transa =  Transaction::where('ref',  $request->ref)->first();
                     if ($transa) {
-                        return $transa;
+                     
                         $transa->update([
                             'customer_name' => $request->customer_name,
                             'showroom' => $request->showroom,
