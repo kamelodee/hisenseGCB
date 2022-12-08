@@ -20,7 +20,7 @@ class Uba
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://gh.instantbillspay.com/instantpay/payload/bill/payment',
+      CURLOPT_URL => env('UBA_URL'),
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -37,7 +37,7 @@ class Uba
       "uniqueID": ' . json_encode($order_code) . ',
       "description": " payment ",
       "amount": ' . json_encode($amount) . ',
-      "returnUrl": "https://www.pay.hisense.com.gh/transactions/uba/returnoute",
+      "returnUrl": '.env('UBA_RETURN_URL').',
       "hash":' . json_encode($hash) . '
       }',
       CURLOPT_HTTPHEADER => array(

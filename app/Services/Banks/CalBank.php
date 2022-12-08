@@ -12,7 +12,7 @@ class CalBank{
         $curl = curl_init();
         
         curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://calpayapi.caleservice.net/api/calpay',
+          CURLOPT_URL => env('CALBANK_PAY_URL'),
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => '',
           CURLOPT_MAXREDIRS => 10,
@@ -48,13 +48,13 @@ class CalBank{
             "order": {
                 "customerAddressCity": '.json_encode($customer_city).',
                 "otherData": "TEST",
-                "datacompleteurl": "https://caclbank.net",
+                "datacompleteurl": '.env('CALBANK_URL').',
                 "sendInvoice": "FALSE",
                 "description": "PAYMENT FOR ITEM",
                 "tax": 0,
                 "customerName": '.json_encode($name).',
                 "customerCountry": "GHA",
-                "datacancelurl": "https://caclbank.net",
+                "datacancelurl": '.env('CALBANK_URL').',
                 "totalAmount": '.json_encode($amount).',
                 "shipping": 0,
                 "customerContact": '.json_encode($phone).',
@@ -62,9 +62,9 @@ class CalBank{
                 "customerEmail": '.json_encode(str_replace(' ', '', $mai).'@gmail.com').',
                 "payOption": "ALL",
                 "currency": "GHS",
-                "approveurl" : "https://api.hisense.com.gh/payments/processing",
+                "approveurl" : '.env('PROCESSING_URL').',
                 "orderCode": '.json_encode($order_code).',
-                "callbackurl": "https://caclbank.net",
+                "callbackurl": '.env('CALBANK_URL').',
                 "fullDiscountAmount": 0
             }
         }',
@@ -87,7 +87,7 @@ class CalBank{
       $curl = curl_init();
             
       curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://calpayapi.caleservice.net/api/calpay',
+        CURLOPT_URL => env('CALBANK_GET_TRANS_URL'),
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,

@@ -112,7 +112,7 @@ class ZenithController extends Controller
         if ($transaction) {
             Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
             $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
-       return redirect('https://www.globalpay.com.gh/paymentapiV2/Service/PaySecure?gpid=GPZEN098&tid='.$transId.'');
+            return redirect(env('ZENITH_REDIRECT_URL').'&tid='.$transId);
    
         }
     

@@ -20,7 +20,7 @@ class Zenith
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'https://www.globalpay.com.gh/paymentapiV2/Service/SecurePaymentRequest?GPID=GPZEN098&amount='.$amount.'&desc=paymentmade&referenceID='.$referenceID.'&productID='.$productID.'&customerID=11230&merchantlogo=123&merchantName=Cedipay',
+  CURLOPT_URL => env('ZENITHBANKURL').'&amount='.$amount.'&desc=paymentmade&referenceID='.$referenceID.'&productID='.$productID.'&customerID=11230&merchantlogo=123&merchantName=Cedipay',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -47,7 +47,7 @@ return $response;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://aspd.zenithbank.com.gh/globalpayapiV2/Service/PaySecure?gpid=GPZEN098&tid='.$tID.'',
+            CURLOPT_URL => env("ZENITH_REDIRECT_URL").'&tid='.$tID.'',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
