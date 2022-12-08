@@ -46,44 +46,44 @@ class Helper
        $trans =[];
        if(!empty($showroom)){
         if(!empty($date1)  && !empty($transaction_type)&& empty($period) && empty($bank) ){
-            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
 
         if(empty($date1) && !empty($transaction_type) && empty($period) && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->get();
+            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->latest();
 
         }
         if(empty($date1) && empty($transaction_type) && empty($period) && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->get();
+            $trans = Transaction::where('showroom',$showroom)->latest();
 
         }
 
         if(!empty($date1) && empty($transaction_type) && empty($period) && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
         if(!empty($date1) && empty($transaction_type) && empty($period) && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
         if(!empty($date1) && empty($transaction_type) && empty($period) && !empty($bank)){
             
-            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
         if(!empty($date1) && empty($transaction_type) && empty($period) && !empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
         if(empty($date1) && empty($transaction_type) && empty($period) && !empty($bank)){
           
-            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->get();
+            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->latest();
 
         }
 
         if(empty($date1) && !empty($transaction_type) && empty($period) && !empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->where('bank',$bank)->get();
+            $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->where('bank',$bank)->latest();
 
         }
        
@@ -92,7 +92,7 @@ class Helper
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-        $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
+        $trans = Transaction::where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->latest();
       
         }
         if( $period =='week' && !empty($bank)){
@@ -100,33 +100,33 @@ class Helper
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-        $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
+        $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereBetween('created_at', [$nowDate, $nextweekdate])->latest();
       
         }
         if($period =='month' && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->get();
+            $trans = Transaction::where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->latest();
 
         }
         if($period =='month' && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->get();
+            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereMonth('created_at', Carbon::now()->month)->latest();
 
         }
         if($period =='year' && empty($bank)){
             
-            $trans = Transaction::where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->get();
+            $trans = Transaction::where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->latest();
  
          }
         if($period =='year' && !empty($bank)){
             
-            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->get();
+            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->latest();
  
          }
          if($period =='today' && empty($bank)){
-            $trans = Transaction::where('showroom',$showroom)->whereDay('created_at',Carbon::now())->get();
+            $trans = Transaction::where('showroom',$showroom)->whereDay('created_at',Carbon::now())->latest();
 
         }
          if($period =='today' && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereDay('created_at',Carbon::now())->get();
+            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->whereDay('created_at',Carbon::now())->latest();
 
         }
 
@@ -138,37 +138,37 @@ class Helper
         
         if(!empty($date1)  && !empty($transaction_type) && empty($period) && empty($bank)){
            
-            $trans = Transaction::where('transaction_type',$transaction_type)->whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::where('transaction_type',$transaction_type)->whereBetween('created_at', array($date1, $date2))->latest();
 
         }
 
         if(!empty($transaction_type) && empty($period) && empty($date1) && empty($bank)){
-            $trans = Transaction::where('transaction_type',$transaction_type)->get();
+            $trans = Transaction::where('transaction_type',$transaction_type)->latest();
 
         }
 
         if(!empty($date1) && empty($period) && empty($transaction_type) && empty($bank)){
-            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->get();
+            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->latest();
 
         }
         if(!empty($date1) && empty($period) && empty($transaction_type) && !empty($bank)){
-            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->where('bank',$bank)->get();
+            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->where('bank',$bank)->latest();
 
         }
         if(!empty($date1) && empty($period) && !empty($transaction_type) && !empty($bank)){
-            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->where('bank',$bank)->where('transaction_type',$transaction_type)->get();
+            $trans = Transaction::whereBetween('created_at', array($date1, $date2))->where('bank',$bank)->where('transaction_type',$transaction_type)->latest();
 
         }
         if(empty($date1) && empty($period) && !empty($transaction_type) && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->where('transaction_type',$transaction_type)->get();
+            $trans = Transaction::where('bank',$bank)->where('transaction_type',$transaction_type)->latest();
 
         }
         if(empty($date1) && empty($period) && empty($transaction_type) && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->get();
+            $trans = Transaction::where('bank',$bank)->latest();
 
         }
         if(empty($date1) && empty($period) && empty($transaction_type) && empty($bank)){
-            $trans = Transaction::all();
+            $trans = Transaction::latest();
 
         }
         if($period =='week' && empty($bank)){
@@ -176,7 +176,7 @@ class Helper
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-        $trans = Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->get();
+        $trans = Transaction::whereBetween('created_at', [$nowDate, $nextweekdate])->latest();
       
         }
         if($period =='week' && !empty($bank)){
@@ -184,29 +184,29 @@ class Helper
             $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
             $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
              
-           $trans = Transaction::where('bank',$bank)->whereBetween('created_at', [$nowDate, $nextweekdate])->get();
+           $trans = Transaction::where('bank',$bank)->whereBetween('created_at', [$nowDate, $nextweekdate])->latest();
       
         }
 
         if($period =='month' && empty($bank)){
-            $trans = Transaction::whereMonth('created_at', Carbon::now()->month)->get();
+            $trans = Transaction::whereMonth('created_at', Carbon::now()->month)->latest();
 
         }
         if($period =='month' && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->whereMonth('created_at', Carbon::now()->month)->get();
+            $trans = Transaction::where('bank',$bank)->whereMonth('created_at', Carbon::now()->month)->latest();
 
         }
         if($period =='year' && empty($bank)){
          
-            $trans = Transaction::whereYear( 'created_at', Carbon::now()->year)->get();
+            $trans = Transaction::whereYear( 'created_at', Carbon::now()->year)->latest();
 
         }
         if($period =='today' && empty($bank)){
-            $trans = Transaction::whereDay('created_at',Carbon::now())->get();
+            $trans = Transaction::whereDay('created_at',Carbon::now())->latest();
 
         }
         if($period =='today' && !empty($bank)){
-            $trans = Transaction::where('bank',$bank)->whereDay('created_at',Carbon::now())->get();
+            $trans = Transaction::where('bank',$bank)->whereDay('created_at',Carbon::now())->latest();
 
         }
         
