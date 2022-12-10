@@ -204,7 +204,7 @@
 
 <script >
   
-  let BASE_URL ='http://127.0.0.1:8000'
+  let BASE_URL ='https://pay.hisense.com.gh'
      
      $(document).on('click',`#close` , function(){
         $("#fullModal").modal("hide");
