@@ -17,6 +17,10 @@ class Showroom extends Model
         'momo',
         'gcb',
         'card',
+        'today',
+        'week',
+        'month',
+        'year',
         'total',
         
     ];

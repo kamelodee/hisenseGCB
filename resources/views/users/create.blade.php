@@ -6,9 +6,7 @@
       <label for="payerName" class="form-label">Name</label>
       <input type="text" value="" name="name" class="form-control" data-bv-field="payerName" id="payerName" required="" placeholder="Enter Name">
     </div>
-   
-   
-   
+
     <div class="mb-3">
       <label for="emailID" class="form-label">Phone</label>
       <input type="text" value="" name="phone" class="form-control" data-bv-field="emailid" id="emailID" required="" placeholder="Enter Phone Number">

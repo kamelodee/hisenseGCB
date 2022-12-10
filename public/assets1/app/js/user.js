@@ -123,3 +123,31 @@ function Adduser(){
         }
     });
 }
+
+function banksetting(){
+
+    $.ajaxSetup({
+        headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    });
+    jQuery.ajax({
+        url: BASE_URL+'/bank/setting',
+        type: 'GET',
+        dataType: 'html',
+        beforeSend: function() {
+          
+        },
+        success: function( data ){
+
+            $("#fullModalTitle").text("Bank Setting");
+            $("#fullModal").modal("show");
+            $("#fullModalBody").html(data);
+
+        },
+        error: function (xhr, b, c) {
+            console.log("xhr=" + xhr + " b=" + b + " c=" + c);
+        },
+        complete: function() {
+       
+        }
+    });
+}

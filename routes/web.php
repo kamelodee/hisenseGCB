@@ -15,6 +15,7 @@ use App\Http\Controllers\CalbankController;
 use App\Http\Controllers\UBAController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ZenithController;
+use App\Http\Controllers\BankController;
 
 
 Route::get('/', function () {
@@ -34,6 +35,8 @@ Route::post('/admin/login', [UserController::class, 'login'])->name('admin.login
 Route::get('/apidocs', [GcbController::class, 'apidoc'])->name('api');
 Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 Route::get('/activities/list', [ActivityController::class, 'list'])->name('activities.list');
+Route::get('/bank/setting', [BankController::class, 'index'])->name('bank.setting');
+Route::post('/bank/update', [BankController::class, 'store'])->name('bank.store');
 
 
 Route::group(['middleware' => ['auth']], function () {

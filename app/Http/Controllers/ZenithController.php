@@ -77,16 +77,15 @@ class ZenithController extends Controller
     }
     public function pay(Request $request)
     {
-      
-        $validator = Validator::make($request->all(), [
-
-            'name' => 'required',
-            'order_code' => 'required',
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'order_code' => ['required', 'string', 'unique:transactions'],
             'phone' => 'required',
             'amount' => 'required',
-
-
+      
         ]);
+     
+
         $trans = Transaction::latest()->first();
         
         $transid= Helper::username($trans?$trans->id+1:1,$request->name);

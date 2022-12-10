@@ -23,7 +23,7 @@
 
 
             <div class="row">
-            <div class="col-md-3 col-lg-3 col-sm-12">
+            <div class="col-md-2 col-lg-3 col-sm-12">
                 <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
                     <a href="#">
                     <h3 class="text-4 text-white  fw-600">All Showrooms</h3>
@@ -42,7 +42,7 @@
           </div>
           </div>
                
-                <div class="col-md-8 col-lg-8 col-sm-12">
+                <div class="col-md-9 col-lg-9 col-sm-12">
                     <div class="table-responsive">
                         <div class="card p-3">
                             <div class="d-md-flex justify-content-between flex-sm-column flex-md-row">
@@ -64,8 +64,12 @@
                                         <tr>
                                             <th class="border-top-0 text-white_">#</th>
                                             <th class="border-top-0 text-white_">Showroom</th>
+                                            <th class="border-top-0 text-white_">Today</th>
+                                            <th class="border-top-0 text-white_">This Week</th>
+                                            <th class="border-top-0 text-white_">This Month</th>
+                                            <th class="border-top-0 text-white_">This Year</th>
                                             <th class="border-top-0 text-white_">MOMO</th>
-                                            <th class="border-top-0 text-white_">GCB</th>
+                                            <th class="border-top-0 text-white_">Deposits</th>
                                             <th class="border-top-0 text-white_">Card</th>
                                             <th class="border-top-0 text-white_">Total</th>
                                            
@@ -123,6 +127,26 @@ console.log($('#search1').val());
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'today',
+                        name: 'today',
+                        searchable: true
+                    },
+                    {
+                        data: 'week',
+                        name: 'week',
+                        searchable: true
+                    },
+                    {
+                        data: 'month',
+                        name: 'month',
+                        searchable: true
+                    },
+                    {
+                        data: 'year',
+                        name: 'year',
+                        searchable: true
                     },
                     {
                         data: 'momo',

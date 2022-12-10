@@ -94,7 +94,6 @@
           </div>
         </div>
       </div>
-      <!-- Login Form End --> 
     </div>
   </div>
 </div>

@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\Showroom;
 use App\Models\Activity;
+use App\Models\Bank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +30,9 @@ class PaymentController extends Controller
     public function index()
     {
         $showrooms = Showroom::all();
-        return view('payment/index',compact('showrooms'));
+        $banks = Bank::all();
+        
+        return view('payment/index',compact('showrooms','banks'));
     }
 
     public function transaction()
@@ -199,7 +202,7 @@ class PaymentController extends Controller
         $validator = Validator::make($request->all(), [
 
             'name' => 'required',
-            'order_code' => 'required',
+            'order_code' => ['required', 'string', 'unique:transactions'],
             'phone' => 'required',
 
 

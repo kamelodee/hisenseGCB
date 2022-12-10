@@ -32,6 +32,8 @@
 
                     </div>
                     <hr> 
+                    
+                    @if(App\Models\Bank::where('name',"GCB")->first()->status =="ACTIVE")
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{route('transactions.gcb')}}">
                         <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -41,6 +43,8 @@
                        
                       
                       </div>
+                      @endif
+                      @if(App\Models\Bank::where('name',"ZENITH")->first()->status =="ACTIVE")
                       <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{route('transactions.zenith')}}">
                         <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -50,6 +54,8 @@
                         <hr class="mx-n3">
                       
                       </div>
+                      @endif
+                      @if(App\Models\Bank::where('name',"UBA")->first()->status =="ACTIVE")
                       <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{route('transactions.uba')}}">
                         <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -59,7 +65,7 @@
                       
                       
                       </div>
-                     
+                     @endif
                 </aside>
                 <!-- Left Panel End -->
 

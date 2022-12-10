@@ -24,6 +24,7 @@
 
 
                     </div>
+                   
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="#">
                             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -33,6 +34,7 @@
 
 
                     </div>
+                    @if(App\Models\Bank::where('name',"GCB")->first()->status =="ACTIVE")
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{ route('transactions.gcb') }}">
                             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -42,7 +44,8 @@
 
 
                     </div>
-                
+                    @endif
+                    @if(App\Models\Bank::where('name',"UBA")->first()->status =="ACTIVE")
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{ route('transactions.uba') }}">
                             <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
@@ -52,9 +55,30 @@
 
 
                     </div>
+@endif
+                    @if(App\Models\Bank::where('name',"ZENITH")->first()->status =="ACTIVE")
+                    <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+                        <a href="{{ route('transactions.zenith') }}">
+                            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+                            <h3 class="text-3 fw-400"> {{ $uba }}</h3>
+                            <p class="text-muted   fw-600 ">Zenith Transactions</p>
+                        </a>
 
 
+                    </div>
+@endif
 
+@if(App\Models\Bank::where('name',"CALBANK")->first()->status =="ACTIVE")
+                    <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
+            <a href="{{route('transactions.calbank')}}">
+            <div class="text-10 text-primary my-3"><i class="fas fa-building"></i></div>
+            <h3 class="text-3 fw-400">GHC {{$calbank}}</h3>
+            <p class="mb-2 ">Calbank Transactions</p>
+            </a>
+            <hr class="mx-n3">
+          
+          </div>
+                @endif 
                 </aside>
              <!-- Left Panel end ============================================= -->
                 <div class="col-lg-9 col-md-9 col-sm-12">
@@ -163,7 +187,7 @@
                                   <a href="{{ route('showrooms.typeTrans','GCB') . '?showroom=' . $showroom->name }}">
                                       <div class="text-7 text-primary my-3"><i class="fas fa-money-check"></i></div>
                                       <h3 class="text-3  fw-400"> {{ $gcb }}</h3>
-                                      <p class=" text-muted   fw-600">GCB</p>
+                                      <p class=" text-muted   fw-600">Deposits </p>
                                   </a>
 
                               </div>

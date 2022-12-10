@@ -48,10 +48,21 @@
               <ul class="dropdown-menu">
              
                 <li><a class="dropdown-item" href="{{route('transactions.all')}}">ALL Payments</a></li>
+                @if(App\Models\Bank::where('name',"GCB")->first()->status =="ACTIVE")
                 <li><a class="dropdown-item" href="{{route('transactions.gcb')}}">GCB Payments</a></li>
+               @endif
+               @if(App\Models\Bank::where('name',"UBA")->first()->status =="ACTIVE")
+               
                 <li><a class="dropdown-item" href="{{route('transactions.uba')}}">UBA Payments</a></li>
+                @endif
+            
+               @if(App\Models\Bank::where('name',"CALBANK")->first()->status =="ACTIVE")
+               
+                <li><a class="dropdown-item" href="{{route('transactions.calbank')}}">Calbank Payments</a></li>
+                @endif
+                @if(App\Models\Bank::where('name',"ZENITH")->first()->status =="ACTIVE")
                 <li><a class="dropdown-item" href="{{route('transactions.zenith')}}">ZENITH Payments</a></li>
-              
+              @endif
                
               </ul>
               @endcan
@@ -84,7 +95,8 @@
                 <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
               
                 <li><a class="dropdown-item" href="{{route('showrooms')}}">Showrooms</a></li>
-                <li><a class="dropdown-item" href="{{route('api')}}">API docs</a></li>
+                <li><a href="javascript:void()" class="dropdown-item"
+                  onclick="banksetting()"> Bank Setting </a></li>
             
               </ul>
             </li>
@@ -192,7 +204,7 @@
 
 <script >
   
-  let BASE_URL ='https://www.pay.hisense.com.gh'
+  let BASE_URL ='http://127.0.0.1:8000'
      
      $(document).on('click',`#close` , function(){
         $("#fullModal").modal("hide");

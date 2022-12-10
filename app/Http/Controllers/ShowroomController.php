@@ -59,8 +59,16 @@ class ShowroomController extends Controller
 
     public function transaction()
     {
+        $currentDate = Carbon::now();
+        $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+        $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
         $showrooms = Showroom::all();
         foreach($showrooms as $showroom){
+            $transactions_today = DB::table('transactions')->where('showroom',$showroom->name)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount');
+            $transactions_week = DB::table('transactions')->where('showroom',$showroom->name)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount');
+            $transactions_month = DB::table('transactions')->where('showroom',$showroom->name)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount');
+            $transactions_year = DB::table('transactions')->where('showroom',$showroom->name)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount');
+        
            $sum = Transaction::where('showroom',$showroom->name)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
            $gcbsum = Transaction::where('showroom',$showroom->name)->where('bank','GCB')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
            $momo = Transaction::where('showroom',$showroom->name)->where('transaction_type','momo')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount');
@@ -68,7 +76,11 @@ class ShowroomController extends Controller
            $showroom->update([
             'total'=>$sum,
             'gcb'=>$gcbsum,
-            'momo'=>$momo
+            'momo'=>$momo,
+            'today'=>$transactions_today,
+            'month'=>$transactions_month,
+            'week'=>$transactions_week,
+            'year'=>$transactions_year
         ]);
           
         
