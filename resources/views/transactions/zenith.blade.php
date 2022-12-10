@@ -15,7 +15,13 @@
       <div class="row"> 
 
         <aside class="col-lg-2 col-md-3 col-sm-12"> 
-          
+          <div class="bg-primary shadow-sm rounded text-center py-2 mb-4">
+            <a href="">
+            <h3 class="text-4 text-white  fw-600">Zenith Payments</h3>
+           
+            </a>
+        
+          </div>
           <!-- Available Balance
           =============================== -->
           <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
@@ -35,7 +41,7 @@
         <!-- Middle Panel
         ============================================= -->
         <div class="col-lg-10 col-md-9 col-sm-12 ">
-          <h4 class="fw-400 mb-3">ZENITH Transactions</h4>
+      
           
           <!-- All Transactions
           ============================================= -->
