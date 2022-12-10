@@ -29,6 +29,10 @@
           <li class="text-muted">{{$transaction->customer_name}}</li>
         </ul>
         <ul class="list-unstyled">
+          <li class="fw-500">Phone:</li>
+          <li class="text-muted">{{$transaction->phone}}</li>
+        </ul>
+        <ul class="list-unstyled">
           <li class="fw-500">Sale Reference:</li>
           <li class="text-muted">{{$transaction->sales_reference_id}}</li>
         </ul>

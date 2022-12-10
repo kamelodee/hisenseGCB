@@ -82,8 +82,9 @@
                           <th class="border-top-0 text-white_">#</th>
                           <th class="border-top-0 text-white_">Date</th>
                           <th class="border-top-0 text-white_">Transaction ID</th>
-                          <th class="border-top-0 text-white_">Transaction Type</th>
+                          <th class="border-top-0 text-white_">Type</th>
                           <th class="border-top-0 text-white_">Amount</th>
+                          <th class="border-top-0 text-white_">Customer</th>
                           <th class="border-top-0 text-white_">Showroom</th>
                           <th class="border-top-0 text-white_">Status</th>
                           
@@ -158,7 +159,11 @@ function load_data(from_date = '', to_date = '')
                         name: 'amount',
                         searchable: true
                     },
-
+                    {
+                            data: 'customer_name',
+                            name: 'customer_name',
+                            searchable: true
+                        },
                     {
                         data: 'showroom',
                         name: 'showroom',

@@ -32,7 +32,7 @@
 
                     </div>
                     <hr> 
-                    
+
                     @if(App\Models\Bank::where('name',"GCB")->first()->status =="ACTIVE")
                     <div class="bg-white shadow-sm rounded text-center p-3 mb-4">
                         <a href="{{route('transactions.gcb')}}">
@@ -133,9 +133,10 @@
 
                                         <th class="border-top-0 text-white_">Date</th>
                                         <th class="border-top-0 text-white_">Sales Ref</th>
-                                        <th class="border-top-0 text-white_">Bank Transaction ID</th>
+                                    
                                        
                                         <th class="border-top-0 text-white_">Amount</th>
+                                        <th class="border-top-0 text-white_">Customer</th>
                                         <th class="border-top-0 text-white_">Showroom</th>
                                         <th class="border-top-0 text-white_">Status</th>
                                         <th class="border-top-0 text-white_">Reconcile Status</th>
@@ -152,9 +153,10 @@
                                      
                                         <th class="border-top-0 text-white_">Date</th>
                                         <th class="border-top-0 text-white_">Sales Ref</th>
-                                        <th class="border-top-0 text-white_">Bank Transaction ID</th>
+                                      
                                        
                                         <th class="border-top-0 text-white_">Amount</th>
+                                        <th class="border-top-0 text-white_">Customer</th>
                                         <th class="border-top-0 text-white_">Showroom</th>
                                         <th class="border-top-0 text-white_">Status</th>
                                         <th class="border-top-0 text-white_">Reconsile Status</th>
@@ -227,10 +229,7 @@ function load_data(from_date = '', to_date = '')
                         data: 'sales_reference_id',
                         name: 'sales_reference_id'
                     },
-                    {
-                        data: 'transaction_id',
-                        name: 'transaction_id'
-                    },
+                   
                    
                     
                     {
@@ -238,7 +237,11 @@ function load_data(from_date = '', to_date = '')
                         name: 'amount',
                         searchable: true
                     },
-
+                    {
+                            data: 'customer_name',
+                            name: 'customer_name',
+                            searchable: true
+                        },
                     {
                         data: 'showroom',
                         name: 'showroom',

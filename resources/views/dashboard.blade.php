@@ -209,9 +209,10 @@
                                             <th class="border-top-0 text-white_"></th>
                                             <th class="border-top-0 text-white_">Date</th>
                                             <th class="border-top-0 text-white_">Sales Ref</th>
-                                            <th class="border-top-0 text-white_">Transaction ID</th>
-                                            <th class="border-top-0 text-white_">Transaction Type</th>
+                                        
+                                            <th class="border-top-0 text-white_">Type</th>
                                             <th class="border-top-0 text-white_">Amount</th>
+                                            <th class="border-top-0 text-white_">Customer</th>
 
                                             <th class="border-top-0 text-white_">Showroom</th>
                                             <th class="border-top-0 text-white_">Status</th>
@@ -293,10 +294,7 @@
                             name: 'sales_reference_id',
                             searchable: true
                         },
-                        {
-                            data: 'transaction_id',
-                            name: 'transaction_id'
-                        },
+                       
                         {
                             data: 'transaction_type',
                             name: 'transaction_type',
@@ -305,6 +303,11 @@
                         {
                             data: 'amount',
                             name: 'amount',
+                            searchable: true
+                        },
+                        {
+                            data: 'customer_name',
+                            name: 'customer_name',
                             searchable: true
                         },
 
