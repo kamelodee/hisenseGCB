@@ -204,7 +204,7 @@
 
 <script >
   
-  let BASE_URL ='https://pay.hisense.com.gh'
+  let BASE_URL ='https://www.pay.hisense.com.gh'
      
      $(document).on('click',`#close` , function(){
         $("#fullModal").modal("hide");
