@@ -88,19 +88,25 @@
           <ul class="navbar-nav">
            
             <li class="dropdown language fw-600"><a class="fw-600 text-2" href=""><i class="fas fa-map-marker-alt mx-2"></i> {{Auth::user()->showroom}}</a></li>
-            @can('Access All')
+          
             <li class="dropdown language"> <a class="dropdown-toggle fw-600" href="#"><i class="fas text-2 fa-user-cog me-2"></i>Settings</a>
               <ul class="dropdown-menu">
+                @can('Show Users')
                 <li><a class="dropdown-item" href="{{route('users')}}">Users</a></li>
+                @endcan
+                @can('Show Roles')
                 <li><a class="dropdown-item" href="{{route('roles')}}">Roles</a></li>
-              
+                @endcan
+                @can('Show Showrooms')
                 <li><a class="dropdown-item" href="{{route('showrooms')}}">Showrooms</a></li>
+                @endcan
+                @can('Bank Setting')
                 <li><a href="javascript:void()" class="dropdown-item"
                   onclick="banksetting()"> Bank Setting </a></li>
-            
+            @endcan
               </ul>
             </li>
-            @endcan
+          
            
             <li class="dropdown profile ms-2"> <a class="px-0 dropdown-toggle fw-600 " href="#"><i class="fas fa-user text-2 text-primary"></i><span class="text-1 ms-2 mx-4">{{Auth::user()->name}}</span></a>
                 
@@ -108,7 +114,7 @@
                 <li class="text-center text-3 py-2">hi {{Auth::user()->name}}</li>
                 <li class="dropdown-divider mx-n3"></li>
                 <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i>My Profile</a></li>
-                @can('Access All')
+                @can('View Logs')
                <li><a class="dropdown-item" href="{{route('activities')}}"><i class="fas fa-credit-card"></i>Activities Logs</a></li>
                @endcan
                 {{-- <li><a class="dropdown-item" href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i>Sign Out</a></li> --}}

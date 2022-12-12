@@ -23,9 +23,10 @@
                             <div class="d-flex">
 
                                 <h5 class="form-header">
+                                    {{-- @can('Create Users') --}}
                                     <a href="javascript:void()" class="btn btn-primary float-right btn-sm"
                                         onclick="Adduser()"><i class="os-icon os-icon-plus-square"></i> Add </a>
-                                    
+                                    {{-- @endcan --}}
                                 </h5>
                                 <h5 class="mx-3">Users</h5>
                             </div>

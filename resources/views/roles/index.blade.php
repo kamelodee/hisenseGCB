@@ -23,8 +23,10 @@
                             <div class="d-flex">
 
                                 <h5 class="form-header_ ">
+                                    @can('Create Role')
                                     <a href="javascript:void()" class="btn  btn-primary  btn-sm float-right"
                                         onclick="RoleAdd()"><i class="os-icon os-icon-plus-square"></i> Add </a>
+                                        @endcan
                                 </h5>
                                 <h5 class="mx-3">Roles</h5>
                             </div>
