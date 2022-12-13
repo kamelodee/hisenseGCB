@@ -20,7 +20,7 @@ class Zenith
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => env('ZENITHBANKURL').'&amount='.$amount.'&desc=&referenceID='.$referenceID.'&productID='.$productID.'&customerID=11230&merchantlogo=123&merchantName=Cedipay',
+  CURLOPT_URL => env('ZENITHBANKURL').'&amount='.$amount.'&desc=payment&referenceID='.$referenceID.'&productID='.$productID.'&customerID=11230&merchantlogo=123&merchantName=Cedipay',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
