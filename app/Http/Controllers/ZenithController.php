@@ -79,7 +79,7 @@ class ZenithController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'order_code' => ['required', 'string', 'unique:transactions'],
+            'order_code' => ['required', 'string'],
             'phone' => 'required',
             'amount' => 'required',
       
