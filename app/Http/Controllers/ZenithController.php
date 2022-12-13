@@ -74,7 +74,7 @@ class ZenithController extends Controller
         
     }
 
-    
+
     public function pay(Request $request)
     {
         $request->validate([
@@ -101,7 +101,7 @@ class ZenithController extends Controller
             'ref' => '',
             'phone' => $request->phone,
             'amount' => $request->amount,
-            'sales_reference_id' => $transid,
+            'sales_reference_id' =>$request->order_code,
             'account_number' => $request->phone,
             'status' => 'PENDING',
             'bank' => 'ZENITH',
