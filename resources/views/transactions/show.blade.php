@@ -37,6 +37,10 @@
           <li class="text-muted">{{$transaction->sales_reference_id}}</li>
         </ul>
         <ul class="list-unstyled">
+          <li class="fw-500">Bank Reference:</li>
+          <li class="text-muted">{{$transaction->ref}}</li>
+        </ul>
+        <ul class="list-unstyled">
           <li class="fw-500">Transaction ID:</li>
           <li class="text-muted">{{$transaction->transaction_id}}</li>
         </ul>

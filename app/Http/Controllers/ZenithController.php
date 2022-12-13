@@ -49,16 +49,14 @@ class ZenithController extends Controller
       } else {
         // dd('lkkk');
           $transaction =   Transaction::create([
-              'customer_name' => json_decode($data)->pan,
-              'showroom' => '$showroom->name',
+        
               'order_code' => json_decode($data)->productID,
               'payment_token' => json_decode($data)->refID,
               'payment_code' => json_decode($data)->refID,
               'shortpay_code' => json_decode($data)->refID,
-              'transaction_id' => json_decode($data)->refID,
+              'transaction_id' => $transid,
               'transaction_type' => json_decode($data)->type,
               'ref' => json_decode($data)->refID,
-              'phone' => json_decode($data)->description,
               'amount' => json_decode($data)->amount,
               'sales_reference_id' => json_decode($data)->productID,
               'account_number' => json_decode($data)->pan,
@@ -75,6 +73,8 @@ class ZenithController extends Controller
     }
         
     }
+
+    
     public function pay(Request $request)
     {
         $request->validate([

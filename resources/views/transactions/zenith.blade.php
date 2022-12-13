@@ -87,7 +87,9 @@
                       <tr>
                           <th class="border-top-0 text-white_">#</th>
                           <th class="border-top-0 text-white_">Date</th>
-                          <th class="border-top-0 text-white_">Transaction ID</th>
+                          <th class="border-top-0 text-white_">Sales Ref</th>
+                          <th class="border-top-0 text-white_">Bank  Ref</th>
+                        
                           <th class="border-top-0 text-white_">Type</th>
                           <th class="border-top-0 text-white_">Amount</th>
                           <th class="border-top-0 text-white_">Customer</th>
@@ -155,8 +157,13 @@ function load_data(from_date = '', to_date = '')
                         name: 'sales_reference_id'
                     },
                     {
-                        data: 'transaction_id',
-                        name: 'transaction_id'
+                        data: 'ref',
+                        name: 'ref'
+                    },
+                   
+                    {
+                        data: 'transaction_type',
+                        name: 'transaction_type'
                     },
                    
                     
