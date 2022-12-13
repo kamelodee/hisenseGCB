@@ -146,7 +146,6 @@ class PaymentController extends Controller
                     'transaction_id' =>   $transid,
                     'transaction_type' => json_decode($data)->type =="MOMO_MTN"?"MOBILE MONEY":json_decode($data)->type,
                     'ref' => json_decode($data)->refID,
-                    'phone' => json_decode($data)->description,
                     'amount' => json_decode($data)->amount,
                     'sales_reference_id' => json_decode($data)->productID,
                     'account_number' => json_decode($data)->pan,
