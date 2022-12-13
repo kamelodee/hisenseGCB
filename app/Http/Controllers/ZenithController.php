@@ -60,7 +60,7 @@ class ZenithController extends Controller
               'ref' => json_decode($data)->refID,
               'phone' => json_decode($data)->description,
               'amount' => json_decode($data)->amount,
-              'sales_reference_id' => $transid,
+              'sales_reference_id' => json_decode($data)->productID,
               'account_number' => json_decode($data)->pan,
               'status' => 'PENDING',
               'bank' => 'ZENITH',

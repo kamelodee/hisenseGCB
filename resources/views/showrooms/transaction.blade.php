@@ -64,10 +64,7 @@
                                         <tr>
                                             <th class="border-top-0 text-white_">#</th>
                                             <th class="border-top-0 text-white_">Showroom</th>
-                                            <th class="border-top-0 text-white_">Today</th>
-                                            <th class="border-top-0 text-white_">This Week</th>
-                                            <th class="border-top-0 text-white_">This Month</th>
-                                            <th class="border-top-0 text-white_">This Year</th>
+                                            
                                             <th class="border-top-0 text-white_">MOMO</th>
                                             <th class="border-top-0 text-white_">Deposits</th>
                                             <th class="border-top-0 text-white_">Card</th>
@@ -128,26 +125,7 @@ console.log($('#search1').val());
                         data: 'name',
                         name: 'name'
                     },
-                    {
-                        data: 'today',
-                        name: 'today',
-                        searchable: true
-                    },
-                    {
-                        data: 'week',
-                        name: 'week',
-                        searchable: true
-                    },
-                    {
-                        data: 'month',
-                        name: 'month',
-                        searchable: true
-                    },
-                    {
-                        data: 'year',
-                        name: 'year',
-                        searchable: true
-                    },
+                   
                     {
                         data: 'momo',
                         name: 'momo',
