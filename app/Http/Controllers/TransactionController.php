@@ -148,7 +148,7 @@ class TransactionController extends Controller
 
     public function zenithlist(Request $request)
     {
-        if(Auth::user()->can('Access All')){
+        if(Auth::user()->can('All Transaction')){
             if(!empty($request->date1)){
                 return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
         
@@ -158,9 +158,11 @@ class TransactionController extends Controller
             }
         }else{
             if(!empty($request->date1)){
+
                 return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
         
             }else{
+                $trans = Transaction::where($showroom=Auth::user()->showroom)->where('bank','ZENITH')->latest();
                 return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
         
             }

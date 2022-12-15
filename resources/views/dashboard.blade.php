@@ -95,7 +95,7 @@
                                         <p class=" text-muted   fw-600">Today</p>
 
                                     </a>
-                                    @if (!Auth::user()->can('Access All'))
+                                    @can('Reconcile')
                                         <div class="reconsile">
                                             <form method="POST" action="{{ route('payments.reconsileweek') }}"
                                                 id="reconsile2">
@@ -104,7 +104,7 @@
                                                     Today</button>
                                             </form>
                                         </div>
-                                    @endif
+                                    @endcan
 
                                 </div>
                             </div>
@@ -228,12 +228,14 @@
 
                                     </tbody>
                                 </table>
+                                @can('Reconcile')
                                 <div class="reconsile">
                                     <form method="POST" action="{{ route('payments.reconsile') }}" id="reconsile">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-primary">Reconcile</button>
                                     </form>
                                 </div>
+                                @endcan
                             </div>
 
                         </div>

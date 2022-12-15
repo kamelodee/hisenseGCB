@@ -16,6 +16,7 @@ use App\Http\Controllers\UBAController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ZenithController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\EcobankController;
 
 
 Route::get('/', function () {
@@ -27,7 +28,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/canceled_url', [EcobankController::class, 'canceled'])->name('payments.cancelede');
+Route::get('/success-url', [EcobankController::class, 'success'])->name('payments.success');
 Route::get('/transaction', [PaymentController::class, 'transaction'])->name('transaction');
 Route::get('/admin', [UserController::class, 'loginForm'])->name('admin.loginform');
 Route::get('/unauthorise', [UserController::class, 'unauthorise'])->name('unauthorise');
@@ -81,6 +83,8 @@ Route::prefix('payments')->group(function () {
     Route::get('/calbank', [PaymentController::class, 'index'])->name('payments.calbank');
     Route::get('/uba', [PaymentController::class, 'uba'])->name('payments.uba');
     Route::post('/zenith', [ZenithController::class, 'pay'])->name('payments.zenith');
+    Route::post('/ecobank', [EcobankController::class, 'pay'])->name('payments.ecobank');
+   
     Route::get('/zenith/redirect', [ZenithController::class, 'redirect'])->name('payments.redirect');
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');
     Route::post('/pay', [PaymentController::class, 'calpay'])->name('payments.pay');

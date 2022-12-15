@@ -144,6 +144,7 @@ class CalbankController extends Controller
         }
     }else{
         if(!empty($request->date1)){
+            
             return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2='',$transaction_type='',$period='',$bank='',request());
     
         }else{

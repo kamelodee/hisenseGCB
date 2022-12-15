@@ -18,6 +18,11 @@
                         aria-controls="zenith" aria-selected="true">ZENITH BANK</a></li>
                         
                         @endif
+                        @if($banks[4]->status =="ACTIVE")
+                        <li class="nav-item"> <a class="nav-link fw-600 " id="ecobanks" href="#ecobank" role="tab" data-bs-toggle="tab"
+                        aria-controls="ecobank" aria-selected="true">ACOBANK</a></li>
+                        
+                        @endif
 @if($banks[3]->status =="ACTIVE")
 
     <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab" data-bs-toggle="tab"
@@ -135,6 +140,9 @@
             <!-- Content end -->
         </div>
         @endif
+
+
+
         @if($banks[2]->status =="ACTIVE")
         <div class="tab-pane fade show " id="uba" role="tabpanel" aria-labelledby="ubas">
             <!-- Content
@@ -216,22 +224,110 @@
             <!-- Content end -->
         </div>
         @endif
-        @if($banks[0]->status =="ACTIVE")
-        <div class="tab-pane fade show active" id="zenith" role="tabpanel" aria-labelledby="zeniths">
+
+{{-- ecobank --}}
+
+@if($banks[2]->status =="ACTIVE")
+<div class="tab-pane fade show " id="uba" role="tabpanel" aria-labelledby="ubas">
+    <!-- Content
+          ============================================= -->
+    <div id="content" class="py-4">
+        <div class="container">
+
+
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
+                    <div class="bg-white shadow-sm rounded p-4 mb-4">
+                        <h3 class="text-5 fw-600 mb-3 mb-sm-4 text-center">UBA</h3>
+                        <hr>
+                        <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
+
+                        <!-- Request Money Form
+                    ============================================= -->
+                        <form id="form-send-money" method="post" action="{{ route('transactions.uba.pay') }}">
+
+                            @csrf
+                            <div class="mb-3">
+                                <label for="payerName" class="form-label">Full Name</label>
+                                <input type="text" value="" class="form-control"
+                                    data-bv-field="payerName" id="payerName" required="" name="name"
+                                    placeholder="Enter Full Name">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label for="emailID" class="form-label">Phone</label>
+                                <input type="text" name="phone" value="" class="form-control"
+                                    data-bv-field="emailid" id="emailID" required=""
+                                    placeholder="Enter Phone Number">
+                            </div>
+
+
+                            @can('Access All')
+                                <div class="mb-3">
+                                    <label for="inputCountry" class="form-label">Showrooms</label>
+                                    <select class="form-select" id="inputCountry" name="showroom">
+                                        @foreach ($showrooms as $s)
+                                            <option value="{{ $s->name }}">{{ $s->name }}</option>
+                                        @endforeach
+
+
+                                    </select>
+                                </div>
+                            @endcan
+
+
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">GHC</span>
+                                    <input type="text" name="amount" class="form-control"
+                                        data-bv-field="amount" id="amount" placeholder="00.00">
+
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Order Number</label>
+                                <div class="input-group">
+
+                                    <input required name="order_code" type="text" class="form-control"
+                                        data-bv-field="amount" id="2amount">
+
+                                </div>
+                            </div>
+                            <div class="d-grid mt-4"><button class="btn btn-primary">Continue</button></div>
+                        </form>
+                        <!-- Request Money Form end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content end -->
+</div>
+@endif
+
+{{-- ecobank --}}
+
+
+        @if($banks[4]->status =="ACTIVE")
+        <div class="tab-pane fade show active" id="ecobank" role="tabpanel" aria-labelledby="ecobanks">
 
             <div id="content" class="py-4">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
                             <div class="bg-white shadow-sm rounded  p-4 mb-4">
-                                <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">ZENITH BANK </h3>
+                                <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">ECO BANK </h3>
                                 <hr>
                                 <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
                                 <hr class="">
                                 <!-- Request Money Form
                             ============================================= -->
                                 
-                                <form id="form-send-money_" action="{{route('payments.zenith')}}" method="POST">
+                                <form id="form-send-money_" action="{{route('payments.ecobank')}}" method="POST">
                                     @csrf
                                    
                                     <div class="mb-3">

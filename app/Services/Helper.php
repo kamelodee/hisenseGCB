@@ -79,9 +79,9 @@ class Helper
         }
         if(empty($date1) && empty($transaction_type) && empty($period) && !empty($bank)){
           
-            $trans = Transaction::where('showroom',$showroom)->where('bank',$bank)->latest();
+            $trans = Transaction::where('bank',$bank)->where('showroom',$showroom)->latest();
 
-        }
+        
 
         if(empty($date1) && !empty($transaction_type) && empty($period) && !empty($bank)){
             $trans = Transaction::where('showroom',$showroom)->where('transaction_type',$transaction_type)->where('bank',$bank)->latest();
@@ -217,13 +217,14 @@ class Helper
          return self::transist($request,$trans);
 
            }
-    
+        }
 
     public static function transist( $request,$trans)
     {
       
 
         if($request->ajax()){
+            if($trans){
             // return $trans;
             return DataTables::eloquent($trans)
             ->filter(function ($query) {
@@ -314,5 +315,6 @@ class Helper
         
     
 
+}
 }
 }

@@ -47,7 +47,7 @@ return $response;
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env("ZENITH_REDIRECT_URL").'&tid='.$tID.'',
+            CURLOPT_URL => env("ZENITH_REDIRECT_URL_TEST").'&tid='.$tID.'',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
