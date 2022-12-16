@@ -37,7 +37,7 @@ class EcoBank
         "number":'.json_encode($phone).',
         "email":"kamelodee@gmail.com",
         "name":'.json_encode($name).',
-        "description":"bougth tv",
+        "description":"payment",
         "pn_url":"https://api.hisense.com.gh",
         "extra_outlet":"https://api.hisense.com.gh",
         "generate_checkout_url":"https://api.hisense.com.gh",

@@ -21,7 +21,7 @@ class EcobankController extends Controller
     }
     public function success(Request $request)
     {
-        return $request->all();
+        return redirect('dashboard');
     }
 
     public function canceled(Request $request)
@@ -53,17 +53,17 @@ class EcobankController extends Controller
             'customer_name' => $request->name,
             'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,
             'order_code' => $request->order_code,
-            'payment_token' => '',
-            'payment_code' => '',
-            'shortpay_code' => '',
-            'transaction_id' => '',
-            'transaction_type' =>'',
-            'ref' => '',
+            'payment_token' => $request->order_code,
+            'payment_code' => $request->order_code,
+            'shortpay_code' => $request->order_code,
+            'transaction_id' => $request->order_code,
+            'transaction_type' =>'MOMO',
+            'ref' => $request->order_code,
             'phone' => $request->phone,
             'amount' => $request->amount,
             'sales_reference_id' =>$request->order_code,
             'account_number' => $request->phone,
-            'status' => 'PENDING',
+            'status' => 'SUCCESS',
             'bank' => 'ECOBANK',
             'description' => '',
             'date' => date('Y.m.d H:i:s'),
