@@ -147,13 +147,13 @@ class CalbankController extends Controller
         $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
           
         }else{
             
-            $trans= Transaction::where('bank',$bank);
+            $trans= Transaction::where('bank',$bank)->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
         }
