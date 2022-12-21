@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\Bank;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -148,23 +149,26 @@ class TransactionController extends Controller
 
     public function zenithlist(Request $request)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('All Transaction')){
             if(!empty($request->date1)){
-                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
-        
+                $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
+                return Helper::transist($request,$trans);
+          
             }else{
-                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
-        
+                $trans= Transaction::where('bank',$bank)->orderBy('created_at', 'desc');
+                return Helper::transist($request,$trans);
+          
             }
         }else{
             if(!empty($request->date1)){
-
-                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='ZENITH',request());
-        
+                $trans= Transaction::where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
+                return Helper::transist($request,$trans);
+          
             }else{
-                $trans = Transaction::where($showroom=Auth::user()->showroom)->where('bank','ZENITH')->latest();
-                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='ZENITH',request());
-        
+                $trans= Transaction::where('bank',$bank)->where('showroom',Auth::user()->showroom)->orderBy('created_at', 'desc');
+                return Helper::transist($request,$trans);
+          
             }
         }
         
