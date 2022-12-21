@@ -111,7 +111,7 @@ class ZenithController extends Controller
         if ($transaction) {
             Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
             $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
-            return redirect(env('ZENITHBANKURL_TEST').'&tid='.$transId);
+            return redirect(env('ZENITHBANKURL').'?tid='.$transId.'&gpid=GPZEN098&API-KEY=641923e50cf549579ea6ad07355047e2');
    
         }
     
