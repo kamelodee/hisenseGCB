@@ -113,25 +113,25 @@ class CalbankController extends Controller
         $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->whereDay('created_at',Carbon::now());
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->whereDay('created_at',Carbon::now())->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
         }else{
             
-            $trans= Transaction::where('bank',$bank)->whereDay('created_at',Carbon::now());
+            $trans= Transaction::where('bank',$bank)->whereDay('created_at',Carbon::now())->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
         }
         }else{
 
         if(!empty($request->date1)){
-            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
           
              
             return Helper::transist($request,$trans);
        
         }else{
-            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank);
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank)->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
        
@@ -159,13 +159,13 @@ class CalbankController extends Controller
         }
     }else{
         if(!empty($request->date1)){
-            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
           
              
             return Helper::transist($request,$trans);
            
         }else{
-            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank);
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
            
@@ -187,11 +187,11 @@ class CalbankController extends Controller
 
           
             
-             $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate));
+             $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate))->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
             
@@ -201,11 +201,11 @@ class CalbankController extends Controller
         }
     }else{
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
            
         }else{
-            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate));
+            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate))->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
         }
     }
@@ -218,19 +218,19 @@ class CalbankController extends Controller
         $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
         }else{
-            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month);
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->orderBy('created_at', 'desc');
              
             return Helper::transist($request,$trans);
         }
     }else{
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
         }else{
-            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom);
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom)->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
         }
         }
@@ -244,11 +244,11 @@ class CalbankController extends Controller
         $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->whereBetween('created_at', array($request->date1, $request->date2));
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->whereBetween('created_at', array($request->date1, $request->date2))->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
       
         }else{
-            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year);
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->orderBy('created_at', 'desc');
             return Helper::transist($request,$trans);
       
         }
