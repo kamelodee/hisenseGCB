@@ -21,8 +21,12 @@ class EcobankController extends Controller
     }
     public function success(Request $request)
     {
-        $trans = Transaction::where('ref',$request->ref)->first()->update(['status'=>"SUCCESS"]);
-      
+        $trans = Transaction::where('ref',$request->ref)->first();
+      if( $trans){
+        $trans ->update(['status'=>"SUCCESS"]);
+      }else{
+        return $request->ref;
+      }
         return redirect('dashboard')->with('success', 'Payment made successfully.');;
     }
 
