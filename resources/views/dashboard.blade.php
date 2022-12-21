@@ -208,6 +208,7 @@
                                         <tr>
                                             <th class="border-top-0 text-white_"></th>
                                             <th class="border-top-0 text-white_">Date</th>
+                                            <th class="border-top-0 text-white_">Bank</th>
                                             <th class="border-top-0 text-white_">Sales Ref</th>
                                         
                                             <th class="border-top-0 text-white_">Type</th>
@@ -289,6 +290,11 @@
                         {
                             data: 'date',
                             name: 'date',
+                            searchable: true
+                        },
+                        {
+                            data: 'bank',
+                            name: 'bank',
                             searchable: true
                         },
                         {

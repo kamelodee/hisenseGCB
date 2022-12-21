@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use App\Models\Showroom;
+use App\Models\Bank;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -86,6 +87,7 @@ class CalbankController extends Controller
        
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
         $total = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+      
         return view('transactions/calbank/weekly', compact('total','activities'));
         //
     }
@@ -108,23 +110,31 @@ class CalbankController extends Controller
     }
     public function daily(Request $request)
     {
-       
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='today',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2))->whereDay('created_at',Carbon::now());
+             
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
-    
+            
+            $trans= Transaction::where('bank',$bank)->whereDay('created_at',Carbon::now());
+             
+            return Helper::transist($request,$trans);
         }
         }else{
 
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='today',request());
-    
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+             
+            return Helper::transist($request,$trans);
+       
         }else{
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
-    
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank);
+             
+            return Helper::transist($request,$trans);
+       
         }
         }
         
@@ -134,22 +144,31 @@ class CalbankController extends Controller
 
     public function alllist(Request $request)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1=$request->date1,$date2='',$transaction_type='',$period='',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+             
+            return Helper::transist($request,$trans);
+          
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
-    
+            
+            $trans= Transaction::where('bank',$bank);
+             
+            return Helper::transist($request,$trans);
         }
     }else{
         if(!empty($request->date1)){
-            
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2='',$transaction_type='',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+             
+            return Helper::transist($request,$trans);
+           
         }else{
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank);
+             
+            return Helper::transist($request,$trans);
+           
         }
     }
        
@@ -158,21 +177,36 @@ class CalbankController extends Controller
 
     public function weekly(Request $request)
     {
+        $currentDate = Carbon::now();
+        $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+        $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+         
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+  
         if(Auth::user()->can('Access All')){
+
+          
+            
+             $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate));
+             
+            return Helper::transist($request,$trans);
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
+            $trans= Transaction::where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2));
+             
+            return Helper::transist($request,$trans);
+            
     
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
-    
+            
         }
     }else{
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2));
+            return Helper::transist($request,$trans);
+           
         }else{
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($nowDate, $nextweekdate));
+            return Helper::transist($request,$trans);
         }
     }
         
@@ -181,21 +215,23 @@ class CalbankController extends Controller
 
     public function monthly(Request $request)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->whereBetween('created_at', array($request->date1, $request->date2));
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month);
+             
+            return Helper::transist($request,$trans);
         }
     }else{
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($request->date1, $request->date2));
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->where('showromm',Auth::user()->showroom);
+            return Helper::transist($request,$trans);
         }
         }
           
@@ -205,24 +241,29 @@ class CalbankController extends Controller
 
     public function yearly(Request $request)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
         if(Auth::user()->can('Access All')){
         if(!empty($request->date1)){
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->whereBetween('created_at', array($request->date1, $request->date2));
+            return Helper::transist($request,$trans);
+      
         }else{
-            return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year);
+            return Helper::transist($request,$trans);
+      
         }
         }else{
 
         
 
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->where('showromm',Auth::user()->showroom)->whereBetween('created_at', array($request->date1, $request->date2));
+            return Helper::transist($request,$trans);
+      
         }else{
-            return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
-    
+            $trans= Transaction::where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->where('showromm',Auth::user()->showroom);
+            return Helper::transist($request,$trans);
+      
         }
         }
         

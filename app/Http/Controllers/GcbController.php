@@ -310,9 +310,11 @@ class GcbController extends Controller
             ], 500);
         }
     }
+
+
     public function verify(Request $request)
     {
-        //   return  $request->all();
+        
         try {
             $validator = Validator::make($request->all(), [
 

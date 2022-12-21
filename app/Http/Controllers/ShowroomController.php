@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Showroom;
 use App\Models\Transaction;
+use App\Models\Bank;
 use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -309,6 +310,8 @@ class ShowroomController extends Controller
 
     public function typeTrans(Request $request,$type)
     { 
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
         $activities = Activity::where('model_name','App\Models\Transaction')->latest()->paginate(10);
        $total='';
         if($type =='GCB'){
@@ -327,13 +330,17 @@ class ShowroomController extends Controller
 
     public function daily(Request $request,$showroom)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
        
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='today',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='today',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereDay('created_at',Carbon::now())->where('bank',$bank);
+             
+            return Helper::transist($request,$trans);
         }
        
         
@@ -343,6 +350,8 @@ class ShowroomController extends Controller
     //transactiontype
     public function transactionWithTypes(Request $request)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
        
         if(!empty($request->date1)){
             if($request->type =="GCB"){
@@ -367,14 +376,16 @@ class ShowroomController extends Controller
 
     public function alllist(Request $request,$showroom)
     {
-       
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
        
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->where('bank',$bank);
+            return Helper::transist($request,$trans);
         }
         
        
@@ -383,26 +394,36 @@ class ShowroomController extends Controller
 
     public function weekly(Request $request,$showroom)
     {
-       
+        $currentDate = Carbon::now();
+        $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
+        $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
+         
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='week',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate))->whereBetween('created_at', array($request->date1, $request->date2));
+          
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='week',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->where('bank',$bank)->whereBetween('created_at', array($nowDate, $nextweekdate));
+          
+            return Helper::transist($request,$trans);
         }
        
            
     }
     public function monthly(Request $request,$showroom)
-    {
-       
+    {      
+          $bank = Bank::where('status',"ACTIVE")->first()->name;
+
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='month',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereMonth( 'created_at', Carbon::now()->month)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='month',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereMonth( 'created_at', Carbon::now()->month)->where('bank',$bank);
+          
+            return Helper::transist($request,$trans);
         }
        
            
@@ -411,12 +432,16 @@ class ShowroomController extends Controller
 
     public function yearly(Request $request,$showroom)
     {
+        $bank = Bank::where('status',"ACTIVE")->first()->name;
+
         if(!empty($request->date1)){
-            return Helper::datatable($showroom=$showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='year',$period='',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->where('bank',$bank)->whereBetween('created_at', array($request->date1, $request->date2));
+          
+            return Helper::transist($request,$trans);
         }else{
-            return Helper::datatable($showroom=$showroom,$date1='',$date2='',$transaction_type='',$period='year',$bank='',request());
-    
+            $trans= Transaction::where('showroom',$showroom)->whereYear( 'created_at', Carbon::now()->year)->where('bank',$bank);
+          
+            return Helper::transist($request,$trans);
         }
 
 

@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     
 
-      
+    
    
         if(Auth::user()->can('Access All')){
 

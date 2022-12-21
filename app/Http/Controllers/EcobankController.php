@@ -21,6 +21,8 @@ class EcobankController extends Controller
     }
     public function success(Request $request)
     {
+        $trans = Transaction::where('ref',$request->ref)->first();
+        dd($trans,$request->ref);
         return redirect('dashboard');
     }
 
@@ -77,7 +79,7 @@ class EcobankController extends Controller
         } else {
             return redirect(json_decode($data)->url);
         }
-            return redirect(env('ZENITH_REDIRECT_URL'));
+           
    
         }
     
