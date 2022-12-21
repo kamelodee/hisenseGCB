@@ -73,9 +73,51 @@ class ZenithController extends Controller
     }
         
     }
-
-
     public function pay(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'order_code' => ['required', 'string'],
+            'phone' => 'required',
+            'amount' => 'required',
+
+        ]);
+
+
+        $trans = Transaction::latest()->first();
+
+        $transid= Helper::username($trans?$trans->id+1:1,$request->name);
+        $transaction= Transaction::updateOrCreate([
+            'customer_name' => $request->name,
+            'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,
+            'order_code' => $request->order_code,
+            'payment_token' => '',
+            'payment_code' => '',
+            'shortpay_code' => '',
+            'transaction_id' => '',
+            'transaction_type' =>'',
+            'ref' => '',
+            'phone' => $request->phone,
+            'amount' => $request->amount,
+            'sales_reference_id' =>$request->order_code,
+            'account_number' => $request->phone,
+            'status' => 'PENDING',
+            'bank' => 'ZENITH',
+            'description' => '',
+            'date' => date('Y.m.d H:i:s'),
+        ]);
+        if ($transaction) {
+            Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
+            $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
+            return redirect(env('ZENITH_REDIRECT_URL').'&tid='.$transId);
+
+        }
+
+}
+
+
+
+    public function pay1(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -111,7 +153,7 @@ class ZenithController extends Controller
         if ($transaction) {
             Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
             $transId=  Zenith::pay($request->amount,$request->order_code,$request->order_code,$request->phone);
-            return redirect(env('ZENITHBANKURL').'?tid='.$transId.'&gpid=GPZEN098&API-KEY=641923e50cf549579ea6ad07355047e2');
+            return redirect(env('ZENITHBANKURL_TEST').'&tid='.$transId);
    
         }
     
