@@ -23,7 +23,7 @@ class EcobankController extends Controller
     {
         $trans = Transaction::where('ref',$request->ref)->first();
       if( $trans){
-        $trans ->update(['status'=>"SUCCESS"]);
+        Transaction::where('ref',$request->ref)->update(['status'=>"SUCCESS"]);
       }else{
         return $request->ref;
       }
