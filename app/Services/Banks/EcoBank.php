@@ -33,7 +33,7 @@ class EcoBank
         "merchant_key":'.json_encode(env('ECOBANK_PRO_KEY')).',
         "invoice_id":'.json_encode($order_code).',
         "success_url":'.json_encode(env('SUCCESS_URL').'?ref='.$order_code).',
-        "cancelled_url":'.json_encode(env('CANCELED_URL')).',
+        "cancelled_url":'.json_encode(env('CANCELED_URL').'?ref='.$order_code).',
         "number":'.json_encode($phone).',
         "email":"hisensecustomer@gmail.com",
         "name":'.json_encode($name).',

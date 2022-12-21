@@ -21,15 +21,17 @@ class EcobankController extends Controller
     }
     public function success(Request $request)
     {
-        $trans = Transaction::where('ref',$request->ref)->first();
-        dd($trans,$request->ref);
-        return redirect('dashboard');
+        $trans = Transaction::where('ref',$request->ref)->first()->update(['status'=>"SUCCESS"]);
+      
+        return redirect('dashboard')->with('success', 'Payment made successfully.');;
     }
 
     public function canceled(Request $request)
     {
+        $trans = Transaction::where('ref',$request->ref)->first()->update(['status'=>"FAILD"]);
+       
         
-        return $request->all();
+        return redirect('dashboard')->with('success','Payment Failed.');;
     
     }
 
@@ -65,7 +67,7 @@ class EcobankController extends Controller
             'amount' => $request->amount,
             'sales_reference_id' =>$request->order_code,
             'account_number' => $request->phone,
-            'status' => 'SUCCESS',
+            'status' => 'PENDING',
             'bank' => 'ECOBANK',
             'description' => '',
             'date' => date('Y.m.d H:i:s'),
