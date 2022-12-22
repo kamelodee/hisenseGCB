@@ -90,60 +90,239 @@
                     <!-- Profile Completeness
               =============================== -->
                     <div class="bg-white shadow-sm rounded p-4 mb-2">
-
-                        <div class="row">
-                            <div class="col-sm-6 col-md-3">
-                                <div class="bg-white shadow-sm rounded text-center p-2 ">
-                                    <a href="{{ route('indexdaily') }}">
-                                        <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                                        <h3 class="text-3  fw-400"> {{ $transactions_today }}</h3>
-                                        <p class=" text-muted   fw-600">Today</p>
-
-                                    </a>
-                                    @can('Reconcile')
-                                        <div class="reconsile">
-                                            <form method="POST" action="{{ route('payments.reconsileweek') }}"
-                                                id="reconsile2">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-primary">Reconcile
-                                                    Today</button>
-                                            </form>
-                                        </div>
-                                    @endcan
-
-                                </div>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                              <button class="nav-link active text-3 text-dark  mx-3 fw-600" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Today <i class="fas fa-wallet text-primary"></i></button>
+                              <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">This Week <i class="fas fa-wallet text-primary"></i></button>
+                              <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">This Month <i class="fas fa-wallet text-primary"></i></button>
+                              <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false">This Year <i class="fas fa-wallet text-primary"></i></button>
                             </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="bg-white shadow-sm rounded text-center p-2 ">
-                                    <a href="{{ route('indexweekly') }}">
-                                        <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                                        <h3 class="text-3  fw-400">{{ $transactions_week }}</h3>
-                                        <p class=" text-muted   fw-600">This Week</p>
+                          </nav>
+                          <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
 
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="bg-white shadow-sm rounded text-center p-2">
-                                    <a href="{{ route('indexmonthly') }}">
-                                        <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                                        <h3 class="text-3  fw-400">{{ $transactions_month }}</h3>
-                                        <p class=" text-muted   fw-600">This Month</p>
+{{--  --}}
 
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="bg-white shadow-sm rounded text-center p-2 ">
-                                    <a href="{{ route('indexyearly') }}">
-                                        <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
-                                        <h3 class="text-3  fw-400"> {{ $transactions_year }}</h3>
-                                        <p class=" text-muted   fw-600">This Year</p>
-                                    </a>
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexdaily') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400"> {{ $transactions_today }}</h3>
+                <p class=" text-muted   fw-600">Reconcile Today</p>
 
-                                </div>
+            </a>
+            @can('Reconcile')
+                <div class="reconsile">
+                    <form method="POST" action="{{ route('payments.reconsileweek') }}"
+                        id="reconsile2">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-primary">Reconcile
+                            Today</button>
+                    </form>
+                </div>
+            @endcan
+
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_todaydepo }}</h3>
+                <p class=" text-muted   fw-600">Deposits</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_todaymomo }}</h3>
+                <p class=" text-muted   fw-600">Mobile Money</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2">
+            <a href="{{ route('indexmonthly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_todaycard }}</h3>
+                <p class=" text-muted   fw-600">Card</p>
+
+            </a>
+        </div>
+    </div>
+    
+</div>
+
+{{--  --}}
+
                             </div>
-                        </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                
+{{--  --}}
+
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexdaily') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400"> {{ $transactions_week }}</h3>
+                <p class=" text-muted   fw-600">This Week</p>
+
+            </a>
+           
+
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_weekdepo }}</h3>
+                <p class=" text-muted   fw-600">Deposits</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_weekmomo }}</h3>
+                <p class=" text-muted   fw-600">Mobile Money</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2">
+            <a href="{{ route('indexmonthly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_weekcard }}</h3>
+                <p class=" text-muted   fw-600">Card</p>
+
+            </a>
+        </div>
+    </div>
+    
+</div>
+
+{{--  --}}
+                            </div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                                
+{{--  --}}
+
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexdaily') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400"> {{ $transactions_month }}</h3>
+                <p class=" text-muted   fw-600">This Month</p>
+
+            </a>
+           
+
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_monthdepo }}</h3>
+                <p class=" text-muted   fw-600">Deposits</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_monthmomo }}</h3>
+                <p class=" text-muted   fw-600">Mobile Money</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2">
+            <a href="{{ route('indexmonthly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_monthcard }}</h3>
+                <p class=" text-muted   fw-600">Card</p>
+
+            </a>
+        </div>
+    </div>
+  
+</div>
+
+{{--  --}}
+                            </div>
+                            <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+                                
+{{--  --}}
+
+<div class="row">
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexdaily') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400"> {{ $transactions_year }}</h3>
+                <p class=" text-muted   fw-600">This Year</p>
+
+            </a>
+           
+
+        </div>
+    </div>
+    
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_yeardepo }}</h3>
+                <p class=" text-muted   fw-600">Deposits</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2 ">
+            <a href="{{ route('indexweekly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_yearmomo }}</h3>
+                <p class=" text-muted   fw-600">Mobile Money</p>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-3">
+        <div class="bg-white shadow-sm rounded text-center p-2">
+            <a href="{{ route('indexmonthly') }}">
+                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                <h3 class="text-3  fw-400">{{ $transactions_yearcard }}</h3>
+                <p class=" text-muted   fw-600">Card</p>
+
+            </a>
+        </div>
+    </div>
+  
+</div>
+
+{{--  --}}
+                            </div>
+                          </div>
+                       
                     </div>
                     <!-- Profile Completeness End -->
 

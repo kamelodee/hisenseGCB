@@ -43,29 +43,98 @@ class AdminController extends Controller
         $transactions_month = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
         $transactions_year = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
        
+        $transactions_todaymomo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','MOMO')->where('bank',$bank)->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekmomo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','MOMO')->where('bank',$bank)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthmomo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','MOMO')->where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearmomo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','MOMO')->where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+       
+        $transactions_todaydepo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','DEPOSIT')->where('bank',$bank)->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekdepo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','DEPOSIT')->where('bank',$bank)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthdepo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','DEPOSIT')->where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yeardepo = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','DEPOSIT')->where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+       
+        $transactions_todaycard = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','CARD')->where('bank',$bank)->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekcard = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','CARD')->where('bank',$bank)->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthcard = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','CARD')->where('bank',$bank)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearcard = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('transaction_type','CARD')->where('bank',$bank)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+       
+           
         $calbank =Helper::money(Transaction::transations('CALBANK'));
         $gcb =Helper::money(Transaction::transations('GCB'));
         $uba =Helper::money(Transaction::transationsu('UBA'));
         $zenith =Helper::money(Transaction::transations('ZENITH'));
        
-        return view('dashboard',compact('zenith','uba','total','gcb','showrooms','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
+        return view('dashboard',compact('zenith',
+        'uba','total','gcb','showrooms',
+        'calbank',
+        'transactions_yearmomo',
+        'transactions_todaymomo',
+        'transactions_weekmomo',
+        'transactions_monthmomo',
+        'transactions_yeardepo',
+        'transactions_todaydepo',
+        'transactions_weekdepo',
+        'transactions_monthdepo',
+        'transactions_yearcard',
+        'transactions_todaycard',
+        'transactions_weekcard',
+        'transactions_monthcard',
+        'transactions_year',
+        'transactions_today',
+        'transactions_week',
+        'transactions_month'
+    ));
     }else{
         $currentDate = Carbon::now();
         $nowDate = Carbon::now()->subDays($currentDate->dayOfWeek+1);
         $nextweekdate = Carbon::now()->subDays($currentDate->dayOfWeek-7);
         $total = Helper::money(DB::table('transactions')->where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->sum('amount'));
        
-        $transactions_today = Helper::money(DB::table('transactions')->where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
-        $transactions_week = Helper::money(DB::table('transactions')->where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
-        $transactions_month = Helper::money(DB::table('transactions')->where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
-        $transactions_year = Helper::money(DB::table('transactions')->where('bank',$bank)->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
-       $showroom='';
+        $transactions_today = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_week = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_month = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_year = Helper::money(DB::table('transactions')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $transactions_todaymomo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','MOMO')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekmomo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','MOMO')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthmomo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','MOMO')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearmomo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','MOMO')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $transactions_todaydepo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','DEPOSIT')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekdepo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','DEPOSIT')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthdepo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','DEPOSIT')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yeardepo = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','DEPOSIT')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $transactions_todaycard = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','CARD')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekcard = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','CARD')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthcard = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','CARD')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearcard = Helper::money(DB::table('transactions')->where('bank',$bank)->where('transaction_type','CARD')->where('showroom',Auth::user()->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $showroom='';
         $calbank =Helper::money(Transaction::cashiertransation('CALBANK'));
         $gcb =Helper::money(Transaction::cashiertransation('GCB'));
         $uba =Helper::money(Transaction::cashiertransation('UBA'));
         $zenith =Helper::money(Transaction::cashiertransation('ZENITH'));
        
-        return view('dashboard',compact('zenith','total','uba','gcb','calbank','transactions_year','transactions_today','transactions_week','transactions_month','showroom'));  
+        return view('dashboard',compact('zenith','total','uba','gcb','calbank',
+        'transactions_yearmomo',
+        'transactions_todaymomo',
+        'transactions_weekmomo',
+        'transactions_monthmomo',
+        'transactions_yeardepo',
+        'transactions_todaydepo',
+        'transactions_weekdepo',
+        'transactions_monthdepo',
+        'transactions_yearcard',
+        'transactions_todaycard',
+        'transactions_weekcard',
+        'transactions_monthcard',
+        'transactions_year',
+        'transactions_today',
+        'transactions_week',
+        'transactions_month',
+
+        'showroom'));  
     }
     }
 

@@ -6,6 +6,7 @@ use App\Models\Showroom;
 use App\Models\Transaction;
 use App\Models\Bank;
 use App\Models\Activity;
+use App\Models\Showroomaccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
@@ -45,6 +46,22 @@ class ShowroomController extends Controller
         $transactions_month = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
         $transactions_year = Helper::money(DB::table('transactions')->whereIn('status', ['SUCCESS','SUCCESSFUL'])->where('showroom',$request->showroom)->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
        
+        $transactions_todaymomo = Helper::money(DB::table('transactions')->where('transaction_type','MOMO')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekmomo = Helper::money(DB::table('transactions')->where('transaction_type','MOMO')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthmomo = Helper::money(DB::table('transactions')->where('transaction_type','MOMO')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearmomo = Helper::money(DB::table('transactions')->where('transaction_type','MOMO')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $transactions_todaydepo = Helper::money(DB::table('transactions')->where('transaction_type','DEPOSIT')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekdepo = Helper::money(DB::table('transactions')->where('transaction_type','DEPOSIT')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthdepo = Helper::money(DB::table('transactions')->where('transaction_type','DEPOSIT')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yeardepo = Helper::money(DB::table('transactions')->where('transaction_type','DEPOSIT')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+        $transactions_todaycard = Helper::money(DB::table('transactions')->where('transaction_type','CARD')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereDay('created_at',Carbon::now())->sum('amount'));
+        $transactions_weekcard = Helper::money(DB::table('transactions')->where('transaction_type','CARD')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereBetween('created_at', [$nowDate, $nextweekdate])->sum('amount'));
+        $transactions_monthcard = Helper::money(DB::table('transactions')->where('transaction_type','CARD')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereMonth( 'created_at', Carbon::now()->month)->sum('amount'));
+        $transactions_yearcard = Helper::money(DB::table('transactions')->where('transaction_type','CARD')->where('showroom',$request->showroom)->whereIn('status', ['SUCCESS','SUCCESSFUL'])->whereYear( 'created_at', Carbon::now()->year)->sum('amount'));
+     
+
         $calbank =Helper::money(Transaction::showroomtransations('CALBANK',$request->showroom));
         $gcb =Helper::money(Transaction::showroomtransations('GCB',$request->showroom));
         $uba =Helper::money(Transaction::showroomtransations('UBA',$request->showroom));
@@ -54,7 +71,24 @@ class ShowroomController extends Controller
         $cash =Helper::money(Transaction::showroomtransationsType('CASH',$request->showroom));
         $card =Helper::money(Transaction::showroomtransationsType('CARD',$request->showroom));
        
-        return view('showrooms/details',compact('zenith','uba','momo','cash','card','total','gcb','showroom','calbank','transactions_year','transactions_today','transactions_week','transactions_month'));
+        return view('showrooms/details',compact('zenith','uba','momo','cash','card','total','gcb','showroom','calbank',
+        'transactions_year',
+        'transactions_today',
+        'transactions_week',
+        'transactions_month',
+        'transactions_yearmomo',
+        'transactions_todaymomo',
+        'transactions_weekmomo',
+        'transactions_monthmomo',
+        'transactions_yeardepo',
+        'transactions_todaydepo',
+        'transactions_weekdepo',
+        'transactions_monthdepo',
+        'transactions_yearcard',
+        'transactions_todaycard',
+        'transactions_weekcard',
+        'transactions_monthcard',
+    ));
    
     }
 
@@ -103,14 +137,19 @@ class ShowroomController extends Controller
                         $actionBtn = '<a onclick="ShowroomEdit('."'$row->id'".')"  href="javascript:void()" class="btn btn-primary btn-sm text-white">
                         Edit
                     </a>
+                    <a onclick="addaccount('."'$row->id'".')"  href="javascript:void()" class="btn btn-primary btn-sm text-white">
+                        Add Account
+                    </a>
                    ';
                    return $actionBtn;
                     }
                  
                     
                 })
+
                 ->addColumn('name', function($row){
-                    $actionBtn = ' <a href="#" class="text-primary">'.$row->name.'</a>
+                    
+                    $actionBtn = ' <a onclick="Showroom('."'$row->id'".')"  href="javascript:void()" class="text-primary">'.$row->name.'</a>
                
                ';
                     return $actionBtn;
@@ -119,7 +158,7 @@ class ShowroomController extends Controller
                     $created_at = $row->created_at->format('Y.m.d H:i:s');
                     return $created_at;
                 })
-                ->rawColumns(['action','name'])
+                ->rawColumns(['action','name','addaccount'])
                 ->make(true);
         }
     } 
@@ -219,11 +258,36 @@ class ShowroomController extends Controller
      * @param  \App\Models\Showroom  $showroom
      * @return \Illuminate\Http\Response
      */
-    public function show(Showroom $showroom)
+    public function addaccount(Showroom $showroom,$id)
     {
-        //
+        $showroom = Showroom::find($id);
+        return view('showrooms/addaccount',compact('showroom'));
     }
 
+
+    public function show($id)
+    {
+        $showroom = Showroom::find($id);
+        return view('showrooms/show',compact('showroom'));
+    }
+    public function storeaccount(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+
+            'account_number' => 'required|unique:showroomaccounts',
+            
+        ]);
+      $showroom=  Showroomaccount::updateOrCreate([
+            'showroom_id'=>$request->showroom_id,
+            'bank'=>$request->bank,
+            'account_number'=>$request->account_number,
+        ]);
+        if($showroom){
+            Activity::activityCreate('App\Models\Showroomaccount','Showroomaccount Created',$showroom->id);
+            }
+        return back();
+        //
+    }
     /**
      * Show the form for editing the specified resource.
      *

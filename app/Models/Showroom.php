@@ -24,4 +24,8 @@ class Showroom extends Model
         'total',
         
     ];
+    public function accounts()
+    {
+        return $this->hasMany(Showroomaccount::class, 'showroom_id','id');
+    }
 }

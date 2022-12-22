@@ -53,8 +53,11 @@ Route::prefix('showrooms')->group(function () {
     Route::get('/list', [ShowroomController::class, 'list'])->name('showrooms.list');
     Route::get('/details', [ShowroomController::class, 'details'])->name('showrooms.details');
     Route::post('/store', [ShowroomController::class, 'store'])->name('showrooms.store');
+    Route::get('/show/{id}', [ShowroomController::class, 'show'])->name('showrooms.show');
+    Route::post('/storeaccount', [ShowroomController::class, 'storeaccount'])->name('showrooms.storeaccount');
     
     Route::get('/create', [ShowroomController::class, 'create'])->name('showrooms.create');
+    Route::get('/addcount/{id}', [ShowroomController::class, 'addaccount'])->name('showrooms.addaccount');
     Route::post('/update/{id}', [ShowroomController::class, 'update'])->name('showrooms.update');
     Route::get('/edit/{id}', [ShowroomController::class, 'edit'])->name('showrooms.edit');
     Route::post('/remove/{id}', [ShowroomController::class, 'remove'])->name('showrooms.remove');
