@@ -198,23 +198,27 @@ class TransactionController extends Controller
 
         
     }
-    public function gcblist(Request $request)
+    public function gcblist(Request $request,$bank)
     {
         if(Auth::user()->can('Access All')){
             if(!empty($request->date1)){
-                return Helper::datatable($showroom='',$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
-        
+                $trans= Transaction::where('bank',$bank)->orderBy('created_at', 'desc');
+             
+                return Helper::transist($request,$trans);
             }else{
-                return Helper::datatable($showroom='',$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
-        
+                $trans= Transaction::where('bank',$bank)->orderBy('created_at', 'desc');
+             
+                return Helper::transist($request,$trans);
             }
         }else{
             if(!empty($request->date1)){
-                return Helper::datatable($showroom=Auth::user()->showroom,$date1=$request->date1,$date2=$request->date2,$transaction_type='',$period='',$bank='GCB',request());
-        
+                $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->orderBy('created_at', 'desc');
+             
+                return Helper::transist($request,$trans);
             }else{
-                return Helper::datatable($showroom=Auth::user()->showroom,$date1='',$date2='',$transaction_type='',$period='',$bank='GCB',request());
-        
+                $trans= Transaction::where('showroom',Auth::user()->showroom)->where('bank',$bank)->orderBy('created_at', 'desc');
+             
+                return Helper::transist($request,$trans);
             }
         }
 

@@ -158,7 +158,7 @@ function load_data(from_date = '', to_date = '')
                 bFilter: false,
                 "dom": '<"top"f>rt<"bottom m-3"lp><"clear">',
                 ajax: {
-                    url: "{{ route('transactions.ubalist') }}",
+                    url: "{{ route('transactions.gcblist','UBA') }}",
                 data: function (d) {
                           d._token = "{{ csrf_token() }}",
                             d.search = $('#search1').val(),

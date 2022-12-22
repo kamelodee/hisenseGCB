@@ -123,7 +123,7 @@ function load_data(from_date = '', to_date = '')
                 bFilter: false,
                 "dom": '<"top"f>rt<"bottom"lp><"clear">',
                 ajax: {
-                    url: "{{ route('transactions.list') }}",
+                    url: "{{ route('transactions.gcblist','CALBANK') }}",
                 data: function (d) {
                           d._token = "{{ csrf_token() }}",
                             d.search = $('#search1').val(),

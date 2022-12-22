@@ -111,7 +111,7 @@ Route::prefix('transactions')->group(function () {
     Route::get('/zenith', [TransactionController::class, 'zenith'])->name('transactions.zenith');
     Route::get('/ubalist', [TransactionController::class, 'ubalist'])->name('transactions.ubalist');
     Route::get('/zenithlist', [TransactionController::class, 'zenithlist'])->name('transactions.zenithlist');
-    Route::get('/gcblist', [TransactionController::class, 'gcblist'])->name('transactions.gcblist');
+    Route::get('/list/{bank}', [TransactionController::class, 'gcblist'])->name('transactions.gcblist');
     Route::get('/list', [TransactionController::class, 'callist'])->name('transactions.list');
     Route::post('/store', [TransactionController::class, 'store'])->name('transactions.store');
     Route::post('/update/{id}', [TransactionController::class, 'update'])->name('transactions.update');
