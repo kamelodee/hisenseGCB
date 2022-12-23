@@ -19,7 +19,7 @@
                 @endif
                 @if ($banks[4]->status == 'ACTIVE')
                     <li class="nav-item"> <a class="nav-link fw-600 " id="ecobanks" href="#ecobank" role="tab"
-                            data-bs-toggle="tab" aria-controls="ecobank" aria-selected="true">ACOBANK</a></li>
+                            data-bs-toggle="tab" aria-controls="ecobank" aria-selected="true">ECOBANK</a></li>
                 @endif
                 @if ($banks[3]->status == 'ACTIVE')
                     <li class="nav-item"> <a class="nav-link " id="gcbs" href="#gcb" role="tab"
@@ -404,7 +404,7 @@
                         <div class="row">
                             <div class="col-md-4 col-lg-4 col-xl-5 mx-auto">
                                 <div class="bg-white shadow-sm rounded  p-4 mb-4">
-                                    <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">ECO BANK </h3>
+                                    <h3 class="text-5 fw-400 mb-3 mb-sm-4 text-center">ECOBANK </h3>
                                     <hr>
                                     <h3 class="text-center text-3 fw-400 mb-3 mb-sm-4">Customer Details</h3>
                                     <hr class="">
