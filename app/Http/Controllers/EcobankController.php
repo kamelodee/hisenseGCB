@@ -8,6 +8,7 @@ use App\Models\Activity;
 use App\Models\Transaction;
 use App\Services\Helper;
 use Illuminate\Support\Facades\Auth;
+
 class EcobankController extends Controller
 {
     /**
@@ -19,24 +20,63 @@ class EcobankController extends Controller
     {
         //
     }
-    public function success(Request $request)
+
+    
+    public function refresh($ref)
     {
-        $trans = Transaction::where('ref',$request->ref)->first();
-      if( $trans){
-        Transaction::where('ref',$request->ref)->update(['status'=>"SUCCESS"]);
-      }else{
-        return $request->ref;
-      }
+        $trans = Transaction::where('ref', $ref)->first();
+        if ($trans) {
+            $data =  Ecobank::getTransaction($ref);
+
+           $t = json_decode($data)->{$ref};
+          if($t->success ){
+
+          
+            if ($t->extra->channel == 'visa_mastercard') {
+                Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
+            } else {
+                Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);
+            }
+            }else{
+                Transaction::where('ref', $ref)->update(['status' => "FAILED"]);
+         
+            }
+        } else {
+
+            return $ref;
+        }
         return redirect('dashboard')->with('success', 'Payment made successfully.');;
     }
 
+
+    public function success(Request $request)
+    {
+
+        $trans = Transaction::where('ref', $request->ref)->first();
+        if ($trans) {
+            $data =  Ecobank::getTransaction($request->ref);
+
+            $t = json_decode($data)->{$request->ref};
+            if ($t->extra->channel == 'visa_mastercard') {
+                Transaction::where('ref', $request->ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
+            } else {
+                Transaction::where('ref', $request->ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);
+            }
+        } else {
+
+            return $request->ref;
+        }
+        return redirect('dashboard')->with('success', 'Payment made successfully.');
+    }
+
+
+
     public function canceled(Request $request)
     {
-        $trans = Transaction::where('ref',$request->ref)->first()->update(['status'=>"FAILD"]);
-       
-        
-        return redirect('dashboard')->with('success','Payment Failed.');;
-    
+        $trans = Transaction::where('ref', $request->ref)->first()->update(['status' => "FAILD"]);
+
+
+        return redirect('dashboard')->with('success', 'Payment Failed.');;
     }
 
 
@@ -50,26 +90,26 @@ class EcobankController extends Controller
             'order_code' => ['required', 'string'],
             'phone' => 'required',
             'amount' => 'required',
-      
+
         ]);
-     
+
 
         $trans = Transaction::latest()->first();
-        
-        $transid= Helper::username($trans?$trans->id+1:1,$request->name);
-        $transaction= Transaction::updateOrCreate([
+
+        $transid = Helper::username($trans ? $trans->id + 1 : 1, $request->name);
+        $transaction = Transaction::updateOrCreate([
             'customer_name' => $request->name,
-            'showroom' => Auth::user()->can('Access All')? $request->showroom: Auth::user()->showroom,
+            'showroom' => Auth::user()->can('Access All') ? $request->showroom : Auth::user()->showroom,
             'order_code' => $request->order_code,
             'payment_token' => $request->order_code,
             'payment_code' => $request->order_code,
             'shortpay_code' => $request->order_code,
             'transaction_id' => $request->order_code,
-            'transaction_type' =>'MOMO',
+            'transaction_type' => 'MOMO',
             'ref' => $request->order_code,
             'phone' => $request->phone,
             'amount' => $request->amount,
-            'sales_reference_id' =>$request->order_code,
+            'sales_reference_id' => $request->order_code,
             'account_number' => $request->phone,
             'status' => 'PENDING',
             'bank' => 'ECOBANK',
@@ -77,19 +117,16 @@ class EcobankController extends Controller
             'date' => date('Y.m.d H:i:s'),
         ]);
         if ($transaction) {
-            Activity::activityCreate('App\Models\Transaction','Transaction created',$transaction->id);
-            $data=  EcoBank::pay($request->name,$request->phone,$request->amount,$request->order_code);
-          
-           if (json_decode($data)->status == false) {
-            return back()->with('error', json_decode($data)->MESSAGE);
-        } else {
-            return redirect(json_decode($data)->url);
+            Activity::activityCreate('App\Models\Transaction', 'Transaction created', $transaction->id);
+            $data =  EcoBank::pay($request->name, $request->phone, $request->amount, $request->order_code);
+
+            if (json_decode($data)->status == false) {
+                return back()->with('error', json_decode($data)->MESSAGE);
+            } else {
+                return redirect(json_decode($data)->url);
+            }
         }
-           
-   
-        }
-    
-}
+    }
 
 
 

@@ -87,6 +87,7 @@ Route::prefix('payments')->group(function () {
     Route::get('/uba', [PaymentController::class, 'uba'])->name('payments.uba');
     Route::post('/zenith', [ZenithController::class, 'pay'])->name('payments.zenith');
     Route::post('/ecobank', [EcobankController::class, 'pay'])->name('payments.ecobank');
+    Route::get('/ecobank/refresh/{ref}', [EcobankController::class, 'refresh'])->name('payments.refresh');
    
     Route::get('/zenith/redirect', [ZenithController::class, 'redirect'])->name('payments.redirect');
     Route::get('/store', [PaymentController::class, 'store'])->name('payments.store');

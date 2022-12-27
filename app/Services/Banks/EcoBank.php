@@ -94,11 +94,12 @@ class EcoBank
   static public function getTransaction( $ref)
   {
 
- 
+  
+
     $curl = curl_init();
     
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://gh.instantbillspay.com/instantpay/api/bill/refstatus?ref='.$ref.'',
+      CURLOPT_URL => env('ECOBANK_GET_URL').'?merchant_key='.env('ECOBANK_PRO_KEY').'&invoice_id='.$ref,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -106,15 +107,13 @@ class EcoBank
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'GET',
-      CURLOPT_HTTPHEADER => array(
-        'Cookie: PHPSESSID=259cvppoim9aapf28ho6thnmus; SERVERID=s1; ci_session_ubfe_gh=VDQBOlIyATwLIFUmBjtVYw9hVDwIc1ZxADULIAd6Uj8JOlJpXAMPMgdiXX5dMwRwVT8BMgw5VWhdIQNkDWJQPFNhATsEO1NmDjYHZ11vVzFUZAEzUjIBMws9VWUGN1VrD2NUNwhpVjsAMgtgBzBSbgkwUmJcZQ9tBzVdfl0zBHBVPwEwDDtVaF0hAzgNJFBbU2IBPQRuUyUONwchXS5XIVRuAXNSPQE3C2hVbwYjVWMPaFQ0CH9WMwBmC2sHJ1JjCWdSKVxuD2IHJF1nXXsEOVU0ATEMMVVwXXYDIg0xUHZTXAE4BG1TMg48ByZdf1c4VCYBOlI1ATcLYVV3BlFVPQ8iVHIIPFZjAD4LAQd8UjgJIVJuXDEPPgcpXWtdJgQxVTwBLww5VXBdOAMiDW5QNVMwAWMEKFM7DjMHIV0pV1xUNAFjUnMBbwstVTwGdVUrD3NUPQg4VjgAYQtlBz9SbglhUjVcbA9uBzddbl0zBHBVPwE4DDFVcF12AyINMVB2U1wBPQRrUyMOMwdwXWZXcFRvATBSPQEkC3lVbgZ834ccb87f0076b3f9468104351d0085b5c339306a'
-      ),
     ));
     
     $response = curl_exec($curl);
     
     curl_close($curl);
-  
+    
+    
     
 return $response;
 
