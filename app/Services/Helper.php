@@ -286,7 +286,7 @@ class Helper
             })
            
             ->addColumn('status', function ($row) {
-                if($row->status =='PENDING' || $row->status =='FAILED'){
+                if($row->status =='PENDING' || $row->status =='FAILD'){
                     $actionBtn = '<div>
                      <a href="" class="text-dark">' . $row->status .'</a> |
                      <a href='.route('payments.refresh',$row->transaction_id).' class="text-primary"> Refresh </a>
