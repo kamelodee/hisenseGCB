@@ -26,7 +26,7 @@ class EcobankController extends Controller
     {
         $trans = Transaction::where('ref', $ref)->first();
         if ($trans) {
-           return $data =  Ecobank::getTransaction($ref);
+            $data =  Ecobank::getTransaction($ref);
 
            $t = json_decode($data)->{$ref};
           if($t){
@@ -44,7 +44,7 @@ class EcobankController extends Controller
           }
         } else {
 
-            return redirect('dashboard')->with('error', 'Payment not foung.');
+     return redirect('dashboard')->with('success', 'Payment not foung.');
         }
         return redirect('dashboard')->with('success', 'Payment made successfully.');;
     }
