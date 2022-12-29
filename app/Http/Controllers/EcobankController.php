@@ -26,9 +26,9 @@ class EcobankController extends Controller
     {
         $trans = Transaction::where('ref', $ref)->first();
         if ($trans) {
-            $data =  Ecobank::getTransaction($ref);
+           return $data =  Ecobank::getTransaction($ref);
 
-          return $t = json_decode($data);
+           $t = json_decode($data)->{$ref};
           if($t){
             if($t->success ){
 
