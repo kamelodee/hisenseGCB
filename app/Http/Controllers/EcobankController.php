@@ -29,21 +29,22 @@ class EcobankController extends Controller
             $data =  Ecobank::getTransaction($ref);
 
            $t = json_decode($data)->{$ref};
-          if($t->success ){
+          if($t){
+            if($t->success ){
 
-          
-            if ($t->extra->channel == 'visa_mastercard') {
-                Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
-            } else {
-                Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);
-            }
-            }else{
-                Transaction::where('ref', $ref)->update(['status' => "FAILED"]);
-         
-            }
+                if ($t->extra->channel == 'visa_mastercard') {
+                    Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
+                } else {
+                    Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);
+                }
+                }else{
+                    Transaction::where('ref', $ref)->update(['status' => "FAILED"]);
+             
+                }
+          }
         } else {
 
-            return $ref;
+            return redirect('dashboard')->with('error', 'Payment not foung.');
         }
         return redirect('dashboard')->with('success', 'Payment made successfully.');;
     }
@@ -64,7 +65,7 @@ class EcobankController extends Controller
             }
         } else {
 
-            return $request->ref;
+            return redirect('dashboard')->with('error', 'Payment not foung.');
         }
         return redirect('dashboard')->with('success', 'Payment made successfully.');
     }

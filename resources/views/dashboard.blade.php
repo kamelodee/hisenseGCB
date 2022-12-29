@@ -99,15 +99,15 @@
                                 <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-profile-tab"
                                     data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
                                     aria-controls="nav-profile" aria-selected="false">This Week <i
-                                        class="fas fa-wallet text-primary"></i></button>
+                                        class="fas fa-wallet text-info"></i></button>
                                 <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-contact-tab"
                                     data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab"
                                     aria-controls="nav-contact" aria-selected="false">This Month <i
-                                        class="fas fa-wallet text-primary"></i></button>
-                                <button class="nav-link text-3 text-dark mx-3 fw-600" id="nav-disabled-tab"
+                                        class="fas fa-wallet text-warning"></i></button>
+                                <button class="nav-link text-3 text-dark mdx-3 fw-600" id="nav-disabled-tab"
                                     data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab"
                                     aria-controls="nav-disabled" aria-selected="false">This Year <i
-                                        class="fas fa-wallet text-primary"></i></button>
+                                        class="fas fa-wallet text-danger"></i></button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -184,7 +184,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexdaily') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-info my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400"> {{ $transactions_week }}</h3>
                                                 <p class=" text-muted   fw-600">This Week</p>
 
@@ -197,7 +197,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-info my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_weekdepo }}</h3>
                                                 <p class=" text-muted   fw-600">Deposits</p>
 
@@ -207,7 +207,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-info my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_weekmomo }}</h3>
                                                 <p class=" text-muted   fw-600">Mobile Money</p>
 
@@ -217,7 +217,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2">
                                             <a href="{{ route('indexmonthly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-info my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_weekcard }}</h3>
                                                 <p class=" text-muted   fw-600">Card</p>
 
@@ -238,7 +238,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexdaily') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-warning my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400"> {{ $transactions_month }}</h3>
                                                 <p class=" text-muted   fw-600">This Month</p>
 
@@ -251,7 +251,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-warning my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_monthdepo }}</h3>
                                                 <p class=" text-muted   fw-600">Deposits</p>
 
@@ -261,7 +261,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-warning my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_monthmomo }}</h3>
                                                 <p class=" text-muted   fw-600">Mobile Money</p>
 
@@ -271,7 +271,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2">
                                             <a href="{{ route('indexmonthly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-warning my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_monthcard }}</h3>
                                                 <p class=" text-muted   fw-600">Card</p>
 
@@ -292,7 +292,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexdaily') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-danger my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400"> {{ $transactions_year }}</h3>
                                                 <p class=" text-muted   fw-600">This Year</p>
 
@@ -305,7 +305,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-danger my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_yeardepo }}</h3>
                                                 <p class=" text-muted   fw-600">Deposits</p>
 
@@ -315,7 +315,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2 ">
                                             <a href="{{ route('indexweekly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-danger my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_yearmomo }}</h3>
                                                 <p class=" text-muted   fw-600">Mobile Money</p>
 
@@ -325,7 +325,7 @@
                                     <div class="col-sm-6 col-md-3">
                                         <div class="bg-white shadow-sm rounded text-center p-2">
                                             <a href="{{ route('indexmonthly') }}">
-                                                <div class="text-7 text-primary my-3"><i class="fas fa-wallet"></i></div>
+                                                <div class="text-7 text-danger my-3"><i class="fas fa-wallet"></i></div>
                                                 <h3 class="text-3  fw-400">{{ $transactions_yearcard }}</h3>
                                                 <p class=" text-muted   fw-600">Card</p>
 

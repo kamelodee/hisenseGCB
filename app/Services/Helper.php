@@ -290,7 +290,7 @@ class Helper
                     $actionBtn = '<div>
                      <a href="" class="text-dark">' . $row->status .'</a> |
                      <a href='.route('payments.refresh',$row->transaction_id).' class="text-primary"> Refresh </a>
-           </div>
+                   </div>
                     ';
                          return $actionBtn;
                 }else{
