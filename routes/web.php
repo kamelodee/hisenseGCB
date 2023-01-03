@@ -183,7 +183,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
 
 Route::get('checktrans', function(){
-    return $data = EcoBank::getTransaction('SO 123999988');
+    return EcoBank::getTransaction('SO 123999988');
 });
 
 //  composer require php-smpp/php-smpp

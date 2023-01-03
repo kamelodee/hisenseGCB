@@ -99,7 +99,7 @@ class EcoBank
     $curl = curl_init();
     
     curl_setopt_array($curl, array(
-      CURLOPT_URL => env('ECOBANK_GET_URL').'?merchant_key='.env('ECOBANK_PRO_KEY').'&invoice_id='.$ref,
+      CURLOPT_URL =>env('ECOBANK_GET_URL').'?merchant_key='.env('ECOBANK_PRO_KEY').'&invoice_id='.urlencode($ref),
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -120,5 +120,6 @@ return $response;
   }
   static public function getTransactions()
   {
+    
   }
 }
