@@ -26,11 +26,11 @@ class EcobankController extends Controller
     {
         $trans = Transaction::where('ref', $ref)->first();
         if ($trans) {
-            $data =  Ecobank::getTransaction($ref);
+         return   $data =  Ecobank::getTransaction($ref);
 
           $t = json_decode($data)->{$ref};
           if($t){
-            return $t ;
+            // return $t ;
             if($t->success ){
               if($t->status =='failed'){
                
