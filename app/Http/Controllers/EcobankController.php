@@ -34,7 +34,7 @@ class EcobankController extends Controller
             if($t->success ){
               if($t->status =='failed'){
                
-                if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard') {
+                if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard' ||$t->extra->card_type ==  'visa_mastercard') {
                     
                     Transaction::where('ref', $ref)->update(['status' => "FAILED", 'transaction_type' => 'CARD',]);
                     return redirect('dashboard')->with('success', 'Payment  failed.');;
@@ -44,7 +44,7 @@ class EcobankController extends Controller
                 }
             }else{
 
-                if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard') {
+                if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard' || $t->extra->card_type ==  'visa_mastercard') {
                     Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
                 } else {
                     Transaction::where('ref', $ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);
@@ -71,7 +71,7 @@ class EcobankController extends Controller
             $data =  Ecobank::getTransaction($request->ref);
 
             $t = json_decode($data)->{$request->ref};
-            if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard') {
+            if ($t->extra->card_type == 'visa'|| $t->extra->card_type == 'mastercard' || $t->extra->card_type ==  'visa_mastercard') {
                 Transaction::where('ref', $request->ref)->update(['status' => "SUCCESS", 'transaction_type' => 'CARD',]);
             } else {
                 Transaction::where('ref', $request->ref)->update(['status' => "SUCCESS", 'transaction_type' => 'MOMO',]);

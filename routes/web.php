@@ -17,7 +17,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ZenithController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\EcobankController;
-
+use App\Services\Banks\EcoBank;
 
 Route::get('/', function () {
     $domain = parse_url(request()->root())['host'];
@@ -178,10 +178,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
 
     Route::get('/admin/logout', [UserController::class, 'logout'])->name('admin.logout');
+   
 });
 
 
-
+Route::get('checktrans', function(){
+    return $data = EcoBank::getTransaction('SO 123999988');
+});
 
 //  composer require php-smpp/php-smpp
 // php artisan config:cache
