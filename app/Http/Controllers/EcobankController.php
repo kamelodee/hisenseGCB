@@ -30,7 +30,7 @@ class EcobankController extends Controller
 
           $t = json_decode($data)->{$ref};
           if($t){
-            // return $t ;
+            return $t ;
             if($t->success ){
               if($t->status =='failed'){
                
