@@ -129,7 +129,7 @@ class EcobankController extends Controller
             'payment_code' => $request->order_code,
             'shortpay_code' => $request->order_code,
             'transaction_id' => $request->order_code,
-            'transaction_type' => 'MOMO',
+            'transaction_type' => '',
             'ref' => $request->order_code,
             'phone' => $request->phone,
             'amount' => $request->amount,
